@@ -24,15 +24,22 @@ void VL6180x_rpi::start(VL6180xsettings settings){
     //Enable interrups
     i2c_writeWord(reg_lo_thres,0x0000);
     i2c_writeWord(reg_hi_thres,0x8000);
-    
+
 };
 
 void VL6180x_rpi::stop(){
-    // this is a callback; replace with an interface
     gpioSetISRFuncEx(sensorSettings.int_gpio,RISING_EDGE,-1,NULL,(void*)this);
     if(sensorSettings.initPIGPIO){
         gpioTerminate();
     }
+};
+
+void VL6180x_rpi::registerCallback(VL6180xcallback* cb){
+    sensorCallback = cb;
+};
+
+void VL6180x_rpi::unRegisterCallback(){
+    sensorCallback = nullptr;
 };
 
 unsigned VL6180x_rpi::i2c_readWord(uint8_t reg)

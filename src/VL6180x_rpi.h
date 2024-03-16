@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <pigpio.h>
 #include <assert.h>
+#include <VL6180xcallbackInterface.h>
 
 #ifndef NDEBUG
 #define DEBUG
@@ -16,6 +17,7 @@ static const char could_not_open_i2c[] = "Could not open I2C.\n";
 
 // default GPIO pin for the interrupt
 #define DEFAULT_INT_TO_GPIO 17
+
 
 struct VL6180xsettings{
     int i2c_bus = 1;
@@ -37,15 +39,28 @@ class VL6180x_rpi {
     /**
      * start data acquisition 
     **/
-   void start (VL6180xsettings vl6180xsettings = VL6180xsettings());
+    void start (VL6180xsettings vl6180xsettings = VL6180xsettings());
 
     /**
      * stop data acquisition 
     **/
     void stop();
 
+    /**
+     * Registers the callback on sample arrival.
+     * \param cb Pointer to the callback interface. 
+    **/
+    void registerCallback(VL6180xcallback* cb);
+
+    /**
+     * Unregisters the callback
+    **/
+    void unRegisterCallback();
+
+
     private:
     VL6180xsettings sensorSettings;
+    VL6180xcallback* sensorCallback = nullptr;
     void i2c_writeWord(uint8_t reg, unsigned data);
     unsigned i2c_readWord(uint8_t reg);
     int i2c_readConversion();
@@ -53,4 +68,5 @@ class VL6180x_rpi {
     const uint8_t reg_congig = 1;
     const uint8_t reg_lo_thres = 2;
     const uint8_t reg_hi_thres = 3;
+
 };
