@@ -44,5 +44,7 @@ class VL6180x_rpi {
 
     private:
     VL6180xsettings sensorSettings;
-
+    void i2c_writeWord(uint8_t reg, unsigned data);
+    unsigned i2c_readWord(uint8_t reg);
+    int i2c_readConversion();
 };
