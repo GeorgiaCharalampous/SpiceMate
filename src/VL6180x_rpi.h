@@ -15,7 +15,7 @@ static const char could_not_open_i2c[] = "Could not open I2C.\n";
 #define DEFAULT_VL6180X_ADDRESS 0x29
 
 // default GPIO pin for the interrupt
-#define DEAFULAT_INT_TO_GPIO 17
+#define DEFAULT_INT_TO_GPIO 17
 
 struct VL6180xsettings{
     int i2c_bus = 1;
@@ -23,6 +23,8 @@ struct VL6180xsettings{
     uint8_t address = DEFAULT_VL6180X_ADDRESS;
 
     bool initPIGPIO = true;
+
+    int int_gpio = DEFAULT_INT_TO_GPIO;
 };
 
 class VL6180x_rpi {
@@ -47,4 +49,8 @@ class VL6180x_rpi {
     void i2c_writeWord(uint8_t reg, unsigned data);
     unsigned i2c_readWord(uint8_t reg);
     int i2c_readConversion();
+
+    const uint8_t reg_congig = 1;
+    const uint8_t reg_lo_thres = 2;
+    const uint8_t reg_hi_thres = 3;
 };
