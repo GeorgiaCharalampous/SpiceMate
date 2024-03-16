@@ -17,7 +17,7 @@ static const char could_not_open_i2c[] = "Could not open I2C.\n";
 // default GPIO pin for the interrupt
 #define DEAFULAT_INT_TO_GPIO 17
 
-struct VL6180Xsettings{
+struct VL6180xsettings{
     int i2c_bus = 1;
 
     uint8_t address = DEFAULT_VL6180X_ADDRESS;
@@ -35,7 +35,7 @@ class VL6180x_rpi {
     /**
      * start data acquisition 
     **/
-   void start (VL6180Xsettings vl6180xsettings = VL6180Xsettings());
+   void start (VL6180xsettings vl6180xsettings = VL6180xsettings());
 
     /**
      * stop data acquisition 
@@ -43,6 +43,6 @@ class VL6180x_rpi {
     void stop();
 
     private:
-    VL6180Xsettings sensorSettings;
+    VL6180xsettings sensorSettings;
 
 };
