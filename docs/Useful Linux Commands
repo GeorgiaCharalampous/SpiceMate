@@ -1,0 +1,10 @@
+sudo -s      Gives temperary access to superuser(root) to allow you to run commands in the terminal with root permissions.
+ssh -X       Get visual output from ssh to open graphical programs
+
+*********************
+Make Commands for leachj/vl6180_pi
+*********************
+
+make              Compile the main class and test
+make install      Create test-vl6180_pi executable
+make check        Run executable
