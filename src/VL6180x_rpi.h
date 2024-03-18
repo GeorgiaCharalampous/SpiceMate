@@ -5,6 +5,7 @@
 #include <pigpio.h>
 #include <assert.h>
 #include <VL6180xcallbackInterface.h>
+#include <VL6180x_regAddress.h>
 
 #ifndef NDEBUG
 #define DEBUG
