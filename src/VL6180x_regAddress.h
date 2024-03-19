@@ -103,6 +103,30 @@ struct rangeStart{
 #define SENSOR_I2C_SLAVE_DEVICE_ADDRESS            0x212          // can change the default sensor address
 #define SENSOR_INTERLEAVED_MODE_ENABLE             0x2A3
 
+/* Robot headers
+#define VL6180X_ID                                    0xB4
+
+#define VL6180X_NO_ERR                                0x00
+#define VL6180X_EARLY_CONV_ERR                        0x06
+#define VL6180X_MAX_CONV_ERR                          0x07
+#define VL6180X_IGNORE_ERR                            0x08
+#define VL6180X_MAX_S_N_ERR                           0x0B
+#define VL6180X_RAW_Range_UNDERFLOW_ERR               0x0C
+#define VL6180X_RAW_Range_OVERFLOW_ERR                0x0D
+#define VL6180X_Range_UNDERFLOW_ERR                   0x0E
+#define VL6180X_Range_OVERFLOW_ERR                    0x0F
+
+#define VL6180X_DIS_INTERRUPT        0
+#define VL6180X_HIGH_INTERRUPT       1
+#define VL6180X_LOW_INTERRUPT        2
+
+#define VL6180X_INT_DISABLE          0
+#define VL6180X_LEVEL_LOW            1
+#define VL6180X_LEVEL_HIGH           2
+#define VL6180X_OUT_OF_WINDOW        3
+#define VL6180X_NEW_SAMPLE_READY     4
+*/
+
 //Settings
 #define SENSOR_defaultID            0xB4
 
