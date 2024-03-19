@@ -6,6 +6,7 @@
 #include <assert.h>
 //#include <VL6180xcallbackInterface.h>
 #include <VL6180x_regAddress.h>
+#include <VL6180X_regOptions.h>
 
 #ifndef NDEBUG
 #define DEBUG
@@ -23,7 +24,7 @@ static const char could_not_open_i2c[] = "Could not open I2C.\n";
 #define ISR_TIMEOUT 1000
 
 
-struct VL6180xsettings{
+struct VL6180x_settings{
     int i2c_bus = 1;
 
     uint8_t address = DEFAULT_VL6180X_ADDRESS;
@@ -45,7 +46,7 @@ class VL6180x_rpi {
     /**
      * start data acquisition 
     **/
-    void start (VL6180xsettings vl6180xsettings = VL6180xsettings());
+    void start (VL6180x_settings vl6180xsettings = VL6180x_settings());
 
     /**
      * stop data acquisition 
@@ -64,7 +65,7 @@ class VL6180x_rpi {
     // void unRegisterCallback();
 
     private:
-    VL6180xsettings sensorSettings;
+    VL6180x_settings sensorSettings;
     /*
     VL6180xcallback* sensorCallback = nullptr;
     */
