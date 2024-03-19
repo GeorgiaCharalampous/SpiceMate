@@ -134,8 +134,10 @@ struct rangeStart{
 //Settings
 #define SENSOR_defaultID            0xB4
 
+#define GPIO1_default               0x20
 #define GPIO1_highInterrupt         0x10
 #define GPIO1_lowInterrupt          0x30
+#define freshReset                  0x00
 
 #define interruptConfig_Dis         0x00
 #define interruptConfig_Low         0x01
@@ -149,3 +151,12 @@ struct rangeStart{
 
 #define singleMode                  0x01
 #define continuousMode              0x03
+
+#define samplePeriod                0x30
+#define vhvRepeat_Rate              0xFF
+#define chcRecalibrate              0x01
+#define integrationPeriod           0x63
+#define intermeasurementPeriod_Rng  0x09
+#define intermeasurementPeriod_ALS  0x31
+#define rangeMax_Convergence_Time   0x31
+#define interleavedMode_Enable      0x00
