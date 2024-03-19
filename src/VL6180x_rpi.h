@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <pigpio.h>
 #include <assert.h>
-#include <VL6180xcallbackInterface.h>
+//#include <VL6180xcallbackInterface.h>
 #include <VL6180x_regAddress.h>
 
 #ifndef NDEBUG
@@ -18,6 +18,9 @@ static const char could_not_open_i2c[] = "Could not open I2C.\n";
 
 // default GPIO pin for the interrupt
 #define DEFAULT_INT_TO_GPIO 17
+
+// default interrupt timeout
+#define ISR_TIMEOUT 1000
 
 
 struct VL6180xsettings{
@@ -37,6 +40,8 @@ class VL6180x_rpi {
     **/
     ~VL6180x_rpi() {stop();}
 
+    virtual void hasSample(uint8_t sample) = 0;
+
     /**
      * start data acquisition 
     **/
@@ -47,21 +52,22 @@ class VL6180x_rpi {
     **/
     void stop();
 
-    /**
-     * Registers the callback on sample arrival.
-     * \param cb Pointer to the callback interface. 
-    **/
-    void registerCallback(VL6180xcallback* cb);
-
-    /**
-     * Unregisters the callback
-    **/
-    void unRegisterCallback();
-
+    // /**
+    //  * Registers the callback on sample arrival.
+    //  * \param cb Pointer to the callback interface. 
+    // **/
+    // void registerCallback(VL6180xcallback* cb);
+    
+    // /**
+    //  * Unregisters the callback
+    // **/
+    // void unRegisterCallback();
 
     private:
     VL6180xsettings sensorSettings;
+    /*
     VL6180xcallback* sensorCallback = nullptr;
+    */
     void i2c_writeWord(uint8_t reg, unsigned data);
     unsigned i2c_readWord(uint8_t reg);
     int i2c_readConversion();
@@ -69,5 +75,10 @@ class VL6180x_rpi {
     const uint8_t reg_congig = 1;
     const uint8_t reg_lo_thres = 2;
     const uint8_t reg_hi_thres = 3;
+
+    void dataReady();
+    static void gpioISR(int,int,uint32_t,void* userdata){
+        ((VL6180x_rpi*)userdata)->dataReady();
+    }
 
 };

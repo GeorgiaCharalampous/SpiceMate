@@ -25,6 +25,8 @@ void VL6180x_rpi::start(VL6180xsettings settings){
     i2c_writeWord(reg_lo_thres,0x0000);
     i2c_writeWord(reg_hi_thres,0x8000);
 
+    gpioSetISRFuncEx(sensorSettings.int_gpio,RISING_EDGE,ISR_TIMEOUT,gpioISR,(void*)this);
+
 };
 
 void VL6180x_rpi::stop(){
@@ -34,13 +36,19 @@ void VL6180x_rpi::stop(){
     }
 };
 
-void VL6180x_rpi::registerCallback(VL6180xcallback* cb){
-    sensorCallback = cb;
-};
+// void VL6180x_rpi::registerCallback(VL6180xcallback* cb){
+//     sensorCallback = cb;
+// };
 
-void VL6180x_rpi::unRegisterCallback(){
-    sensorCallback = nullptr;
-};
+// void VL6180x_rpi::unRegisterCallback(){
+//     sensorCallback = nullptr;
+// };
+
+void VL6180x_rpi::dataReady(){
+    //need to assign an actual value
+    uint8_t value;
+    hasSample(value);
+}
 
 unsigned VL6180x_rpi::i2c_readWord(uint8_t reg)
 {
