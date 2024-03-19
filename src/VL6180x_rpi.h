@@ -6,7 +6,7 @@
 #include <assert.h>
 //#include <VL6180xcallbackInterface.h>
 #include <VL6180x_regAddress.h>
-#include <VL6180X_regOptions.h>
+#include <VL6180X_regBitDefinitions.h>
 
 #ifndef NDEBUG
 #define DEBUG
@@ -23,15 +23,33 @@ static const char could_not_open_i2c[] = "Could not open I2C.\n";
 // default interrupt timeout
 #define ISR_TIMEOUT 1000
 
+// pointers to user configured registers
+uint8_t* range_thresh_low = nullptr;
+uint8_t* range_thresh_high = nullptr;
+uint8_t* intermeasurement_period = nullptr;
 
 struct VL6180x_settings{
     int i2c_bus = 1;
-
     uint8_t address = DEFAULT_VL6180X_ADDRESS;
-
     bool initPIGPIO = true;
-
     int int_gpio = DEFAULT_INT_TO_GPIO;
+
+    /**
+     * initial register settings 
+    **/
+    uint8_t system_mode_gpio1 = (ACTIVE_HIGH|GPIO_INTERRUPT_OUTPUT);
+
+    uint8_t system_interrupt_config_gpio = RANGE_LEVEL_LOW;
+
+    uint8_t system_interrupt_clear = RESET_INTERRUPT_CLEAR;
+
+    uint8_t sysrange_thresh_low = *range_thresh_low;
+
+    uint8_t sysrange_thresh_low = *range_thresh_high;
+
+    uint8_t sysrange_intermeasurement_period = *intermeasurement_period;
+
+    uint8_t sysrange_start = (RANGING_MODE_CONTINUOUS|RANGE_START_STOP_TRIGGER);
 };
 
 class VL6180x_rpi {

@@ -1,6 +1,6 @@
 #include "VL6180x_rpi.h"
 
-void VL6180x_rpi::start(VL6180xsettings settings){
+void VL6180x_rpi::start(VL6180x_settings settings){
     sensorSettings = settings;
 
     //Initialise pigpio
