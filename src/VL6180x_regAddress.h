@@ -1,4 +1,3 @@
-
 // registers for model identification
 #define SENSOR_IDENTIFICATION_MODEL_ID             0x000           //default 0xB4
 #define SENSOR_IDENTIFICATION_MODEL_REV_MAJOR      0x001
@@ -8,6 +7,7 @@
 #define SENSOR_IDENTIFICATION_DATE_HI              0x006
 #define SENSOR_IDENTIFICATION_DATE_LO              0x007
 #define SENSOR_IDENTIFICATION_TIME                 0x008:0x009
+
 // registers for system setup
 #define SENSOR_SYSTEM_MODE_GPIO0                   0x010
 #define SENSOR_SYSTEM_MODE_GPIO1                   0x011
@@ -40,6 +40,7 @@ struct interruptClear{
 
 #define SENSOR_SYSTEM_FRESH_OUT_OF_RESET           0x016           //used for initialisation func
 #define SENSOR_SYSTEM_GROUPED_PARAMETER_HOLD       0x017
+
 // registers for range setup
 #define SENSOR_SYRANGE_START                       0x018
 
@@ -65,6 +66,7 @@ struct rangeStart{
 #define SENSOR_SYRANGE_VHV_RECALIBRATE             0x02E
 #define SENSOR_SYRANGE_VHV_REPEAT_RATE             0x031
 #define SENSRO_SYSRANGE_SCALER                     0x096           //used for set scaling
+
 // registers for ambient light source (ALS) setup
 #define SENSOR_SYSALS_START                        0x038
 
@@ -80,6 +82,7 @@ struct rangeStart{
 #define SENSOR_SYSALS_INTERMEASUREMENT_PERIOD      0x03E
 #define SENSOR_SYSALS_ANALOGUE_GAIN                0x03F
 #define SENSOR_SYSALS_INTEGRATION_PERIOD           0x040
+
 // registers for resutls
 #define SENSOR_RESULT_RANGE_STATUS                 0x04D
 #define SENSOR_RESULT_ALD_STATUS                   0x04E
@@ -96,6 +99,7 @@ struct rangeStart{
 #define SENSOR_RESULT_RANGE_REFERENCE_AMB_COUNT    0x078
 #define SENSOR_RESULT_RANGE_RETURN_CONV_TIME       0x07C
 #define SENSOR_RESULT_RANGE_REFERENCE_CONV_TIME    0x080
+
 // other registers
 #define SENSOR_READOUT_AVERAGING_SAMPLE_PERIOD     0x10A
 #define SENSOR_FIRMWARE_BOOTUP                     0x119
