@@ -1,6 +1,8 @@
 #include "VL6180x_rpi.h"
 
 void VL6180x_rpi::startRangeContinuous(VL6180x_settings settings){
+    if (running) return;
+
     sensorSettings = settings;
 
     //Initialise pigpio
@@ -24,7 +26,10 @@ void VL6180x_rpi::startRangeContinuous(VL6180x_settings settings){
     //Enable interrups
     i2c_writeTwoBytes(reg_lo_thres,0x0000);
     i2c_writeTwoBytes(reg_hi_thres,0x8000);
-
+    
+    #ifdef DEBUG
+	fprintf(stderr,"Starting proximity thread.\n");
+    #endif
     proxThread = std::thread(&VL6180x_rpi::run,this);
    
 
@@ -32,7 +37,7 @@ void VL6180x_rpi::startRangeContinuous(VL6180x_settings settings){
 
 void VL6180x_rpi::run(){
     running = 1;
-     gpioSetISRFuncEx(sensorSettings.int_gpio,RISING_EDGE,ISR_TIMEOUT,gpioISR,(void*)this);
+    gpioSetISRFuncEx(sensorSettings.int_gpio,RISING_EDGE,ISR_TIMEOUT,gpioISR,(void*)this);
 };
 
 void VL6180x_rpi::stop(){
