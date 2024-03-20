@@ -31,8 +31,8 @@ void VL6180x_rpi::startRangeContinuous(VL6180x_settings settings){
 	fprintf(stderr,"Starting proximity thread.\n");
     #endif
     proxThread = std::thread(&VL6180x_rpi::run,this);
-   
 
+    gpioSetMode(settings.int_gpio,PI_INPUT);
 };
 
 void VL6180x_rpi::run(){
