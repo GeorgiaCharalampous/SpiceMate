@@ -18,6 +18,7 @@ int main(int argc, char *argv[]){
     max_convergence_time = &Range_Max_convergence_time;
 
     VL6180x_settings Settings_Struct;
+    printf("Range threshold low is %f",Settings_Struct.sysrange_thresh_low);
 
 
 }
