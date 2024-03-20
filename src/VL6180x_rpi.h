@@ -46,7 +46,7 @@ struct VL6180x_settings{
 
     uint8_t sysrange_thresh_low = *range_thresh_low;
 
-    uint8_t sysrange_thresh_low = *range_thresh_high;
+    uint8_t sysrange_thresh_high = *range_thresh_high;
 
     uint8_t sysrange_intermeasurement_period = *intermeasurement_period;
 

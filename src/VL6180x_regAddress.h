@@ -42,7 +42,7 @@ struct interruptClear{
 #define SENSOR_SYSTEM_GROUPED_PARAMETER_HOLD       0x017
 
 // registers for range setup
-#define SENSOR_SYRANGE_START                       0x018
+#define SENSOR_SYSRANGE_START                       0x018
 
 /*
 struct rangeStart{
@@ -51,20 +51,20 @@ struct rangeStart{
     uint8_t     reservedBits:6;
 }*/
 
-#define SENSOR_SYRANGE_THRESH_HIGH                 0x019
-#define SENSOR_SYRANGE_THRESH_LOW                  0x01A
-#define SENSOR_SYRANGE_INTERMEASUREMENT_PERIOD     0x01B
-#define SENSOR_SYRANGE_MAX_CONVERGENCE_TIME        0x01C
-#define SENSOR_SYRANGE_CROSSTALK_COMPENSATION_RATE 0x01E
-#define SENSOR_SYRANGE_CROSSTALK_VALID_HEIGHT      0x021           //used for defaultCrosstalkValidHeight func
-#define SENSOR_SYRANGE_EALRY_CONVERGENCE_ESTIMATE  0x022
-#define SENSOR_SYRANGE_PART_TO_PART_RANGE_OFFSET   0x024           //used for ptp_offset
-#define SENSOR_SYRANGE_RANGE_IGNORE_VALID_HEIGHT   0x025
-#define SENSOR_SYRANGE_RANGE_IGNORE_THRESHOLD      0x026
-#define SENSOR_SYRANGE_MAX_AMBIENT_LEVEL_MULT      0x02C
-#define SENSOR_SYRANGE_RANGE_CHECK_ENABLES         0x02D           //used for rce var
-#define SENSOR_SYRANGE_VHV_RECALIBRATE             0x02E
-#define SENSOR_SYRANGE_VHV_REPEAT_RATE             0x031
+#define SENSOR_SYSRANGE_THRESH_HIGH                 0x019
+#define SENSOR_SYSRANGE_THRESH_LOW                  0x01A
+#define SENSOR_SYSRANGE_INTERMEASUREMENT_PERIOD     0x01B
+#define SENSOR_SYSRANGE_MAX_CONVERGENCE_TIME        0x01C
+#define SENSOR_SYSRANGE_CROSSTALK_COMPENSATION_RATE 0x01E
+#define SENSOR_SYSRANGE_CROSSTALK_VALID_HEIGHT      0x021           //used for defaultCrosstalkValidHeight func
+#define SENSOR_SYSRANGE_EALRY_CONVERGENCE_ESTIMATE  0x022
+#define SENSOR_SYSRANGE_PART_TO_PART_RANGE_OFFSET   0x024           //used for ptp_offset
+#define SENSOR_SYSRANGE_RANGE_IGNORE_VALID_HEIGHT   0x025
+#define SENSOR_SYSRANGE_RANGE_IGNORE_THRESHOLD      0x026
+#define SENSOR_SYSRANGE_MAX_AMBIENT_LEVEL_MULT      0x02C
+#define SENSOR_SYSRANGE_RANGE_CHECK_ENABLES         0x02D           //used for rce var
+#define SENSOR_SYSRANGE_VHV_RECALIBRATE             0x02E
+#define SENSOR_SYSRANGE_VHV_REPEAT_RATE             0x031
 #define SENSRO_SYSRANGE_SCALER                     0x096           //used for set scaling
 
 // registers for ambient light source (ALS) setup
