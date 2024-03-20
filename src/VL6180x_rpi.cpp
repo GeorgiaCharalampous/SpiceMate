@@ -52,7 +52,7 @@ void VL6180x_rpi::dataReady(){
 
 unsigned VL6180x_rpi::i2c_readWord(uint8_t reg)
 {
-    int fd = i2cOpen(sensorSettings.i2c_bus, sensorSettings.address, 0);
+    int fd = i2cOpen(sensorSettings.default_i2c_bus, sensorSettings.address, 0);
     if (fd<0){
         #ifdef DEBUG
         fprintf(stderr, "Could not open %02x.\n",sensorSettings.address);
@@ -73,9 +73,10 @@ unsigned VL6180x_rpi::i2c_readWord(uint8_t reg)
 
 };
 
+//Can we call this writeTwoBytes instead of writeWord? It's confusing me...
 void VL6180x_rpi::i2c_writeWord(uint8_t reg, unsigned data)
 {
-        int fd = i2cOpen(sensorSettings.i2c_bus, sensorSettings.address, 0);
+        int fd = i2cOpen(sensorSettings.default_i2c_bus, sensorSettings.address, 0);
         if (fd < 0) {
 #ifdef DEBUG
                 fprintf(stderr,"Could not open %02x.\n",sensorSettings.address);
@@ -86,6 +87,35 @@ void VL6180x_rpi::i2c_writeWord(uint8_t reg, unsigned data)
 	tmp[0] = (char)((data & 0xff00) >> 8);
 	tmp[1] = (char)(data & 0x00ff);
 	int r = i2cWriteI2CBlockData(fd, reg, tmp, 2);
+        if (r < 0) {
+#ifdef DEBUG
+                fprintf(stderr,"Could not write word from %02x. ret=%d.\n",sensorSettings.address,r);
+#endif
+                throw "Could not write to i2c.";
+        }
+        i2cClose(fd);
+}
+
+void VL6180x_rpi::i2c_writeByte(uint8_t reg, unsigned data)
+{
+        int fd = i2cOpen(sensorSettings.default_i2c_bus, sensorSettings.address, 0);
+        if (fd < 0) {
+#ifdef DEBUG
+                fprintf(stderr,"Could not open %02x.\n",sensorSettings.address);
+#endif
+                throw could_not_open_i2c;
+        }
+	// Cast data to char = 1 byte = 8 bits
+	
+        if (data > 0xFF) {
+#ifdef DEBUG
+                fprintf(stderr,"Data %.2X is larger than 1 byte.\n",data);
+#endif
+                throw thre;
+        }
+    char tmp = (char)(data);
+
+	int r = i2cWriteI2CBlockData(fd, reg, tmp, 1);
         if (r < 0) {
 #ifdef DEBUG
                 fprintf(stderr,"Could not write word from %02x. ret=%d.\n",sensorSettings.address,r);

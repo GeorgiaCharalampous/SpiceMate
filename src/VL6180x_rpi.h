@@ -23,19 +23,20 @@ static const char could_not_open_i2c[] = "Could not open I2C.\n";
 // default interrupt timeout
 #define ISR_TIMEOUT 1000
 
-// pointers to user configured registers
+// pointers to end-user configured settings
 uint8_t* range_thresh_low = nullptr;
 uint8_t* range_thresh_high = nullptr;
 uint8_t* intermeasurement_period = nullptr;
+uint8_t* max_convergence_time = nullptr;
 
 struct VL6180x_settings{
-    int i2c_bus = 1;
+    int default_i2c_bus = 1;
     uint8_t address = DEFAULT_VL6180X_ADDRESS;
     bool initPIGPIO = true;
     int int_gpio = DEFAULT_INT_TO_GPIO;
 
     /**
-     * initial register settings 
+     * Initial sensor register settings 
     **/
     uint8_t system_mode_gpio1 = (ACTIVE_HIGH|GPIO_INTERRUPT_OUTPUT);
 
@@ -48,6 +49,10 @@ struct VL6180x_settings{
     uint8_t sysrange_thresh_low = *range_thresh_high;
 
     uint8_t sysrange_intermeasurement_period = *intermeasurement_period;
+
+    uint8_t sysrange_max_convergence_time = *max_convergence_time;
+
+    uint8_t sysrange_range_check_enables = (SIGNAL_TO_NOISE_ENABLE);
 
     uint8_t sysrange_start = (RANGING_MODE_CONTINUOUS|RANGE_START_STOP_TRIGGER);
 };
@@ -88,6 +93,7 @@ class VL6180x_rpi {
     VL6180xcallback* sensorCallback = nullptr;
     */
     void i2c_writeWord(uint8_t reg, unsigned data);
+    void i2c_writeByte(uint8_t reg, unsigned data);
     unsigned i2c_readWord(uint8_t reg);
     int i2c_readConversion();
 
