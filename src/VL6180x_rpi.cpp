@@ -25,15 +25,27 @@ void VL6180x_rpi::startRangeContinuous(VL6180x_settings settings){
     i2c_writeTwoBytes(reg_lo_thres,0x0000);
     i2c_writeTwoBytes(reg_hi_thres,0x8000);
 
-    gpioSetISRFuncEx(sensorSettings.int_gpio,RISING_EDGE,ISR_TIMEOUT,gpioISR,(void*)this);
+    proxThread = std::thread(&VL6180x_rpi::run,this);
+   
 
 };
 
+void VL6180x_rpi::run(){
+    running = 1;
+     gpioSetISRFuncEx(sensorSettings.int_gpio,RISING_EDGE,ISR_TIMEOUT,gpioISR,(void*)this);
+};
+
 void VL6180x_rpi::stop(){
+    if (!running) return;
+	running = 0;
     gpioSetISRFuncEx(sensorSettings.int_gpio,RISING_EDGE,-1,NULL,(void*)this);
     if(sensorSettings.initPIGPIO){
         gpioTerminate();
     }
+    proxThread.join();
+    #ifdef DEBUG
+	fprintf(stderr,"Proximity thread stopped.\n");
+    #endif	
 };
 
 void VL6180x_rpi::registerCallback(VL6180xcallback* cb){
