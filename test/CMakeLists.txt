@@ -1,2 +1,7 @@
-cmake_minimum_required(VERSION 3.10)
-add_executable(DriverTest test_main.cpp)
+include_directories("${PROJECT_SOURCE_DIR}/src")
+include_directories("${PROJECT_SOURCE_DIR}/test")
+
+link_directories("${PROJECT_SOURCE_DIR}/test")
+
+add_executable(TestDriver test_main.cpp)
+target_link_libraries(TestDriver src_Lib)
