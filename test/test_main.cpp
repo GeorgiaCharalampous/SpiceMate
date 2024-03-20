@@ -19,6 +19,14 @@ int main(int argc, char *argv[]){
 
     VL6180x_settings Settings_Struct;
     printf("Range threshold low is %f",Settings_Struct.sysrange_thresh_low);
-
-
+    
+    //--------CAUTION--------
+    // Uncomment the following lines only if the printing above has been successful and you want to test the data acquisition
+    // Make sure the getchar() is interpreted correctly on the rpi
+    /*
+    Sensor_Instance.startRangeContinuous(Settings_Struct);
+    getchar();
+	Sensor_Instance.stop();
+	return 0;
+    */
 }
