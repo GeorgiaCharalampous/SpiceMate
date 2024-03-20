@@ -33,13 +33,13 @@ void VL6180x_rpi::startRangeContinuous(VL6180x_settings settings){
     i2c_writeByte(SENSOR_SYSRANGE_MAX_CONVERGENCE_TIME,settings.sysrange_max_convergence_time);
     i2c_writeByte(SENSOR_SYSRANGE_RANGE_CHECK_ENABLES,settings.sysrange_range_check_enables);
     i2c_writeByte(SENSOR_SYSRANGE_START,settings.sysrange_start);
-    
+    gpioSetMode(settings.int_gpio,PI_INPUT);
+
     #ifdef DEBUG
 	fprintf(stderr,"Starting proximity thread.\n");
     #endif
     proxThread = std::thread(&VL6180x_rpi::run,this);
 
-    gpioSetMode(settings.int_gpio,PI_INPUT);
 };
 
 void VL6180x_rpi::run(){
