@@ -4,7 +4,8 @@
 #include <stdlib.h>
 #include <pigpio.h>
 #include <assert.h>
-//#include <VL6180xcallbackInterface.h>
+#include <thread>
+#include <VL6180xcallbackInterface.h>
 #include <VL6180x_regAddress.h>
 #include <VL6180X_regBitDefinitions.h>
 
@@ -64,8 +65,6 @@ class VL6180x_rpi {
     **/
     ~VL6180x_rpi() {stop();}
 
-    virtual void hasSample(uint8_t sample) = 0;
-
     /**
      * start data acquisition 
     **/
@@ -76,22 +75,22 @@ class VL6180x_rpi {
     **/
     void stop();
 
-    // /**
-    //  * Registers the callback on sample arrival.
-    //  * \param cb Pointer to the callback interface. 
-    // **/
-    // void registerCallback(VL6180xcallback* cb);
+    /**
+     * Registers the callback on sample arrival.
+     * \param cb Pointer to the callback interface. 
+    **/
+    void registerCallback(VL6180xcallback* cb);
     
-    // /**
-    //  * Unregisters the callback
-    // **/
-    // void unRegisterCallback();
+    /**
+     * Unregisters the callback
+    **/
+    void unRegisterCallback();
 
     private:
     VL6180x_settings sensorSettings;
-    /*
     VL6180xcallback* sensorCallback = nullptr;
-    */
+    std::thread proxThread;//Proximity sensor thread
+    int running = 0;
     void i2c_writeTwoBytes(uint8_t reg, unsigned data);
     void i2c_writeByte(uint8_t reg, unsigned data);
     unsigned i2c_readWord(uint8_t reg);
@@ -102,6 +101,7 @@ class VL6180x_rpi {
     const uint8_t reg_hi_thres = 3;
 
     void dataReady();
+    void run();
     static void gpioISR(int,int,uint32_t,void* userdata){
         ((VL6180x_rpi*)userdata)->dataReady();
     }

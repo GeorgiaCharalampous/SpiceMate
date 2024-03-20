@@ -1,6 +1,8 @@
 #include "VL6180x_rpi.h"
 
 void VL6180x_rpi::startRangeContinuous(VL6180x_settings settings){
+    if (running) return;
+
     sensorSettings = settings;
 
     //Initialise pigpio
@@ -31,30 +33,45 @@ void VL6180x_rpi::startRangeContinuous(VL6180x_settings settings){
     i2c_writeByte(SENSOR_SYSRANGE_MAX_CONVERGENCE_TIME,settings.sysrange_max_convergence_time);
     i2c_writeByte(SENSOR_SYSRANGE_RANGE_CHECK_ENABLES,settings.sysrange_range_check_enables);
     i2c_writeByte(SENSOR_SYSRANGE_START,settings.sysrange_start);
+    
+    #ifdef DEBUG
+	fprintf(stderr,"Starting proximity thread.\n");
+    #endif
+    proxThread = std::thread(&VL6180x_rpi::run,this);
 
+    gpioSetMode(settings.int_gpio,PI_INPUT);
+};
+
+void VL6180x_rpi::run(){
+    running = 1;
     gpioSetISRFuncEx(sensorSettings.int_gpio,RISING_EDGE,ISR_TIMEOUT,gpioISR,(void*)this);
-
 };
 
 void VL6180x_rpi::stop(){
+    if (!running) return;
+	running = 0;
     gpioSetISRFuncEx(sensorSettings.int_gpio,RISING_EDGE,-1,NULL,(void*)this);
     if(sensorSettings.initPIGPIO){
         gpioTerminate();
     }
+    proxThread.join();
+    #ifdef DEBUG
+	fprintf(stderr,"Proximity thread stopped.\n");
+    #endif	
 };
 
-// void VL6180x_rpi::registerCallback(VL6180xcallback* cb){
-//     sensorCallback = cb;
-// };
+void VL6180x_rpi::registerCallback(VL6180xcallback* cb){
+    sensorCallback = cb;
+};
 
-// void VL6180x_rpi::unRegisterCallback(){
-//     sensorCallback = nullptr;
-// };
+void VL6180x_rpi::unRegisterCallback(){
+    sensorCallback = nullptr;
+};
 
 void VL6180x_rpi::dataReady(){
     //need to assign an actual value
     uint8_t value;
-    hasSample(value);
+    sensorCallback->hasSample(value);
 }
 
 unsigned VL6180x_rpi::i2c_readWord(uint8_t reg)
