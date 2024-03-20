@@ -28,9 +28,9 @@ static const char could_not_open_i2c[] = "Could not open I2C.\n";
 
 // pointers to end-user configured settings
 //extern uint8_t* ptr_range_thresh_low;
-uint8_t* ptr_range_thresh_high = nullptr;
-uint8_t* ptr_intermeasurement_period = nullptr;
-uint8_t* ptr_max_convergence_time = nullptr;
+//uint8_t* ptr_range_thresh_high = nullptr;
+//uint8_t* ptr_intermeasurement_period = nullptr;
+//uint8_t* ptr_max_convergence_time = nullptr;
 
 struct VL6180x_settings{
     int default_i2c_bus = 1;
