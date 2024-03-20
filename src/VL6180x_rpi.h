@@ -27,7 +27,7 @@ static const char could_not_open_i2c[] = "Could not open I2C.\n";
 #define ISR_TIMEOUT 1000
 
 // pointers to end-user configured settings
-extern uint8_t* ptr_range_thresh_low;
+//extern uint8_t* ptr_range_thresh_low;
 uint8_t* ptr_range_thresh_high = nullptr;
 uint8_t* ptr_intermeasurement_period = nullptr;
 uint8_t* ptr_max_convergence_time = nullptr;
@@ -47,7 +47,8 @@ struct VL6180x_settings{
 
     uint8_t system_interrupt_clear = RESET_INTERRUPT_CLEAR;
 
-    uint8_t sysrange_thresh_low = *ptr_range_thresh_low;
+    //uint8_t sysrange_thresh_low = *ptr_range_thresh_low;
+    uint8_t sysrange_thresh_low = 0x00;
 
     uint8_t sysrange_thresh_high = *ptr_range_thresh_high;
 
