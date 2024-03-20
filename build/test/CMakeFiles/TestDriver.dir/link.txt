@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/TestDriver.dir/test_main.cpp.o -o TestDriver   -L/home/georgiac/setup/SpiceMate/test  -Wl,-rpath,/home/georgiac/setup/SpiceMate/test ../src/libsrc_Lib.a 
