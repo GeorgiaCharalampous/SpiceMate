@@ -1,5 +1,9 @@
-#include "src/VL6180x_rpi.h"
-#include "src/VL6180xcallbackChild.h"
+#ifndef VL6180x_rpi
+#include "VL6180x_rpi.h"
+#endif
+// #ifndef VL6180xcallbackChild
+// #include "VL6180xcallbackChild.h"
+// #endif
 
 
 
@@ -12,10 +16,10 @@ int main(int argc, char *argv[]){
     uint8_t Range_Intermeasurement_period = 100; //ms
     uint8_t Range_Max_convergence_time = 15; //ms
 
-    range_thresh_low = &Range_Threshold_Low;
-    range_thresh_high = &Range_Threshold_HIGH;
-    intermeasurement_period = &Range_Intermeasurement_period;
-    max_convergence_time = &Range_Max_convergence_time;
+    uint8_t* ptr_range_thresh_low = &Range_Threshold_Low;
+    ptr_range_thresh_high = &Range_Threshold_HIGH;
+    ptr_intermeasurement_period = &Range_Intermeasurement_period;
+    ptr_max_convergence_time = &Range_Max_convergence_time;
 
     VL6180x_settings Settings_Struct;
     printf("Range threshold low is %f",Settings_Struct.sysrange_thresh_low);

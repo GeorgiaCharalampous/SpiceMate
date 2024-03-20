@@ -1,8 +1,0 @@
-/home/georgiac/setup/SpiceMate/build/CMakeFiles/edit_cache.dir
-/home/georgiac/setup/SpiceMate/build/CMakeFiles/rebuild_cache.dir
-/home/georgiac/setup/SpiceMate/build/test/CMakeFiles/TestDriver.dir
-/home/georgiac/setup/SpiceMate/build/test/CMakeFiles/edit_cache.dir
-/home/georgiac/setup/SpiceMate/build/test/CMakeFiles/rebuild_cache.dir
-/home/georgiac/setup/SpiceMate/build/src/CMakeFiles/src_Lib.dir
-/home/georgiac/setup/SpiceMate/build/src/CMakeFiles/edit_cache.dir
-/home/georgiac/setup/SpiceMate/build/src/CMakeFiles/rebuild_cache.dir

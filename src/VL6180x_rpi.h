@@ -5,7 +5,9 @@
 #include <pigpio.h>
 #include <assert.h>
 #include <thread>
-#include <VL6180xcallbackInterface.h>
+#ifndef  VL6180xcallbackChild
+#include <VL6180xcallbackChild.h>
+#endif
 #include <VL6180x_regAddress.h>
 #include <VL6180X_regBitDefinitions.h>
 
@@ -25,10 +27,10 @@ static const char could_not_open_i2c[] = "Could not open I2C.\n";
 #define ISR_TIMEOUT 1000
 
 // pointers to end-user configured settings
-uint8_t* range_thresh_low = nullptr;
-uint8_t* range_thresh_high = nullptr;
-uint8_t* intermeasurement_period = nullptr;
-uint8_t* max_convergence_time = nullptr;
+extern uint8_t* ptr_range_thresh_low;
+uint8_t* ptr_range_thresh_high = nullptr;
+uint8_t* ptr_intermeasurement_period = nullptr;
+uint8_t* ptr_max_convergence_time = nullptr;
 
 struct VL6180x_settings{
     int default_i2c_bus = 1;
@@ -45,13 +47,13 @@ struct VL6180x_settings{
 
     uint8_t system_interrupt_clear = RESET_INTERRUPT_CLEAR;
 
-    uint8_t sysrange_thresh_low = *range_thresh_low;
+    uint8_t sysrange_thresh_low = *ptr_range_thresh_low;
 
-    uint8_t sysrange_thresh_high = *range_thresh_high;
+    uint8_t sysrange_thresh_high = *ptr_range_thresh_high;
 
-    uint8_t sysrange_intermeasurement_period = *intermeasurement_period;
+    uint8_t sysrange_intermeasurement_period = *ptr_intermeasurement_period;
 
-    uint8_t sysrange_max_convergence_time = *max_convergence_time;
+    uint8_t sysrange_max_convergence_time = *ptr_max_convergence_time;
 
     uint8_t sysrange_range_check_enables = (SIGNAL_TO_NOISE_ENABLE);
 

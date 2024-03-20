@@ -1,2 +1,0 @@
-/usr/bin/ar qc libsrc_Lib.a CMakeFiles/src_Lib.dir/VL6180x_rpi.cpp.o CMakeFiles/src_Lib.dir/VL6180xcallbackChild.cpp.o
-/usr/bin/ranlib libsrc_Lib.a
