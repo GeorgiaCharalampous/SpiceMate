@@ -1,6 +1,6 @@
 #include "VL6180x_rpi.h"
 
-void VL6180x_rpi::start(VL6180x_settings settings){
+void VL6180x_rpi::startRangeContinuous(VL6180x_settings settings){
     sensorSettings = settings;
 
     //Initialise pigpio
@@ -22,8 +22,8 @@ void VL6180x_rpi::start(VL6180x_settings settings){
     #endif
 
     //Enable interrups
-    i2c_writeWord(reg_lo_thres,0x0000);
-    i2c_writeWord(reg_hi_thres,0x8000);
+    i2c_writeTwoBytes(reg_lo_thres,0x0000);
+    i2c_writeTwoBytes(reg_hi_thres,0x8000);
 
     gpioSetISRFuncEx(sensorSettings.int_gpio,RISING_EDGE,ISR_TIMEOUT,gpioISR,(void*)this);
 
@@ -74,7 +74,7 @@ unsigned VL6180x_rpi::i2c_readWord(uint8_t reg)
 };
 
 //Can we call this writeTwoBytes instead of writeWord? It's confusing me...
-void VL6180x_rpi::i2c_writeWord(uint8_t reg, unsigned data)
+void VL6180x_rpi::i2c_writeTwoBytes(uint8_t reg, unsigned data)
 {
         int fd = i2cOpen(sensorSettings.default_i2c_bus, sensorSettings.address, 0);
         if (fd < 0) {
@@ -89,7 +89,7 @@ void VL6180x_rpi::i2c_writeWord(uint8_t reg, unsigned data)
 	int r = i2cWriteI2CBlockData(fd, reg, tmp, 2);
         if (r < 0) {
 #ifdef DEBUG
-                fprintf(stderr,"Could not write word from %02x. ret=%d.\n",sensorSettings.address,r);
+                fprintf(stderr,"Could not write two bytes to %02x. ret=%d.\n",sensorSettings.address,r);
 #endif
                 throw "Could not write to i2c.";
         }
@@ -111,16 +111,17 @@ void VL6180x_rpi::i2c_writeByte(uint8_t reg, unsigned data)
 #ifdef DEBUG
                 fprintf(stderr,"Data %.2X is larger than 1 byte.\n",data);
 #endif
-                throw thre;
+                throw "Data larger than 1 byte.";
         }
-    char tmp = (char)(data);
+    char tmp[1];
+    tmp[0] = (char)(data);
 
 	int r = i2cWriteI2CBlockData(fd, reg, tmp, 1);
         if (r < 0) {
 #ifdef DEBUG
-                fprintf(stderr,"Could not write word from %02x. ret=%d.\n",sensorSettings.address,r);
+                fprintf(stderr,"Could not write byte to %02x. ret=%d.\n",sensorSettings.address,r);
 #endif
-                throw "Could not read from i2c.";
+                throw "Could not write to i2c.";
         }
         i2cClose(fd);
 }

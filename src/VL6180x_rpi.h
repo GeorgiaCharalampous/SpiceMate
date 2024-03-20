@@ -69,7 +69,7 @@ class VL6180x_rpi {
     /**
      * start data acquisition 
     **/
-    void start (VL6180x_settings vl6180xsettings = VL6180x_settings());
+    void startRangeContinuous(VL6180x_settings vl6180xsettings = VL6180x_settings());
 
     /**
      * stop data acquisition 
@@ -92,7 +92,7 @@ class VL6180x_rpi {
     /*
     VL6180xcallback* sensorCallback = nullptr;
     */
-    void i2c_writeWord(uint8_t reg, unsigned data);
+    void i2c_writeTwoBytes(uint8_t reg, unsigned data);
     void i2c_writeByte(uint8_t reg, unsigned data);
     unsigned i2c_readWord(uint8_t reg);
     int i2c_readConversion();
