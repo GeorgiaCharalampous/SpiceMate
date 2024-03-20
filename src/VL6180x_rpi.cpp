@@ -74,7 +74,7 @@ void VL6180x_rpi::dataReady(){
     sensorCallback->hasSample(value);
 }
 
-unsigned VL6180x_rpi::i2c_readWord(uint8_t reg)
+unsigned VL6180x_rpi::i2c_readTwoBytes(uint8_t reg)
 {
     int fd = i2cOpen(sensorSettings.default_i2c_bus, sensorSettings.address, 0);
     if (fd<0){
@@ -94,6 +94,29 @@ unsigned VL6180x_rpi::i2c_readWord(uint8_t reg)
     }
     i2cClose(fd);
     return (((unsigned)(tmp[0])) << 8) | ((unsigned)(tmp[1]));
+
+};
+
+unsigned VL6180x_rpi::i2c_readByte(uint8_t reg)
+{
+    int fd = i2cOpen(sensorSettings.default_i2c_bus, sensorSettings.address, 0);
+    if (fd<0){
+        #ifdef DEBUG
+        fprintf(stderr, "Could not open %02x.\n",sensorSettings.address);
+        #endif
+        throw could_not_open_i2c;
+    }
+    int r;
+    char tmp[1];
+    r = i2cReadI2CBlockData(fd,reg,tmp,1);
+        if (r<0){
+        #ifdef DEBUG
+        fprintf(stderr, "Could not read from%02x.\n",sensorSettings.address,r);
+        #endif
+        throw "Could not read from i2c.";
+    }
+    i2cClose(fd);
+    return ((unsigned)(tmp[0]));
 
 };
 

@@ -93,7 +93,8 @@ class VL6180x_rpi {
     int running = 0;
     void i2c_writeTwoBytes(uint8_t reg, unsigned data);
     void i2c_writeByte(uint8_t reg, unsigned data);
-    unsigned i2c_readWord(uint8_t reg);
+    unsigned i2c_readTwoBytes(uint8_t reg);
+     unsigned i2c_readByte(uint8_t reg);
     int i2c_readConversion();
 
     const uint8_t reg_congig = 1;
