@@ -70,7 +70,7 @@ void VL6180x_rpi::unRegisterCallback(){
 
 void VL6180x_rpi::dataReady(){
     //need to assign an actual value
-    uint8_t value;
+    uint8_t value = i2cReadByte(SENSOR_RESULT_RANGE_VAL);
     sensorCallback->hasSample(value);
 }
 

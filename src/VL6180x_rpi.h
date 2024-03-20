@@ -41,7 +41,7 @@ struct VL6180x_settings{
     **/
     uint8_t system_mode_gpio1 = (ACTIVE_HIGH|GPIO_INTERRUPT_OUTPUT);
 
-    uint8_t system_interrupt_config_gpio = RANGE_LEVEL_LOW;
+    uint8_t system_interrupt_config_gpio = RANGE_NEW_SAMPLE_READY;
 
     uint8_t system_interrupt_clear = RESET_INTERRUPT_CLEAR;
 
