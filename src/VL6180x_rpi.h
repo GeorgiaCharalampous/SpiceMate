@@ -50,11 +50,14 @@ struct VL6180x_settings{
     //uint8_t sysrange_thresh_low = *ptr_range_thresh_low;
     uint8_t sysrange_thresh_low = 0x00;
 
-    uint8_t sysrange_thresh_high = *ptr_range_thresh_high;
+    //uint8_t sysrange_thresh_high = *ptr_range_thresh_high;
+    uint8_t sysrange_thresh_high = 0xFF;
 
-    uint8_t sysrange_intermeasurement_period = *ptr_intermeasurement_period;
+    //uint8_t sysrange_intermeasurement_period = *ptr_intermeasurement_period;
+    uint8_t sysrange_intermeasurement_period = 0xFF;
 
-    uint8_t sysrange_max_convergence_time = *ptr_max_convergence_time;
+    //uint8_t sysrange_max_convergence_time = *ptr_max_convergence_time;
+    uint8_t sysrange_max_convergence_time = 0x31;
 
     uint8_t sysrange_range_check_enables = (SIGNAL_TO_NOISE_ENABLE);
 

@@ -16,12 +16,6 @@ int main(int argc, char *argv[]){
     uint8_t Range_Intermeasurement_period = 100; //ms
     uint8_t Range_Max_convergence_time = 15; //ms
 
-    //uint8_t* ptr_range_thresh_low = &Range_Threshold_Low;
-
-    ptr_range_thresh_high = &Range_Threshold_HIGH;
-    ptr_intermeasurement_period = &Range_Intermeasurement_period;
-    ptr_max_convergence_time = &Range_Max_convergence_time;
-
     VL6180x_settings Settings_Struct;
     Settings_Struct.sysrange_thresh_low = 100;
 
