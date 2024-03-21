@@ -24,10 +24,10 @@ int main(int argc, char *argv[]){
     //--------CAUTION--------
     // Uncomment the following lines only if the printing above has been successful and you want to test the data acquisition
     // Make sure the getchar() is interpreted correctly on the rpi
-    /*
+    
     Sensor_Instance.startRangeContinuous(Settings_Struct);
     getchar();
 	Sensor_Instance.stop();
 	return 0;
-    */
+    
 }
