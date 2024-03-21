@@ -10,7 +10,8 @@
 int main(int argc, char *argv[]){
     
     VL6180x_rpi Sensor_Instance;
-    
+    VL6180xcallbackChild printCallback;
+
     uint8_t Range_Threshold_Low = 100;//mm
     uint8_t Range_Threshold_HIGH = 100; //mm
     uint8_t Range_Intermeasurement_period = 100; //ms
@@ -21,9 +22,7 @@ int main(int argc, char *argv[]){
 
     printf("Range threshold low is %u . \n",Settings_Struct.sysrange_thresh_low);
     
-    //--------CAUTION--------
-    // Uncomment the following lines only if the printing above has been successful and you want to test the data acquisition
-    // Make sure the getchar() is interpreted correctly on the rpi
+    Sensor_Instance.registerCallback(&printCallback);
     
     Sensor_Instance.startRangeContinuous(Settings_Struct);
     getchar();
