@@ -47,6 +47,9 @@ void VL6180x_rpi::startRangeContinuous(VL6180x_settings settings){
 
 void VL6180x_rpi::run(){
     running = 1;
+    #ifdef DEBUG
+	fprintf(stderr,"Proximity thread running.\n");
+    #endif
     gpioSetISRFuncEx(sensorSettings.int_gpio,RISING_EDGE,ISR_TIMEOUT,gpioISR,(void*)this);
 };
 
