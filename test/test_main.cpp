@@ -19,7 +19,7 @@ int main(int argc, char *argv[]){
     VL6180x_settings Settings_Struct;
     Settings_Struct.sysrange_thresh_low = 100;
 
-    printf("Range threshold low is %f",Settings_Struct.sysrange_thresh_low);
+    printf("Range threshold low is %u /n",Settings_Struct.sysrange_thresh_low);
     
     //--------CAUTION--------
     // Uncomment the following lines only if the printing above has been successful and you want to test the data acquisition
