@@ -81,6 +81,9 @@ void VL6180x_rpi::dataReady(){
 	fprintf(stderr,"Data acquired %u.\n",value);
     #endif	
     sensorCallback->hasSample(value);
+    #ifdef DEBUG
+	fprintf(stderr,"Processed callback.\n");
+    #endif
 }
 
 unsigned VL6180x_rpi::i2c_readTwoBytes(uint8_t reg)
