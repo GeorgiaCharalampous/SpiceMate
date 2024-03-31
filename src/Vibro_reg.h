@@ -1,5 +1,15 @@
+//Registers for Vibro 4
+
 #define VIBRO_STATUS_REG        0x00        // ALL READ ONLY
+
 #define VIBRO_MODE_REG          0x01        // [6] is Standby 0: Device ready 1: Standby(Default)
+//settings
+
+
+
+
+
+
                                             // [2:0] is Mode 0:Internal trigger 3:PWM trigger 5:Real-time Playback 7:Autocalibration
 #define VIBRO_RTP_REG           0x02
 #define VIBRO_REGFIELD_REG      0x03        // 6:LRA Library
