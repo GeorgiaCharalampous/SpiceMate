@@ -1,7 +1,7 @@
 #ifndef VL6180x_rpi
 #include "VL6180x_rpi.h"
 #endif
-
+#include <bitset>
 
 void VL6180x_rpi::startRangeContinuous(VL6180x_settings settings){
     if (running) return;
@@ -109,8 +109,11 @@ void VL6180x_rpi::unRegisterCallback(){
 void VL6180x_rpi::dataReady(){
     //need to assign an actual value
     uint8_t value = i2cReadByte(SENSOR_RESULT_RANGE_VAL);
+    uint8_t error = i2cReadByte(SENSOR_RESULT_RANGE_STATUS);
+    error = error >> 4;
+    std::bitset<8> errorcode{error};
     #ifdef DEBUG
-	fprintf(stderr,"Data acquired %u.\n",value);
+	fprintf(stderr,"Error code %u.\n",errorcode);
     #endif	
     sensorCallback->hasSample(value);
     #ifdef DEBUG
