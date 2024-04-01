@@ -26,6 +26,38 @@ void VL6180x_rpi::startRangeContinuous(VL6180x_settings settings){
     fprintf(stderr, "Init .\n");
     #endif
 
+    //Write private registers from VL6180X API
+    // i2c_writeByte(0x0207, 0x01);
+    // i2c_writeByte(0x0208, 0x01);
+    // i2c_writeByte(0x0096, 0x00);
+    // i2c_writeByte(0x0097, 0xfd);
+    // i2c_writeByte(0x00e3, 0x00);
+    // i2c_writeByte(0x00e4, 0x04);
+    // i2c_writeByte(0x00e5, 0x02);
+    // i2c_writeByte(0x00e6, 0x01);
+    // i2c_writeByte(0x00e7, 0x03);
+    // i2c_writeByte(0x00f5, 0x02);
+    // i2c_writeByte(0x00d9, 0x05);
+    // i2c_writeByte(0x00db, 0xce);
+    // i2c_writeByte(0x00dc, 0x03);
+    // i2c_writeByte(0x00dd, 0xf8);
+    // i2c_writeByte(0x009f, 0x00);
+    // i2c_writeByte(0x00a3, 0x3c);
+    // i2c_writeByte(0x00b7, 0x00);
+    // i2c_writeByte(0x00bb, 0x3c);
+    // i2c_writeByte(0x00b2, 0x09);
+    // i2c_writeByte(0x00ca, 0x09);
+    // i2c_writeByte(0x0198, 0x01);
+    // i2c_writeByte(0x01b0, 0x17);
+    // i2c_writeByte(0x01ad, 0x00);
+    // i2c_writeByte(0x00ff, 0x05);
+    // i2c_writeByte(0x0100, 0x05);
+    // i2c_writeByte(0x0199, 0x05);
+    // i2c_writeByte(0x01a6, 0x1b);
+    // i2c_writeByte(0x01ac, 0x3e);
+    // i2c_writeByte(0x01a7, 0x1f);
+    // i2c_writeByte(0x0030, 0x00);
+
     //Write initial settings
     i2c_writeByte(SENSOR_SYSTEM_MODE_GPIO1,settings.system_mode_gpio1);
     i2c_writeByte(SENSOR_SYSTEM_INTERRUPT_CONFIG_GPIO,settings.system_interrupt_config_gpio);
@@ -84,6 +116,8 @@ void VL6180x_rpi::dataReady(){
     #ifdef DEBUG
 	fprintf(stderr,"Processed callback.\n");
     #endif
+    //clear Range interupt
+    i2c_writeByte(SENSOR_SYSTEM_INTERRUPT_CLEAR,CLEAR_RANGE_INT);
 }
 
 unsigned VL6180x_rpi::i2c_readTwoBytes(uint8_t reg)
