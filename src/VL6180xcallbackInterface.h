@@ -5,5 +5,5 @@ class VL6180xcallback {
  * \param sample contains sensor readings 
  **/
 	public:
-        virtual void hasSample(uint8_t sample) = 0;
+        virtual void hasSample(int sample) = 0;
 };

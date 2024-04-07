@@ -2,7 +2,10 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <pigpio.h>
+//#include <pigpio.h>
+#include <linux/i2c-dev.h>
+#include <gpiod.h>
+
 #include <assert.h>
 #include <thread>
 #ifndef  VL6180xcallbackChild
@@ -21,8 +24,8 @@ static const char could_not_open_i2c[] = "Could not open I2C.\n";
 #define DEFAULT_VL6180X_ADDRESS 0x29
 
 // default GPIO pins for the interrupt and sensor enable
-#define DEFAULT_INT_TO_GPIO 529
-#define DEFAULT_EN_TO_GPIO 516
+#define DEFAULT_INT_TO_GPIO 17
+#define DEFAULT_EN_TO_GPIO 4
 
 // default interrupt timeout
 #define ISR_TIMEOUT 1000
@@ -36,8 +39,10 @@ static const char could_not_open_i2c[] = "Could not open I2C.\n";
 struct VL6180x_settings{
     int default_i2c_bus = 1;
     uint8_t sensor_address = DEFAULT_VL6180X_ADDRESS;
-    bool initPIGPIO = true;
+    //bool initPIGPIO = true;
+    int int_chip = 0;
     int int_gpio = DEFAULT_INT_TO_GPIO;
+    int en_chip = 0;
     int en_gpio = DEFAULT_EN_TO_GPIO;
 
     /**
@@ -110,9 +115,17 @@ class VL6180x_rpi {
     const uint8_t reg_hi_thres = 3;
 
     void dataReady();
-    void run();
-    static void gpioISR(int,int,uint32_t,void* userdata){
+    //void run();
+    void worker();
+    /*static void gpioISR(int,int,uint32_t,void* userdata){
         ((VL6180x_rpi*)userdata)->dataReady();
-    }
+    }*/
+    struct gpiod_chip *chipINT = nullptr;
+    struct gpiod_line *pinINT = nullptr;
+    struct gpiod_chip *chipEN = nullptr;
+    struct gpiod_line *pinEN = nullptr;
 
+    std::thread thr;
+
+    int fd_i2c = -1;
 };
