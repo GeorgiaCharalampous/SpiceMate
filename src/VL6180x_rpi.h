@@ -20,8 +20,9 @@ static const char could_not_open_i2c[] = "Could not open I2C.\n";
 // default i2c address 
 #define DEFAULT_VL6180X_ADDRESS 0x29
 
-// default GPIO pin for the interrupt
-#define DEFAULT_INT_TO_GPIO 17
+// default GPIO pins for the interrupt and sensor enable
+#define DEFAULT_INT_TO_GPIO 529
+#define DEFAULT_EN_TO_GPIO 516
 
 // default interrupt timeout
 #define ISR_TIMEOUT 1000
@@ -34,9 +35,10 @@ static const char could_not_open_i2c[] = "Could not open I2C.\n";
 
 struct VL6180x_settings{
     int default_i2c_bus = 1;
-    uint8_t address = DEFAULT_VL6180X_ADDRESS;
+    uint8_t sensor_address = DEFAULT_VL6180X_ADDRESS;
     bool initPIGPIO = true;
     int int_gpio = DEFAULT_INT_TO_GPIO;
+    int en_gpio = DEFAULT_EN_TO_GPIO;
 
     /**
      * Initial sensor register settings 

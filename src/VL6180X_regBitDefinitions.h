@@ -1,4 +1,4 @@
-#ifndef stdint.h
+#ifndef stdint
 #include <stdint.h>
 #endif
 
