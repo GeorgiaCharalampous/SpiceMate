@@ -2,9 +2,10 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <pigpio.h>
 #include <assert.h>
 #include <thread>
+#include <linux/i2c-dev.h>
+#include <gpiod.h>
 #include <Vibro_reg.h>
 
 #ifndef NDEBUG
@@ -52,31 +53,19 @@ class VIBRO_rpi{
 
     public:
     /**
-     * destructor 
+     * Itialises vibration motor
     **/
-    ~VIBRO_rpi() {stop();}
+    bool initVibro(VIBRO4_settings vibro4settings = VIBRO4_settings());
 
     /**
-     * auto-callibration  
-    **/
-    void autoCallibration(VIBRO4_settings vibro4settings = VIBRO4_settings());
-
-    /**
-     * Registers the callback on sample arrival.
-     * \param cb Pointer to the callback interface. 
-    **/
-    void registerCallback(VIBRO4callback* cb);
-    
-    /**
-     * Unregisters the callback
-    **/
-    void unRegisterCallback();
+     * Play haptic sequence
+    */
+    void playHaptic();
 
     private:
     VIBRO4_settings motorSettings;
-    VIBRO4callback* motorCallback = nullptr;
-    std::thread proxThread;//Proximity sensor thread
-    int running = 0;
+    //std::thread proxThread;//Proximity sensor thread
+    //int running = 0;
     void i2c_writeTwoBytes(uint8_t reg, unsigned data);
     void i2c_writeByte(uint8_t reg, unsigned data);
     unsigned i2c_readTwoBytes(uint8_t reg);
