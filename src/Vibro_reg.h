@@ -4,7 +4,10 @@
 
 //Registers for Vibro 4
 #define VIBRO_STATUS_REG        0x00        // ALL READ ONLY
-
+enum{
+    DEFAULT_STATUS              = 0b01100000,
+    DIAG_RESULT_FAIL            = 0b01101000,
+};
 #define VIBRO_MODE_REG          0x01       
 //settings
 enum {
@@ -45,7 +48,7 @@ enum {
 #define VIBRO_GO_REG            0x0C        //[0] sets vibro to go and gives waveforms to sequencer
 enum{
     VIBRO_GO                    = 0b00000001,
-    VIBRO_STOP                  = 0b00000000
+    VIBRO_STOP                  = 0b00000000,
 };
 
 //Offset registers
@@ -63,20 +66,22 @@ enum{
 
 #define VIBRO_RATED_VOLTAGE_REG 0x16        //sets ref voltage for fullscale output needed by auto-cal
 enum{
-    RATED_VOLTAGE_DEFAULT       = 0b00111111
+    RATED_VOLTAGE_DEFAULT       = 0b00111111,
+    RATED_VOLTAGE_170Hz         = 0b01101000,
 };
 
 #define VIBRO_OD_CLAMP_REG      0x17
 enum{
-    OD_CLAMP                    = 0b10011001
+    OD_CLAMP_DEFAULT            = 0b10001001,// 3V
+    OD_CLAMP_MOTOR              = 0b01111111 // 2.8V
 };
 #define VIBRO_A_CAL_COMP_REG    0x18
 enum{
-    A_CAL_COMP                  = 0b00001101
+    A_CAL_COMP                  = 0b00001101,
 };
 #define VIBRO_A_CAL_BEMF_REG    0x19 
 enum{
-    A_CAL_BEMF                  = 0b01101101
+    A_CAL_BEMF                  = 0b01101101,
 };
 #define VIBRO_FEEDBACK_REG      0x1A        
 enum{
@@ -169,5 +174,5 @@ enum{
 
 #define VIBRO_LRA_PERIOD_REG    0x22
 enum{
-    LRA_PERIOD                  = 0b00000000
+    LRA_PERIOD                  = 0b00000000,
 };

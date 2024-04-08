@@ -23,12 +23,10 @@ static const char could_not_open_i2c[] = "Could not open I2C.\n";
 struct VIBRO4_settings{
     int default_i2c_bus = 1;
     uint8_t address = DEFAULT_VIBRO_ADDRESS;
-    bool initPIGPIO = true;
+    int drdy_chip = 0;
     int int_gpio = DEFAULT_EN_PIN;
 
     // init setup
-    uint8_t en_high = 1;
-
     uint8_t init_autocal_mode = MODE_AUTO_CALIBRATION; // idle with internal trigger
 
     // Auto-calibration register config section
@@ -47,9 +45,7 @@ struct VIBRO4_settings{
     uint8_t device_rdy = DEVICE_RDY;
 };
 
-67.66
-
-class VIBRO_rpi{
+class VIBRO4_rpi{
 
     public:
     /**
@@ -66,19 +62,12 @@ class VIBRO_rpi{
     VIBRO4_settings motorSettings;
     //std::thread proxThread;//Proximity sensor thread
     //int running = 0;
-    void i2c_writeTwoBytes(uint8_t reg, unsigned data);
+    //void i2c_writeTwoBytes(uint8_t reg, unsigned data);
     void i2c_writeByte(uint8_t reg, unsigned data);
-    unsigned i2c_readTwoBytes(uint8_t reg);
+    //unsigned i2c_readTwoBytes(uint8_t reg);
     unsigned i2c_readByte(uint8_t reg);
     int i2c_readConversion();
 
-    const uint8_t reg_congig = 1;
-    const uint8_t reg_lo_thres = 2;
-    const uint8_t reg_hi_thres = 3;
-
-    void dataReady();
-    void run();
-    static void gpioISR(int,int,uint32_t,void* userdata){
-        ((VL6180x_rpi*)userdata)->dataReady();
-    }
+    struct gpiod_chip *chipDRDY = nullptr;
+    struct gpiod_line *pinDRDY = nullptr;
 };
