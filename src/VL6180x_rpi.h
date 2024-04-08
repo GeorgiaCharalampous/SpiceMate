@@ -52,7 +52,7 @@ struct VL6180x_settings{
 
     uint8_t system_interrupt_config_gpio = RANGE_NEW_SAMPLE_READY;
 
-    uint8_t system_interrupt_clear = RESET_INTERRUPT_CLEAR;
+    uint8_t system_interrupt_clear = (CLEAR_RANGE_INT|CLEAR_ALS_INT|CLEAR_ERROR_INT);
 
     //uint8_t sysrange_thresh_low = *ptr_range_thresh_low;
     uint8_t sysrange_thresh_low = 0x00;
@@ -64,7 +64,7 @@ struct VL6180x_settings{
     uint8_t sysrange_intermeasurement_period = 0xFF;
 
     //uint8_t sysrange_max_convergence_time = *ptr_max_convergence_time;
-    uint8_t sysrange_max_convergence_time = 0x31;
+    uint8_t sysrange_max_convergence_time = 63;
 
     uint8_t sysrange_range_check_enables = (SIGNAL_TO_NOISE_ENABLE);
 
@@ -99,6 +99,7 @@ class VL6180x_rpi {
     **/
     void unRegisterCallback();
 
+    void getStatus();
     private:
     VL6180x_settings sensorSettings;
     VL6180xcallback* sensorCallback = nullptr;
