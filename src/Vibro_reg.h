@@ -106,7 +106,7 @@ enum{
     BEMF_GAIN_LRA_10x           = 0b00000001,
     BEMF_GAIN_LRA_20x           = 0b00000010, //default
     BEMF_GAIN_LRA_30x           = 0b00000000,
-}
+};
 #define VIBRO_CONTROL1_REG      0x1B        
 enum{
     STARTUP_BOOST               = 0b10000000,

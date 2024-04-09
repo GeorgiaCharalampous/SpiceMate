@@ -15,7 +15,7 @@
 static const char could_not_open_i2c[] = "Could not open I2C.\n";
 
 // default i2c address
-#define DEFAULT_VIBRO_ADDRESS
+#define DEFAULT_VIBRO_ADDRESS 0x5A
 
 // default GPIO pin for EN pin
 #define DEFAULT_EN_PIN 25
@@ -26,23 +26,24 @@ struct VIBRO4_settings{
     int drdy_chip = 0;
     int int_gpio = DEFAULT_EN_PIN;
 
-    // init setup
-    uint8_t init_autocal_mode = MODE_AUTO_CALIBRATION; // idle with internal trigger
+    // Mode setup
+    uint8_t standby = STANDBY;
+    uint8_t rdy_internalTrig        = MODE_INT_TRIGGER;
+    uint8_t rdy_externalTrig_edge   = MODE_EXT_TRIGGER_EDGE;
+    uint8_t rdy_realTIME            = MODE_RTPLAYBACK;
+    uint8_t init_autocal_mode       = MODE_AUTO_CALIBRATION; // idle with internal trigger
 
     // Auto-calibration register config section
-    uint8_t init_feedBack_reg = (LRA_MODE|FB_BRAKE_FACTOR_3x|LOOP_GAIN_HIGH);
-    uint8_t init_ratedVoltage_reg = RATED_VOLTAGE_DEFAULT; //default needs to change?
-    uint8_t init_odClamp_reg = OD_CLAMP; //default needs to change?
-    uint8_t init_control4_reg = AUTO_CAL_TIME_500um;
-    uint8_t init_control1_reg = DRIVE_TIME; //default needs to change?
-    uint8_t init_control2_reg = SAMPLE_TIME_300um|BLANKING_TIME|IDISS_TIME;
+    uint8_t init_feedBack_reg       = (LRA_MODE|FB_BRAKE_FACTOR_3x|LOOP_GAIN_HIGH);
+    uint8_t init_ratedVoltage_reg   = RATED_VOLTAGE_170Hz; //currently based on motor datasheet values
+    uint8_t init_odClamp_reg        = OD_CLAMP_MOTOR; //currently based on motor datasheet values
+    uint8_t init_control4_reg       = AUTO_CAL_TIME_500um;
+    uint8_t init_control1_reg       = DRIVE_TIME; //default needs to change?
+    uint8_t init_control2_reg       = SAMPLE_TIME_300um|BLANKING_TIME|IDISS_TIME;
     uint8_t init_go = VIBRO_GO;
 
     uint8_t vibro_library = LIBRARY_SELECT_LRA;
     
-    //put on standby after autocal
-    uint8_t standby = STANDBY;
-    uint8_t device_rdy = DEVICE_RDY;
 };
 
 class VIBRO4_rpi{
@@ -51,7 +52,7 @@ class VIBRO4_rpi{
     /**
      * Itialises vibration motor
     **/
-    bool initVibro(VIBRO4_settings vibro4settings = VIBRO4_settings());
+    void initVibro(VIBRO4_settings vibro4settings = VIBRO4_settings());
 
     /**
      * Play haptic sequence
