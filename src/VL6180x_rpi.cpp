@@ -151,25 +151,6 @@ void VL6180x_rpi::dataReady(){
 
 unsigned VL6180x_rpi::i2c_readTwoBytes(uint8_t reg)
 {
-    /*int fd = i2copen(sensorSettings.default_i2c_bus, sensorSettings.sensor_address, 0);
-    if (fd<0){
-        #ifdef DEBUG
-        fprintf(stderr, "Could not open %02x.\n",sensorSettings.sensor_address);
-        #endif
-        throw could_not_open_i2c;
-    }
-    int r;
-    char tmp[2];
-    r = i2cReadI2CBlockData(fd,reg,tmp,2);
-        if (r<0){
-        #ifdef DEBUG
-        fprintf(stderr, "Could not read from%02x.\n",sensorSettings.sensor_address,r);
-        #endif
-        throw "Could not read from i2c.";
-    }
-    i2cClose(fd);
-    return (((unsigned)(tmp[0])) << 8) | ((unsigned)(tmp[1]));*/
-
     char gpioFilename[20];
 	snprintf(gpioFilename, 19, "/dev/i2c-%d", sensorSettings.default_i2c_bus);
 	fd_i2c = open(gpioFilename, O_RDWR);
@@ -213,33 +194,6 @@ unsigned VL6180x_rpi::i2c_readTwoBytes(uint8_t reg)
 
 unsigned VL6180x_rpi::i2c_readByte(uint8_t reg)
 {
-    /*
-    //open sensor i2c comms
-    int fd = i2cOpen(sensorSettings.default_i2c_bus, sensorSettings.sensor_address, 0);
-    if (fd<0){
-        #ifdef DEBUG
-        fprintf(stderr, "Could not open %02x.\n",sensorSettings.sensor_address);
-        #endif
-        throw could_not_open_i2c;
-    }
-    //transmit a single read request to sensor for reg_address
-    char reg_address[2];
-    reg_address[0] = (reg >> 8) & 0xFF; // MSB of register address
-    reg_address[1] = reg & 0xFF;        // LSB of register address
-    i2cWriteDevice(fd,reg_address,2);
-    //read one byte of data returned from the sensor
-    int r;
-    char data[1];
-    r = i2cReadDevice(fd,data,1);
-        if (r<0){
-        #ifdef DEBUG
-        fprintf(stderr, "Could not read from %02x.\n",sensorSettings.sensor_address);
-        #endif
-        throw "Could not read from sensor.";
-    }
-    i2cClose(fd);
-    return ((unsigned)(data[0]));
-    */
     char gpioFilename[20];
 	snprintf(gpioFilename, 19, "/dev/i2c-%d", sensorSettings.default_i2c_bus);
 	fd_i2c = open(gpioFilename, O_RDWR);
@@ -280,25 +234,6 @@ unsigned VL6180x_rpi::i2c_readByte(uint8_t reg)
 
 void VL6180x_rpi::i2c_writeTwoBytes(uint8_t reg, unsigned data)
 {
-    /*
-    int fd = i2cOpen(sensorSettings.default_i2c_bus, sensorSettings.sensor_address, 0);
-    if (fd < 0) {
-    #ifdef DEBUG
-            fprintf(stderr,"Could not open %02x.\n",sensorSettings.sensor_address);
-    #endif
-            throw could_not_open_i2c;
-        }
-	char tmp[2];
-	tmp[0] = (char)((data & 0xff00) >> 8);
-	tmp[1] = (char)(data & 0x00ff);
-	int r = i2cWriteI2CBlockData(fd, reg, tmp, 2);
-    if (r < 0) {
-    #ifdef DEBUG
-                fprintf(stderr,"Could not write two bytes to %02x. ret=%d.\n",sensorSettings.sensor_address,r);
-    #endif
-                throw "Could not write to i2c.";
-        }
-        i2cClose(fd);*/
     char gpioFilename[20];
 	snprintf(gpioFilename, 19, "/dev/i2c-%d", sensorSettings.default_i2c_bus);
 	fd_i2c = open(gpioFilename, O_RDWR);
@@ -337,15 +272,6 @@ void VL6180x_rpi::i2c_writeTwoBytes(uint8_t reg, unsigned data)
 
 void VL6180x_rpi::i2c_writeByte(uint8_t reg, unsigned data)
 {
-    /*
-    int fd = i2cOpen(sensorSettings.default_i2c_bus, sensorSettings.sensor_address, 0);
-    if (fd < 0) {
-    #ifdef DEBUG
-            fprintf(stderr,"Could not open %02x.\n",sensorSettings.sensor_address);
-    #endif
-            throw could_not_open_i2c;
-    }*/
-
     if (data > 0xFF) {
     #ifdef DEBUG
             fprintf(stderr,"Data %.2X is larger than 1 byte.\n",data);
