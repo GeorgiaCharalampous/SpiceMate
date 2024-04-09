@@ -76,4 +76,6 @@ class VIBRO4_rpi{
 
     struct gpiod_chip *chipDRDY = nullptr;
     struct gpiod_line *pinDRDY = nullptr;
+
+    int fd_i2c = -1;
 };

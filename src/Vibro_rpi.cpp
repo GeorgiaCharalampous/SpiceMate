@@ -138,7 +138,7 @@ void VIBRO4_rpi::i2c_writeByte(uint8_t reg, unsigned data)
 	long int r = write(fd_i2c,&tmp,3);
         if (r < 0) {
         #ifdef DEBUG
-                fprintf(stderr,"Could not write word from %02x. ret=%d.\n",ads1115settings.address,r);
+                fprintf(stderr,"Could not write word from %02x. ret=%d.\n",motorSettings.address,r);
         #endif
                 throw "Could not write to i2c.";
         }
@@ -152,7 +152,7 @@ unsigned VIBRO4_rpi::i2c_readByte(uint8_t reg)
         long int r = read(fd_i2c, tmp, 2);
         if (r < 0) {
         #ifdef DEBUG
-                fprintf(stderr,"Could not read word from %02x. ret=%d.\n",ads1115settings.address,r);
+                fprintf(stderr,"Could not read word from %02x. ret=%d.\n",motorSettings.address,r);
         #endif
                 throw "Could not read from i2c.";
         }
