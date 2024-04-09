@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <VL6180xcallbackChild.h>
+#include <DataProcess.h>
+#include <thread>
 
 void VL6180xcallbackChild::hasSample(uint8_t sample){
 
-	if ((sample > lowerLimit)&&(sample < upperLimit)){
+    if ((inputData > lowerLimit)&&(inputData< upperLimit)){
 		counter +=1;
 	}
 	else {
@@ -12,8 +14,11 @@ void VL6180xcallbackChild::hasSample(uint8_t sample){
 
 	if (10 == counter)
 	{
-		printf("Persistent value!"); 
+		printf("Start Dispensing!"); 
 		counter = 0;
-		printf("Counter reset. Counter is %u mm. \n",counter); 
 	};
+    
+
+	//processThread = std::thread(&DataProcess::worker,this);
+
 };

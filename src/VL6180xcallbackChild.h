@@ -12,4 +12,6 @@ class VL6180xcallbackChild : public VL6180xcallback {
 	uint8_t counter = 0;
 	uint8_t upperLimit = 180;
 	uint8_t lowerLimit = 20;
+
+	//std::thread processThread;
 };
