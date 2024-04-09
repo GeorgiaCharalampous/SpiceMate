@@ -197,7 +197,7 @@ void VL6180x_rpi::dataReady(){
     int cvh = i2c_readByte(SENSOR_SYSRANGE_CROSSTALK_VALID_HEIGHT);
     fprintf(stderr,"Scaling settings are %u, %u and %u.\n",scale,p2p,cvh);
     //need to assign an actual value
-    int value = i2c_readByte(SENSOR_RESULT_RANGE_VAL);
+    uint8_t value = i2c_readByte(SENSOR_RESULT_RANGE_VAL);
     int error = i2c_readByte(SENSOR_RESULT_RANGE_STATUS);
     error = error >> 4;
     #ifdef DEBUG
@@ -269,7 +269,7 @@ unsigned VL6180x_rpi::i2c_readTwoBytes(uint8_t reg)
     return (((uint8_t)(data[0])) << 8) | ((uint8_t)(data[1]));
 };
 
-unsigned VL6180x_rpi::i2c_readByte(uint8_t reg)
+uint8_t VL6180x_rpi::i2c_readByte(uint8_t reg)
 {
     /*
     //open sensor i2c comms
@@ -332,7 +332,7 @@ unsigned VL6180x_rpi::i2c_readByte(uint8_t reg)
         throw "Could not read from sensor.";
     }
     close(fd_i2c);
-    return ((unsigned)(data[0]));
+    return ((uint8_t)(data[0]));
 
 };
 

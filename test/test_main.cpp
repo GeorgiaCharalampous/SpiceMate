@@ -23,10 +23,13 @@ int main(int argc, char *argv[]){
     printf("Range threshold low is %u . \n",Settings_Struct.sysrange_thresh_low);
     
     Sensor_Instance.registerCallback(&printCallback);
-    
+    printf("Callback registered \n");
     Sensor_Instance.startRangeContinuous(Settings_Struct);
+    printf("Acquisition started \n");
     getchar();
+    printf("Character received \n");
 	Sensor_Instance.stop();
+    printf("Driver stopped \n");
 	return 0;
     
 }

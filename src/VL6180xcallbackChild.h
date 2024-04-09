@@ -6,5 +6,5 @@
 #endif
 
 class VL6180xcallbackChild : public VL6180xcallback {
-	virtual void hasSample(int v);
+	virtual void hasSample(uint8_t sample);
 };

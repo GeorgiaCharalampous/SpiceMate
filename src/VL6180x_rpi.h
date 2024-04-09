@@ -48,7 +48,7 @@ struct VL6180x_settings{
     /**
      * Initial sensor register settings 
     **/
-    uint8_t system_mode_gpio1 = (ACTIVE_HIGH|GPIO_INTERRUPT_OUTPUT);
+    uint8_t system_mode_gpio1 = (ACTIVE_LOW|GPIO_INTERRUPT_OUTPUT);
 
     uint8_t system_interrupt_config_gpio = RANGE_NEW_SAMPLE_READY;
 
@@ -107,7 +107,7 @@ class VL6180x_rpi {
     void i2c_writeTwoBytes(uint8_t reg, unsigned data);
     void i2c_writeByte(uint8_t reg, unsigned data);
     unsigned i2c_readTwoBytes(uint8_t reg);
-    unsigned i2c_readByte(uint8_t reg);
+    uint8_t i2c_readByte(uint8_t reg);
     int i2c_readConversion();
 
     const uint8_t reg_congig = 1;
@@ -124,8 +124,6 @@ class VL6180x_rpi {
     struct gpiod_line *pinINT = nullptr;
     struct gpiod_chip *chipEN = nullptr;
     struct gpiod_line *pinEN = nullptr;
-
-    std::thread thr;
 
     int fd_i2c = -1;
 };
