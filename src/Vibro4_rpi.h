@@ -49,10 +49,26 @@ struct VIBRO4_settings{
 class VIBRO4_rpi{
 
     public:
+
+    /**
+     * destructor 
+    **/
+    ~VIBRO4_rpi() {stop();}
+
+    /**
+     * Executes autocallibration procedure
+    */
+    void autoCal();
+
     /**
      * Itialises vibration motor
     **/
     void initVibro(VIBRO4_settings vibro4settings = VIBRO4_settings());
+
+    /**
+     * stop data acquisition 
+    **/
+    void stop();
 
     /**
      * Play prefedined haptic sequence
@@ -62,7 +78,13 @@ class VIBRO4_rpi{
     /**
      * Play haptic sequence in real time
     */
-    void playHaptic_realTime();
+    void playHaptic_realTime(uint8_t amplitude);
+
+    /**
+     * Play haptic sequence in real time
+    */
+    void stopHaptic();
+
 
     private:
     VIBRO4_settings motorSettings;
@@ -78,4 +100,5 @@ class VIBRO4_rpi{
     struct gpiod_line *pinEN = nullptr;
 
     int fd_i2c = -1;
+    bool cal_in_process = true;
 };
