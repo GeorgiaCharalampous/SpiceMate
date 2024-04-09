@@ -48,7 +48,7 @@ struct VL6180x_settings{
     /**
      * Initial sensor register settings 
     **/
-    uint8_t system_mode_gpio1 = (ACTIVE_LOW|GPIO_INTERRUPT_OUTPUT);
+    uint8_t system_mode_gpio1 = (ACTIVE_HIGH|GPIO_INTERRUPT_OUTPUT);
 
     uint8_t system_interrupt_config_gpio = RANGE_NEW_SAMPLE_READY;
 
@@ -99,7 +99,7 @@ class VL6180x_rpi {
     **/
     void unRegisterCallback();
 
-    void getStatus();
+    //void getStatus();
     private:
     VL6180x_settings sensorSettings;
     VL6180xcallback* sensorCallback = nullptr;
@@ -116,11 +116,7 @@ class VL6180x_rpi {
     const uint8_t reg_hi_thres = 3;
 
     void dataReady();
-    //void run();
     void worker();
-    /*static void gpioISR(int,int,uint32_t,void* userdata){
-        ((VL6180x_rpi*)userdata)->dataReady();
-    }*/
     struct gpiod_chip *chipINT = nullptr;
     struct gpiod_line *pinINT = nullptr;
     struct gpiod_chip *chipEN = nullptr;
