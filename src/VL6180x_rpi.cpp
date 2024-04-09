@@ -10,29 +10,30 @@ void VL6180x_rpi::startRangeContinuous(VL6180x_settings settings){
     if (running) return;
 
     sensorSettings = settings;
-
-    // char gpioFilename[20];
-	// snprintf(gpioFilename, 19, "/dev/i2c-%d", settings.default_i2c_bus);
-	// fd_i2c = open(gpioFilename, O_RDWR);
-	// if (fd_i2c < 0) {
-	//     char i2copen[] = "Could not open I2C.\n";
-    // #ifdef DEBUG
-	//     fprintf(stderr,i2copen);
-    // #endif
-	//     throw i2copen;
-	// }
+    /*
+    char gpioFilename[20];
+	snprintf(gpioFilename, 19, "/dev/i2c-%d", settings.default_i2c_bus);
+	fd_i2c = open(gpioFilename, O_RDWR);
+	if (fd_i2c < 0) {
+	    char i2copen[] = "Could not open I2C.\n";
+    #ifdef DEBUG
+	    fprintf(stderr,i2copen);
+    #endif
+	    throw i2copen;
+	}
 	
-	// if (ioctl(fd_i2c, I2C_SLAVE, settings.sensor_address) < 0) {
-	//     char i2cslave[] = "Could not access I2C adress.\n";
-    // #ifdef DEBUG
-	//     fprintf(stderr,i2cslave);
-    // #endif
-	//     throw i2cslave;
-	// }
+	if (ioctl(fd_i2c, I2C_SLAVE, settings.sensor_address) < 0) {
+	    char i2cslave[] = "Could not access I2C adress.\n";
+    #ifdef DEBUG
+	    fprintf(stderr,i2cslave);
+    #endif
+	    throw i2cslave;
+	}
 
-    // #ifdef DEBUG
-    // fprintf(stderr, "Init .\n");
-    // #endif
+    #ifdef DEBUG
+    fprintf(stderr, "Init .\n");
+    #endif
+    */
 
     /*Initialise pigpio
     if(settings.initPIGPIO){
@@ -48,11 +49,12 @@ void VL6180x_rpi::startRangeContinuous(VL6180x_settings settings){
             throw msg;
         }
     }*/
-
-    //Hardware reset sensor using EN gpio pin
-    // gpioSetMode(settings.en_gpio,PI_OUTPUT);
-    // gpioWrite(settings.en_gpio,0);
-    // gpioWrite(settings.en_gpio,1);
+    /*
+    Hardware reset sensor using EN gpio pin
+    gpioSetMode(settings.en_gpio,PI_OUTPUT);
+    gpioWrite(settings.en_gpio,0);
+    gpioWrite(settings.en_gpio,1);
+    */
     chipEN = gpiod_chip_open_by_number(settings.en_chip);
     pinEN = gpiod_chip_get_line(chipEN,settings.en_gpio);
     gpiod_line_request_output(pinEN,"Consumer",0);
@@ -68,7 +70,10 @@ void VL6180x_rpi::startRangeContinuous(VL6180x_settings settings){
     fprintf(stderr,"Sensor rebooted successfully.\n");
     i2c_writeByte(SENSOR_SYSTEM_FRESH_OUT_OF_RESET,0);
 
+    fprintf(stderr,"Sensor model is %u.\n",i2c_readByte(SENSOR_IDENTIFICATION_MODEL_ID));
+
     //Write private registers from VL6180X API
+    /*
     // i2c_writeByte(0x0207, 0x01);
     // i2c_writeByte(0x0208, 0x01);
     // i2c_writeByte(0x0096, 0x00);
@@ -99,18 +104,22 @@ void VL6180x_rpi::startRangeContinuous(VL6180x_settings settings){
     // i2c_writeByte(0x01ac, 0x3e);
     // i2c_writeByte(0x01a7, 0x1f);
     // i2c_writeByte(0x0030, 0x00);
+    */
 
-    fprintf(stderr,"P2P and CVH resets are %u and %u.\n",i2c_readByte(SENSOR_SYSRANGE_PART_TO_PART_RANGE_OFFSET),i2c_readByte(SENSOR_SYSRANGE_CROSSTALK_VALID_HEIGHT));
+    fprintf(stderr,"Default Scale, P2P and CVH are %u, %u and %u. \n",i2c_readTwoBytes(0x96), i2c_readByte(SENSOR_SYSRANGE_PART_TO_PART_RANGE_OFFSET),i2c_readByte(SENSOR_SYSRANGE_CROSSTALK_VALID_HEIGHT));
     i2c_writeTwoBytes(0x96,127);
-    int scale = i2c_readTwoBytes(0x96);
+    unsigned scale = i2c_readTwoBytes(0x96);
 
-    int p2p = i2c_readByte(SENSOR_SYSRANGE_PART_TO_PART_RANGE_OFFSET);
+    unsigned p2p = i2c_readByte(SENSOR_SYSRANGE_PART_TO_PART_RANGE_OFFSET);
     i2c_writeByte(SENSOR_SYSRANGE_PART_TO_PART_RANGE_OFFSET,p2p/2);
     p2p = i2c_readByte(SENSOR_SYSRANGE_PART_TO_PART_RANGE_OFFSET);
 
     i2c_writeByte(SENSOR_SYSRANGE_CROSSTALK_VALID_HEIGHT,20/2);
-    int cvh = i2c_readByte(SENSOR_SYSRANGE_CROSSTALK_VALID_HEIGHT);
+    unsigned cvh = i2c_readByte(SENSOR_SYSRANGE_CROSSTALK_VALID_HEIGHT);
     fprintf(stderr,"New scalings are %u, %u and %u.\n",scale,p2p,cvh);
+
+    unsigned rce = i2c_readByte(SENSOR_SYSRANGE_RANGE_CHECK_ENABLES);
+    i2c_writeByte(SENSOR_SYSRANGE_RANGE_CHECK_ENABLES, (rce & 0xFE) | (false));
 
     //Write initial settings
     i2c_writeByte(SENSOR_SYSTEM_MODE_GPIO1,settings.system_mode_gpio1);
@@ -120,7 +129,7 @@ void VL6180x_rpi::startRangeContinuous(VL6180x_settings settings){
     i2c_writeByte(SENSOR_SYSRANGE_THRESH_HIGH,settings.sysrange_thresh_high);
     i2c_writeByte(SENSOR_SYSRANGE_INTERMEASUREMENT_PERIOD,settings.sysrange_intermeasurement_period);
     i2c_writeByte(SENSOR_SYSRANGE_MAX_CONVERGENCE_TIME,settings.sysrange_max_convergence_time);
-    i2c_writeByte(SENSOR_SYSRANGE_RANGE_CHECK_ENABLES,settings.sysrange_range_check_enables);
+    //i2c_writeByte(SENSOR_SYSRANGE_RANGE_CHECK_ENABLES,settings.sysrange_range_check_enables);
     i2c_writeByte(SENSOR_SYSRANGE_START,settings.sysrange_start);
     //gpioSetMode(settings.int_gpio,PI_INPUT);
 
@@ -131,7 +140,7 @@ void VL6180x_rpi::startRangeContinuous(VL6180x_settings settings){
     chipINT = gpiod_chip_open_by_number(settings.int_chip);
     pinINT = gpiod_chip_get_line(chipINT,settings.int_gpio);
 
-    int ret = gpiod_line_request_rising_edge_events(pinINT, "Consumer");
+    int ret = gpiod_line_request_rising_edge_events(pinINT, "Apple");
         if (ret < 0) {
     #ifdef DEBUG
             fprintf(stderr,"Request event notification failed on pin %d and chip %d.\n",settings.int_chip,settings.int_gpio);
@@ -183,19 +192,34 @@ void VL6180x_rpi::unRegisterCallback(){
 
 void VL6180x_rpi::worker(){
     while (1 == running) {
+        printf("Worker ON\n");
         const struct timespec ts = { 1, 0 };
         gpiod_line_event_wait(pinINT, &ts);
+        printf("Even wait\n");
         struct gpiod_line_event event;
         gpiod_line_event_read(pinINT, &event);
+        printf("Even read\n");
         dataReady();
+        printf("Data Ready CAlled\n");
     }
 }
 
+void VL6180x_rpi::getStatus(){
+    int a = i2c_readByte(SENSOR_RESULT_INTERRUPT_STATUS_GPIO);
+    int error = i2c_readByte(SENSOR_RESULT_RANGE_STATUS);
+    error = error >> 4;
+    printf("Error code is %u. \n",error);
+    printf("Current Interupt status is %u. \n",a);
+    printf("Sensor Start status is %u. \n",i2c_readByte(SENSOR_SYSRANGE_START));
+    printf("Interleave status is %u. \n",i2c_readByte(0x2A3));
+    sleep(1);
+}
+
 void VL6180x_rpi::dataReady(){
-    int scale = i2c_readTwoBytes(0x96);
+    unsigned scale = i2c_readTwoBytes(0x96);
     int p2p = i2c_readByte(SENSOR_SYSRANGE_PART_TO_PART_RANGE_OFFSET);
     int cvh = i2c_readByte(SENSOR_SYSRANGE_CROSSTALK_VALID_HEIGHT);
-    fprintf(stderr,"Scaling settings are %u, %u and %u.\n",scale,p2p,cvh);
+    //printf("Scaling settings are %u, %u and %u.\n",scale,p2p,cvh);
     //need to assign an actual value
     uint8_t value = i2c_readByte(SENSOR_RESULT_RANGE_VAL);
     int error = i2c_readByte(SENSOR_RESULT_RANGE_STATUS);
@@ -205,10 +229,18 @@ void VL6180x_rpi::dataReady(){
     #endif	
     sensorCallback->hasSample(value);
     //clear All interupts
+    printf("Interrupt status is %u. \n",i2c_readByte(SENSOR_RESULT_INTERRUPT_STATUS_GPIO));
     i2c_writeByte(SENSOR_SYSTEM_INTERRUPT_CLEAR,(CLEAR_RANGE_INT|CLEAR_ALS_INT|CLEAR_ERROR_INT));
+    printf("Interrupt status is %u. \n",i2c_readByte(SENSOR_RESULT_INTERRUPT_STATUS_GPIO));
     #ifdef DEBUG
-	fprintf(stderr,"Processed callback.\n");
+	//fprintf(stderr,"Processed callback.\n");
     #endif
+    sleep(1);
+    i2c_writeByte(SENSOR_SYSRANGE_START,3);
+    //printf("Sensor Start status is %u. \n",i2c_readByte(SENSOR_SYSRANGE_START));
+    i2c_writeByte(SENSOR_SYSRANGE_START,3);
+    //printf("Sensor Start status is %u. \n",i2c_readByte(SENSOR_SYSRANGE_START));
+
 }
 
 unsigned VL6180x_rpi::i2c_readTwoBytes(uint8_t reg)
@@ -250,14 +282,18 @@ unsigned VL6180x_rpi::i2c_readTwoBytes(uint8_t reg)
     #endif
 	    throw i2cslave;
 	}
+
+
+
     //transmit a single read request to sensor for reg_address
-    char reg_address[2];
+    uint8_t reg_address[2];
     reg_address[0] = (reg >> 8) & 0xFF; // MSB of register address
     reg_address[1] = reg & 0xFF;        // LSB of register address
     write(fd_i2c,reg_address,2);
+
     //read one byte of data returned from the sensor
     long int r;
-    char data[2];
+    uint8_t data[2];
     r = read(fd_i2c,data,2);
         if (r<0){
         #ifdef DEBUG
@@ -266,10 +302,10 @@ unsigned VL6180x_rpi::i2c_readTwoBytes(uint8_t reg)
         throw "Could not read from sensor.";
     }
     close(fd_i2c);
-    return (((uint8_t)(data[0])) << 8) | ((uint8_t)(data[1]));
+    return ((((unsigned)(data[0])) << 8) | ((unsigned)(data[1])));
 };
 
-uint8_t VL6180x_rpi::i2c_readByte(uint8_t reg)
+unsigned VL6180x_rpi::i2c_readByte(uint8_t reg)
 {
     /*
     //open sensor i2c comms
@@ -298,7 +334,7 @@ uint8_t VL6180x_rpi::i2c_readByte(uint8_t reg)
     i2cClose(fd);
     return ((unsigned)(data[0]));
     */
-   char gpioFilename[20];
+    char gpioFilename[20];
 	snprintf(gpioFilename, 19, "/dev/i2c-%d", sensorSettings.default_i2c_bus);
 	fd_i2c = open(gpioFilename, O_RDWR);
 	if (fd_i2c < 0) {
@@ -317,13 +353,13 @@ uint8_t VL6180x_rpi::i2c_readByte(uint8_t reg)
 	    throw i2cslave;
 	}
     //transmit a single read request to sensor for reg_address
-    char reg_address[2];
+    uint8_t reg_address[2];
     reg_address[0] = (reg >> 8) & 0xFF; // MSB of register address
     reg_address[1] = reg & 0xFF;        // LSB of register address
     write(fd_i2c,reg_address,2);
     //read one byte of data returned from the sensor
     long int r;
-    char data[1];
+    uint8_t data[1];
     r = read(fd_i2c,data,1);
         if (r<0){
         #ifdef DEBUG
@@ -357,6 +393,40 @@ void VL6180x_rpi::i2c_writeTwoBytes(uint8_t reg, unsigned data)
                 throw "Could not write to i2c.";
         }
         i2cClose(fd);*/
+    char gpioFilename[20];
+	snprintf(gpioFilename, 19, "/dev/i2c-%d", sensorSettings.default_i2c_bus);
+	fd_i2c = open(gpioFilename, O_RDWR);
+	if (fd_i2c < 0) {
+	    char i2copen[] = "Could not open I2C.\n";
+    #ifdef DEBUG
+	    fprintf(stderr,i2copen);
+    #endif
+	    throw i2copen;
+	}
+	
+	if (ioctl(fd_i2c, I2C_SLAVE, sensorSettings.sensor_address) < 0) {
+	    char i2cslave[] = "Could not access I2C adress.\n";
+    #ifdef DEBUG
+	    fprintf(stderr,i2cslave);
+    #endif
+	    throw i2cslave;
+    }
+
+    uint8_t message[4];
+    message[0] = (reg >> 8) & 0xFF; // MSB of register address
+    message[1] = reg & 0xFF;        // LSB of register address
+    message[2] = (data >> 8) & 0xFF;// MSB of data to be written
+    message[3] = data & 0xFF;       // LSB of data to be written
+
+    long int r = write(fd_i2c, message, 4);
+    if (r < 0) {
+    #ifdef DEBUG
+        fprintf(stderr,"Could not write byte to %02x. ret=%ld.\n",sensorSettings.sensor_address,r);
+    #endif
+        throw "Could not write to i2c.";
+    }
+    
+    close(fd_i2c);
 }
 
 void VL6180x_rpi::i2c_writeByte(uint8_t reg, unsigned data)
@@ -396,7 +466,7 @@ void VL6180x_rpi::i2c_writeByte(uint8_t reg, unsigned data)
 	    throw i2cslave;
     }
 
-    char message[3];
+    uint8_t message[3];
     message[0] = (reg >> 8) & 0xFF; // MSB of register address
     message[1] = reg & 0xFF;        // LSB of register address
     message[2] = data & 0xFF;       // Data to be written
@@ -404,7 +474,7 @@ void VL6180x_rpi::i2c_writeByte(uint8_t reg, unsigned data)
     long int r = write(fd_i2c, message, 3);
     if (r < 0) {
     #ifdef DEBUG
-        fprintf(stderr,"Could not write byte to %02x. ret=%d.\n",sensorSettings.sensor_address,r);
+        fprintf(stderr,"Could not write byte to %02x. ret=%ld.\n",sensorSettings.sensor_address,r);
     #endif
         throw "Could not write to i2c.";
     }
