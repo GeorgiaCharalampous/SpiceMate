@@ -2,10 +2,10 @@
 #include "Vibro4_rpi.h"
 #endif
 
-#include <fcntl.h>
-#include <sys/ioctl.h>
-
 #include <bitset>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/ioctl.h>
 
 void VIBRO4_rpi::initVibro(VIBRO4_settings settings){
         
@@ -41,27 +41,6 @@ void VIBRO4_rpi::initVibro(VIBRO4_settings settings){
         gpiod_line_request_output(pinDRDY,"example1",0); // open the pin to drive as output
         gpiod_line_set_value(pinDRDY,1); // sets EN pin to high 
 
-    // Set default regs
-    /*
-    i2c_writeByte(VIBRO_STATUS_REG,DEFAULT_STATUS);
-    i2c_writeByte(VIBRO_MODE_REG,STANDBY);
-    i2c_writeByte(VIBRO_RTP_REG,0x00);
-    i2c_writeByte(VIBRO_REGFIELD_REG,LIBRARY_SELECT_LRA);
-    i2c_writeByte(VIBRO_WAV_SEQ_REG1,0x00);
-    i2c_writeByte(VIBRO_WAV_SEQ_REG2,0x00);
-    i2c_writeByte(VIBRO_WAV_SEQ_REG3,0x00);
-    i2c_writeByte(VIBRO_WAV_SEQ_REG4,0x00);
-    i2c_writeByte(VIBRO_WAV_SEQ_REG5,0x00);
-    i2c_writeByte(VIBRO_WAV_SEQ_REG6,0x00);
-    i2c_writeByte(VIBRO_WAV_SEQ_REG7,0x00);
-    i2c_writeByte(VIBRO_WAV_SEQ_REG8,0x00);
-    i2c_writeByte(VIBRO_GO_REG,VIBRO_STOP);
-    i2c_writeByte(VIBRO_ODT_OFFSET_REG,0x00);
-    i2c_writeByte(VIBRO_SPT_OFFSET_REG,0x00);
-    i2c_writeByte(VIBRO_SNT_OFFSET_REG,0x00);
-    i2c_writeByte(VIBRO_BRT_OFFSET_REG,0x00);
-    i2c_writeByte(VIBRO_ATH_REG,);
-    */
         // wait before sending i2c commands for motor init
         usleep(260);
 
@@ -83,17 +62,6 @@ void VIBRO4_rpi::initVibro(VIBRO4_settings settings){
                 #endif
                 throw "Auto-calibration failed";
         };
-
-        /* preset the sequences
-        i2c_writeByte(VIBRO_WAV_SEQ_REG1,0x01);
-        i2c_writeByte(VIBRO_WAV_SEQ_REG2,0xC);
-        i2c_writeByte(VIBRO_WAV_SEQ_REG3,0xE);
-        i2c_writeByte(VIBRO_WAV_SEQ_REG4,0x00);
-        i2c_writeByte(VIBRO_WAV_SEQ_REG5,0x00);
-        i2c_writeByte(VIBRO_WAV_SEQ_REG6,0x00);
-        i2c_writeByte(VIBRO_WAV_SEQ_REG7,0x00);
-        i2c_writeByte(VIBRO_WAV_SEQ_REG8,0x00);
-        */
 
         // put on standby for low pwer mode
         i2c_writeByte(VIBRO_MODE_REG,settings.standby); // also sets this to internal trigger
