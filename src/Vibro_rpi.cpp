@@ -35,11 +35,11 @@ void VIBRO4_rpi::initVibro(VIBRO4_settings settings){
             fprintf(stderr, "Init.\n");
         #endif
 
-        chipDRDY = gpiod_chip_open_by_number(settings.drdy_chip);
-        pinDRDY = gpiod_chip_get_line(chipDRDY,settings.drdy_gpio);
+        chipEN = gpiod_chip_open_by_number(settings.EN_chip);
+        pinEN = gpiod_chip_get_line(chipEN,settings.EN_gpio);
 
-        gpiod_line_request_output(pinDRDY,"example1",0); // open the pin to drive as output
-        gpiod_line_set_value(pinDRDY,1); // sets EN pin to high 
+        gpiod_line_request_output(pinEN,"Motor",0); // open the pin to drive as output
+        gpiod_line_set_value(pinEN,1); // sets EN pin to high 
 
         // wait before sending i2c commands for motor init
         usleep(260);
@@ -91,42 +91,98 @@ void VIBRO4_rpi::playHaptic_realTime(){
         
         // Wake up and set to internal trigger
         i2c_writeByte(VIBRO_MODE_REG,MODE_RTPLAYBACK); 
-        // wake up and set to external trigger
-//        i2c_writeByte(VIBRO_MODE_REG,MODE_EXT_TRIGGER_EDGE);
+
+        // Write amplitude for continuous vibration
+        i2c_writeByte(VIBRO_RTP_REG,0x00); // no amp
+        i2c_writeByte(VIBRO_RTP_REG,0x80); // half amp
+        i2c_writeByte(VIBRO_RTP_REG,0xFF); // half amp
+
 
 }
 
 // i2c read and write protocols
 void VIBRO4_rpi::i2c_writeByte(uint8_t reg, unsigned data)
 {
-	uint8_t tmp[3];
-	tmp[0] = reg;
-	tmp[1] = (char)((data & 0xff00) >> 8);
-	tmp[2] = (char)(data & 0x00ff);
-	long int r = write(fd_i2c,&tmp,3);
+        if (data > 0xFF) {
+        #ifdef DEBUG
+            fprintf(stderr,"Data %.2X is larger than 1 byte.\n",data);
+        #endif
+            throw "Data larger than 1 byte.";
+        }
+            
+        char gpioFilename[20];
+	snprintf(gpioFilename, 19, "/dev/i2c-%d", sensorSettings.default_i2c_bus);
+	fd_i2c = open(gpioFilename, O_RDWR);
+	if (fd_i2c < 0) {
+	    char i2copen[] = "Could not open I2C.\n";
+        #ifdef DEBUG
+	    fprintf(stderr,i2copen);
+        #endif
+	    throw i2copen;
+	}
+	
+	if (ioctl(fd_i2c, I2C_SLAVE, sensorSettings.sensor_address) < 0) {
+	    char i2cslave[] = "Could not access I2C adress.\n";
+        #ifdef DEBUG
+	    fprintf(stderr,i2cslave);
+        #endif
+	    throw i2cslave;
+        }
+	
+        uint8_t message[2];
+        message[0] = reg & 0xFF; // MSB of register address
+        message[1] = data & 0xFF; 
+	long int r = write(fd_i2c, message ,2);
         if (r < 0) {
         #ifdef DEBUG
-                fprintf(stderr,"Could not write word from %02x. ret=%d.\n",motorSettings.address,r);
+                fprintf(stderr,"Could not write byte to %02x. ret=%ld.\n",sensorSettings.sensor_address,r);
         #endif
                 throw "Could not write to i2c.";
         }
+
+        close(fd_i2c);
 }
 
 unsigned VIBRO4_rpi::i2c_readByte(uint8_t reg)
-{
-	uint8_t tmp[2];
-	tmp[0] = reg;
-	write(fd_i2c,&tmp,1);
-        long int r = read(fd_i2c, tmp, 2);
-        if (r < 0) {
+{       
+        char gpioFilename[20];
+	snprintf(gpioFilename, 19, "/dev/i2c-%d", sensorSettings.default_i2c_bus);
+	fd_i2c = open(gpioFilename, O_RDWR);
+	if (fd_i2c < 0) {
+	    char i2copen[] = "Could not open I2C.\n";
         #ifdef DEBUG
-                fprintf(stderr,"Could not read word from %02x. ret=%d.\n",motorSettings.address,r);
+	    fprintf(stderr,i2copen);
         #endif
-                throw "Could not read from i2c.";
+	    throw i2copen;
+	}
+	
+	if (ioctl(fd_i2c, I2C_SLAVE, sensorSettings.sensor_address) < 0) {
+	    char i2cslave[] = "Could not access I2C adress.\n";
+        #ifdef DEBUG
+	    fprintf(stderr,i2cslave);
+        #endif
+	    throw i2cslave;
+	}
+
+	uint8_t reg_address[1];
+	reg_address[0] = reg;
+	write(fd_i2c,reg_address,1);
+        
+        long int r;
+        uint8_t data[1];
+        r = read(fd_i2c,data,1);
+        if (r<0){
+        
+        #ifdef DEBUG
+            fprintf(stderr, "Could not read from %02x.\n",sensorSettings.sensor_address);
+        #endif
+                throw "Could not read from sensor.";
         }
-        return (((unsigned)(tmp[0])) << 8) | ((unsigned)(tmp[1]));
+    close(fd_i2c);
+    return ((uint8_t)(data[0]));
 }
 
+/*
 int VIBRO4_rpi::i2c_readConversion()
 {
 	const int reg = 0;
@@ -141,4 +197,4 @@ int VIBRO4_rpi::i2c_readConversion()
                 throw "Could not read from i2c.";
         }
         return ((int)(tmp[0]) << 8) | (int)(tmp[1]);
-}
+}*/

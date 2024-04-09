@@ -23,8 +23,8 @@ static const char could_not_open_i2c[] = "Could not open I2C.\n";
 struct VIBRO4_settings{
     int default_i2c_bus = 1;
     uint8_t address = DEFAULT_VIBRO_ADDRESS;
-    int drdy_chip = 0;
-    int drdy_gpio = DEFAULT_EN_PIN;
+    int EN_chip = 0;
+    int EN_gpio = DEFAULT_EN_PIN;
 
     // Mode setup
     uint8_t standby                 = STANDBY;
@@ -72,10 +72,10 @@ class VIBRO4_rpi{
     void i2c_writeByte(uint8_t reg, unsigned data);
     //unsigned i2c_readTwoBytes(uint8_t reg);
     unsigned i2c_readByte(uint8_t reg);
-    int i2c_readConversion();
+    //int i2c_readConversion();
 
-    struct gpiod_chip *chipDRDY = nullptr;
-    struct gpiod_line *pinDRDY = nullptr;
+    struct gpiod_chip *chipEN = nullptr;
+    struct gpiod_line *pinEN = nullptr;
 
     int fd_i2c = -1;
 };
