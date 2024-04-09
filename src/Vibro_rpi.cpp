@@ -10,31 +10,31 @@
 void VIBRO4_rpi::initVibro(VIBRO4_settings settings){
         
         motorSettings = settings;
-/*
+
         char gpioFilename[20]; // character array meant to hold the i2c device name
 	    snprintf(gpioFilename, 19, "/dev/i2c-%d", settings.default_i2c_bus); // add name to the buffer created
 	    fd_i2c = open(gpioFilename, O_RDWR);
 	    if (fd_i2c < 0) {
 	        char i2copen[] = "Could not open I2C.\n";
 
-#ifdef DEBUG
-            fprintf(stderr, i2copen)
-#endif
-    	    throw i2copen;
+        #ifdef DEBUG
+            fprintf(stderr, i2copen);
+        #endif
+    	        throw i2copen;
 	    }
 
     	if (ioctl(fd_i2c, I2C_SLAVE, settings.address) < 0) {
 	        char i2cslave[] = "Could not access I2C adress.\n";
-    #ifdef DEBUG
+        #ifdef DEBUG
             fprintf(stderr,i2cslave);
-    #endif
+        #endif
             throw i2cslave;
         }
 
-    #ifdef DEBUG
+        #ifdef DEBUG
             fprintf(stderr, "Init.\n");
-    #endif
-*/
+        #endif
+
         chipDRDY = gpiod_chip_open_by_number(settings.drdy_chip);
         pinDRDY = gpiod_chip_get_line(chipDRDY,settings.drdy_gpio);
 
@@ -63,7 +63,7 @@ void VIBRO4_rpi::initVibro(VIBRO4_settings settings){
     i2c_writeByte(VIBRO_ATH_REG,);
     */
         // wait before sending i2c commands for motor init
-        usleep(260)
+        usleep(260);
 
         // Initialise and autocallibrate
         i2c_writeByte(VIBRO_MODE_REG,settings.rdy_internalTrig); // decide on whether we need both

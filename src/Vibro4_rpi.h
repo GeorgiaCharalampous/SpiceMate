@@ -24,10 +24,10 @@ struct VIBRO4_settings{
     int default_i2c_bus = 1;
     uint8_t address = DEFAULT_VIBRO_ADDRESS;
     int drdy_chip = 0;
-    int int_gpio = DEFAULT_EN_PIN;
+    int drdy_gpio = DEFAULT_EN_PIN;
 
     // Mode setup
-    uint8_t standby = STANDBY;
+    uint8_t standby                 = STANDBY;
     uint8_t rdy_internalTrig        = MODE_INT_TRIGGER;
     uint8_t rdy_externalTrig_edge   = MODE_EXT_TRIGGER_EDGE;
     uint8_t rdy_realTIME            = MODE_RTPLAYBACK;
@@ -40,7 +40,7 @@ struct VIBRO4_settings{
     uint8_t init_control4_reg       = AUTO_CAL_TIME_500um;
     uint8_t init_control1_reg       = DRIVE_TIME; //default needs to change?
     uint8_t init_control2_reg       = SAMPLE_TIME_300um|BLANKING_TIME|IDISS_TIME;
-    uint8_t init_go = VIBRO_GO;
+    uint8_t init_go                 = VIBRO_GO;
 
     uint8_t vibro_library = LIBRARY_SELECT_LRA;
     
@@ -55,9 +55,14 @@ class VIBRO4_rpi{
     void initVibro(VIBRO4_settings vibro4settings = VIBRO4_settings());
 
     /**
-     * Play haptic sequence
+     * Play prefedined haptic sequence
     */
-    void playHaptic();
+    void playHaptic_preDef();
+
+    /**
+     * Play haptic sequence in real time
+    */
+    void playHaptic_realTime();
 
     private:
     VIBRO4_settings motorSettings;
