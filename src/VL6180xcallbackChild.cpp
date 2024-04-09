@@ -5,7 +5,7 @@
 
 void VL6180xcallbackChild::hasSample(uint8_t sample){
 
-    if ((inputData > lowerLimit)&&(inputData< upperLimit)){
+    if ((sample> lowerLimit)&&(sample < upperLimit)){
 		counter +=1;
 	}
 	else {
