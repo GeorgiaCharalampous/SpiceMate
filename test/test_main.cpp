@@ -22,17 +22,17 @@ int main(int argc, char *argv[]){
     Settings_Struct.sysrange_thresh_low = 128;
 
     printf("Range threshold low is %u . \n",Settings_Struct.sysrange_thresh_low);
-
-    // Sensor_Instance.registerCallback(&printCallback);
-    // Sensor_Instance.startRangeContinuous(Settings_Struct);
-    // for(int i = 0; i < 1000000; i++){
-    //     Sensor_Instance.getStatus();
-    // }
-    // printf("Done \n");
-    // Sensor_Instance.stop();
-    // printf("Test finished \n");
-    // return 0;
-    
+    /*
+    Sensor_Instance.registerCallback(&printCallback);
+    Sensor_Instance.startRangeContinuous(Settings_Struct);
+    for(int i = 0; i < 1000000; i++){
+        Sensor_Instance.getStatus();
+    }
+    printf("Done \n");
+    Sensor_Instance.stop();
+    printf("Test finished \n");
+    return 0;
+    */
     Sensor_Instance.registerCallback(&printCallback);
     Sensor_Instance.startRangeContinuous(Settings_Struct);
     printf("Acquisisition started \n");
