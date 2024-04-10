@@ -56,6 +56,32 @@ void VIBRO4_rpi::autoCal(){
         };
 }
 
+void VIBRO4_rpi::vibroDiagnostic(){
+
+        i2c_writeByte(VIBRO_MODE_REG,motorSettings.init_diagnostic_mode);
+        i2c_writeByte(VIBRO_GO_REG,motorSettings.init_go);
+        
+        if (i2c_readByte(VIBRO_STATUS_REG)==DIAG_RESULT_FAIL){
+                #ifdef DEBUG
+                fprintf(stderr, "Actuator not working.\n");
+                #endif
+                throw "Actuator not working";
+        };        
+}
+
+void VIBRO4_rpi::vibroDiagnostic(){
+
+        i2c_writeByte(VIBRO_MODE_REG,motorSettings.init_diagnostic_mode);
+        i2c_writeByte(VIBRO_GO_REG,motorSettings.init_go);
+        
+        if (i2c_readByte(VIBRO_STATUS_REG)==DIAG_RESULT_FAIL){
+                #ifdef DEBUG
+                fprintf(stderr, "Actuator not working.\n");
+                #endif
+                throw "Actuator not working";
+        };        
+}
+
 void VIBRO4_rpi::playHaptic_preDef(){
         
         // Wake up and set to internal trigger
