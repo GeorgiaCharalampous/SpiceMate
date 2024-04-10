@@ -7,7 +7,14 @@
 class DataProcess
 {
     public:
-    void worker(uint8_t inputdata);
-
+    uint8_t value;
+    bool dataReceived = false;
+    
+    private:
+    void thresholding();
+    
+	uint8_t counter = 0;
+	uint8_t upperLimit = 180;
+	uint8_t lowerLimit = 20;
 
 };

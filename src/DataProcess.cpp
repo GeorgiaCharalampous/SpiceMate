@@ -1,6 +1,19 @@
 #include <DataProcess.h>
 
-void DataProcess::worker(uint8_t inputData){
+void DataProcess::thresholding(){
+    if (!dataReceived) return;
 
-    printf("Value is %u",inputData);
+    if ((value > lowerLimit)&&(value< upperLimit)){
+		counter +=1;
+	}
+	else {
+		counter = 0;
+	};
+
+	if (10 == counter)
+	{
+		printf("Start Dispensing!"); 
+		counter = 0;
+	};
+
 };

@@ -6,6 +6,7 @@
 #include<fcntl.h>
 #include<sys/ioctl.h>
 
+
 void VL6180x_rpi::startRangeContinuous(VL6180x_settings settings){
     if (running) return;
 

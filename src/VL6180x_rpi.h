@@ -5,6 +5,7 @@
 //#include <pigpio.h>
 #include <linux/i2c-dev.h>
 #include <gpiod.h>
+#include <DataProcess.h>
 
 #include <assert.h>
 #include <thread>
@@ -110,6 +111,7 @@ class VL6180x_rpi {
     unsigned i2c_readTwoBytes(uint8_t reg);
     unsigned i2c_readByte(uint8_t reg);
     int i2c_readConversion();
+
 
     const uint8_t reg_congig = 1;
     const uint8_t reg_lo_thres = 2;
