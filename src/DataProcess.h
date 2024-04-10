@@ -4,6 +4,9 @@
 #include <stdlib.h>
 #include <thread>
 
+#ifndef NDEBUG
+#define DEBUG
+#endif
 
 class DataProcess {
     public:
