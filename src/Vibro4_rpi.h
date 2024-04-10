@@ -18,7 +18,7 @@ static const char could_not_open_i2c[] = "Could not open I2C.\n";
 #define DEFAULT_VIBRO_ADDRESS 0x5A
 
 // default GPIO pin for EN pin
-#define DEFAULT_EN_PIN 25
+#define DEFAULT_EN_PIN 26
 
 struct VIBRO4_settings{
     int default_i2c_bus = 1;
@@ -32,18 +32,19 @@ struct VIBRO4_settings{
     uint8_t rdy_externalTrig_edge   = MODE_EXT_TRIGGER_EDGE;
     uint8_t rdy_realTIME            = MODE_RTPLAYBACK;
     uint8_t init_autocal_mode       = MODE_AUTO_CALIBRATION; // idle with internal trigger
+    uint8_t init_diagnostic_mode    = MODE_DIAGNOSTIC; // idle with internal trigger
+
 
     // Auto-calibration register config section
     uint8_t init_feedBack_reg       = (LRA_MODE|FB_BRAKE_FACTOR_3x|LOOP_GAIN_HIGH);
     uint8_t init_ratedVoltage_reg   = RATED_VOLTAGE_170Hz; //currently based on motor datasheet values
-    uint8_t init_odClamp_reg        = OD_CLAMP_MOTOR; //currently based on motor datasheet values
+    uint8_t init_odClamp_reg        = OD_CLAMP_DEFAULT; //currently based on motor datasheet values
     uint8_t init_control4_reg       = AUTO_CAL_TIME_500um;
-    uint8_t init_control1_reg       = DRIVE_TIME; //default needs to change?
+    uint8_t init_control1_reg       = STARTUP_BOOST|DRIVE_TIME; //default needs to change?
     uint8_t init_control2_reg       = SAMPLE_TIME_300um|BLANKING_TIME|IDISS_TIME;
     uint8_t init_go                 = VIBRO_GO;
 
     uint8_t vibro_library = LIBRARY_SELECT_LRA;
-    
 };
 
 class VIBRO4_rpi{
@@ -59,6 +60,8 @@ class VIBRO4_rpi{
      * Executes autocallibration procedure
     */
     void autoCal();
+
+    void vibroDiagnostic();
 
     /**
      * Itialises vibration motor

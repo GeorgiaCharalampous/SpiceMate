@@ -1,4 +1,4 @@
-#ifndef stdint.h
+#ifndef stdint
 #include <stdint.h>
 #endif
 
@@ -7,6 +7,9 @@
 enum{
     DEFAULT_STATUS              = 0b01100000,
     DIAG_RESULT_FAIL            = 0b01101000,
+    FB_STS_TIMEOUT              = 0b01100100,
+    OVER_TEMP_DEVICE            = 0b01100010,
+    OVER_CURRENT_DEVICE         = 0b01100001,
 };
 #define VIBRO_MODE_REG          0x01       
 //settings
@@ -40,7 +43,6 @@ enum {
 #define VIBRO_WAV_SEQ_REG7      0x0A
 #define VIBRO_WAV_SEQ_REG8      0x0B
 enum {
-    WAIT_DEFAULT                = 0b00000000,
     WAIT_ENABLE                 = 0b10000000, // sets waveform sequencer to idle and delay is added between vibrations
     WAV_FRM_SEQ                 = 0b00000000, // holds the waveform identifier of the waveform to be played
 };
@@ -67,7 +69,7 @@ enum{
 #define VIBRO_RATED_VOLTAGE_REG 0x16        //sets ref voltage for fullscale output needed by auto-cal
 enum{
     RATED_VOLTAGE_DEFAULT       = 0b00111111,
-    RATED_VOLTAGE_170Hz         = 0b01101000,
+    RATED_VOLTAGE_170Hz         = 105,
 };
 
 #define VIBRO_OD_CLAMP_REG      0x17
@@ -100,12 +102,12 @@ enum{
     LOOP_GAIN_LOW               = 0b00000000,
     LOOP_GAIN_MED               = 0b00000100, //default
     LOOP_GAIN_HIGH              = 0b00001000,
-    LOOP_GAIN_VERY_HIGH         = 0b00010100,
+    LOOP_GAIN_VERY_HIGH         = 0b00001100,
     
     BEMF_GAIN_LRA_5x            = 0b00000000,
     BEMF_GAIN_LRA_10x           = 0b00000001,
     BEMF_GAIN_LRA_20x           = 0b00000010, //default
-    BEMF_GAIN_LRA_30x           = 0b00000000,
+    BEMF_GAIN_LRA_30x           = 0b00000011,
 };
 #define VIBRO_CONTROL1_REG      0x1B        
 enum{
@@ -147,7 +149,7 @@ enum{
     DATA_FORMAT_RTP_USGN        = 0b00001000,
     
     LRA_DRIVE_MODE_1            = 0b00000000,
-    LRA_DRIVE_MODE_2            = 0b00000010,
+    LRA_DRIVE_MODE_2            = 0b00000100,
     
     INPUT_MODE_PWM              = 0b00000000,
     INPUT_MODE_ANALOG           = 0b00000010,
@@ -162,8 +164,8 @@ enum{
     AUTO_CAL_TIME_250um         = 0b00010000,
     AUTO_CAL_TIME_500um         = 0b00100000, //default
     AUTO_CAL_TIME_1000um        = 0b00110000,
-    OTP_STATUS_PROG             = 0b00000000,
-    OTP_STATUS_NOTPROG          = 0b00000100,
+    OTP_STATUS_PROG             = 0b00000100,
+    OTP_STATUS_NOTPROG          = 0b00000000,
     OTP_PROGRAM                 = 0b00000000
 };
 
@@ -174,5 +176,5 @@ enum{
 
 #define VIBRO_LRA_PERIOD_REG    0x22
 enum{
-    LRA_PERIOD                  = 0b00000000,
+    LRA_PERIOD                  = 0x38,
 };
