@@ -5,7 +5,7 @@ int main(int argc, char *argv[]){
     GROVE_EMG magnetInstance;
     GROVE_settings Settings_Struct;
 
-    motorInstance.initMagnet(Settings_Struct);
+    magnetInstance.initMagnet(Settings_Struct);
 
     magnetInstance.startMagnet();
 
