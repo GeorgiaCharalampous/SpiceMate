@@ -15,19 +15,41 @@ void DataProcess::thresholding(){
     if (!dataReceived) return;
 	
 	printf("Incomming reading: %u \n",value); 
-    if ((value > lowerLimit)&&(value< upperLimit)){
-		counter +=1;
-	}
-	else {
-		counter = 0;
-	};
-
-	if (10 == counter)
+	if ((value > lowerLimit)&&(value < upperLimit))
 	{
-		printf("Start Dispensing! \n"); 
-		counter = 0;
-	};
+		currentValueInRange = true;
+	}
+	else {currentValueInRange = false;};
 
+	if(isDispensing)
+	{
+		counterStart = 0;
+		if(!currentValueInRange){
+			counterStop +=1;
+		}
+		else {counterStop = 0;};
+		if(10==counterStop){
+			printf("Stop Dispensing! \n");
+			counterStop = 0;
+			isDispensing = false;
+		};
+
+	};
+	if(!isDispensing)
+	{
+		counterStop = 0;
+		if(currentValueInRange){
+			counterStart +=1;
+		}
+		else {counterStart = 0;};
+
+		if(10 == counterStart){
+			printf("Start Dispensing! \n");
+			counterStart = 0;
+			isDispensing = true;
+		};
+	};
+	lastValueInRange = currentValueInRange;
 };
 
 void DataProcess::stop(){

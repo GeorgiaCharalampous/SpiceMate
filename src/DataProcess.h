@@ -19,10 +19,14 @@ class DataProcess {
     void worker();
     void thresholding();
     
-	uint8_t counter = 0;
+	uint8_t counterStart = 0;
+    uint8_t counterStop = 0;
 	uint8_t upperLimit = 180;
 	uint8_t lowerLimit = 20;
     std::thread prosThread;
     bool running = false;
+    bool isDispensing = false;
+    bool lastValueInRange = false;
+    bool currentValueInRange = false;
 
 };

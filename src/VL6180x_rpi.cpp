@@ -136,13 +136,13 @@ void VL6180x_rpi::dataReady(){
     int error = i2c_readByte(SENSOR_RESULT_RANGE_STATUS);
     error = error >> 4;
     #ifdef DEBUG
-	fprintf(stderr,"Error code %u.\n",error);
+	//fprintf(stderr,"Error code %u.\n",error);
     #endif	
     sensorCallback->hasSample(value);
     //clear All interupts
     i2c_writeByte(SENSOR_SYSTEM_INTERRUPT_CLEAR,(CLEAR_RANGE_INT|CLEAR_ALS_INT|CLEAR_ERROR_INT));
     #ifdef DEBUG
-	fprintf(stderr,"Processed callback.\n");
+	//fprintf(stderr,"Processed callback.\n");
     #endif
     i2c_writeByte(SENSOR_SYSRANGE_START,3);
     i2c_writeByte(SENSOR_SYSRANGE_START,3);
