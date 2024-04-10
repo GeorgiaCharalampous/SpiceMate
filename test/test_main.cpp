@@ -10,7 +10,8 @@
 int main(int argc, char *argv[]){
     
     VL6180x_rpi Sensor_Instance;
-    VL6180xcallbackChild printCallback;
+    VL6180xcallbackChild passCallback;
+    DataProcess printThreshold;
 
     int Range_Threshold_Low = 100;//mm
     int Range_Threshold_HIGH = 100; //mm
@@ -33,11 +34,14 @@ int main(int argc, char *argv[]){
     printf("Test finished \n");
     return 0;
     */
-    Sensor_Instance.registerCallback(&printCallback);
+    Sensor_Instance.registerCallback(&passCallback);
+    passCallback.registerDP(&printThreshold);
     Sensor_Instance.startRangeContinuous(Settings_Struct);
     printf("Acquisisition started \n");
+    printThreshold.start();
     getchar();
 	Sensor_Instance.stop();
+    printThreshold.stop();
 	return 0;
     
 }

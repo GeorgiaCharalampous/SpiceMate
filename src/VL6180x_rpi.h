@@ -5,7 +5,6 @@
 //#include <pigpio.h>
 #include <linux/i2c-dev.h>
 #include <gpiod.h>
-#include <DataProcess.h>
 
 #include <assert.h>
 #include <thread>
