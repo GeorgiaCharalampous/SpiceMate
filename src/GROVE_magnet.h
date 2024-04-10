@@ -36,7 +36,7 @@ class GROVE_EMG{
     **/
     ~GROVE_EMG() {stop();}
 
-    void initMagnet(GROVE_settings groveSettings = GROVE_settings())
+    void initMagnet(GROVE_settings groveSettings = GROVE_settings());
 
     void startMagnet();
 
@@ -47,6 +47,6 @@ class GROVE_EMG{
     private:
     GROVE_settings  magnetSettings;
 
-    struct gpiod_chip *chipEN = nullptr;
-    struct gpiod_line *pinEN = nullptr;
-}
+    struct gpiod_chip *chipSIG = nullptr;
+    struct gpiod_line *pinSIG = nullptr;
+};
