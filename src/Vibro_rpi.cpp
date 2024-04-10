@@ -17,26 +17,11 @@ void VIBRO4_rpi::initVibro(VIBRO4_settings settings){
         gpiod_line_request_output(pinEN,"Motor",0); // open the pin to drive as output
         gpiod_line_set_value(pinEN,1); // sets EN pin to high 
 
-        // wait before sending i2c commands for motor init
-        sleep(1);
-
-        printf("Should be standby %u \n",i2c_readByte(VIBRO_MODE_REG));
-
         // Initialise and autocallibrate
         i2c_writeByte(VIBRO_MODE_REG,DEVICE_RDY); // decide on whether we need both
-        printf("Should be awake %u \n",i2c_readByte(VIBRO_MODE_REG));
-
-        usleep(100);
-
-        printf("Autocal comp voltage before calibration %u \n",i2c_readByte(VIBRO_A_CAL_COMP_REG));
-
         autoCal();
         
         i2c_writeByte(VIBRO_REGFIELD_REG,settings.vibro_library);
-
-        printf("Autocal comp voltage after calibration %u \n",i2c_readByte(VIBRO_A_CAL_COMP_REG));
-
-        //printf("Should be set for high imp and LRA library %u \n",i2c_readByte(VIBRO_REGFIELD_REG));
 
         i2c_writeByte(VIBRO_CONTROL3_REG,settings.init_control3_reg);
         // put on standby for low pwer mode
@@ -46,7 +31,6 @@ void VIBRO4_rpi::initVibro(VIBRO4_settings settings){
 void VIBRO4_rpi::autoCal(){
 
         i2c_writeByte(VIBRO_MODE_REG,motorSettings.init_autocal_mode);
-        printf("Should be autocal mode %u \n",i2c_readByte(VIBRO_MODE_REG));
 
         i2c_writeByte(VIBRO_FEEDBACK_REG,motorSettings.init_feedBack_reg);
 
@@ -64,9 +48,9 @@ void VIBRO4_rpi::autoCal(){
 
         while (i2c_readByte(VIBRO_GO_REG)==1)
         {
-                printf("Calibration in progress");
+                //Waiting for Auto Calibration
         };
-        usleep(500);
+
         if (i2c_readByte(VIBRO_STATUS_REG)==DIAG_RESULT_FAIL){
                 #ifdef DEBUG
                 fprintf(stderr, "Auto-calibration failed.\n");
@@ -110,16 +94,9 @@ void VIBRO4_rpi::playHaptic_preDef(){
 }
 
 void VIBRO4_rpi::playHaptic_realTime(uint8_t amplitude){
-        
-        printf("Should be standby %u \n",i2c_readByte(VIBRO_MODE_REG));
-        //i2c_writeByte(VIBRO_MODE_REG,DEVICE_RDY);
-        usleep(100);
-        printf("Play haptic entered");
 
         // Wake up and set to internal trigger
         i2c_writeByte(VIBRO_MODE_REG,MODE_RTPLAYBACK);
-        usleep(400);
-        printf("RTP Register written");
 
         // Write amplitude for continuous vibration
         i2c_writeByte(VIBRO_RTP_REG,amplitude);
@@ -131,6 +108,9 @@ void VIBRO4_rpi::stopHaptic(){
 
 void VIBRO4_rpi::stop(){
         i2c_writeByte(VIBRO_MODE_REG,STANDBY);
+        //gpiod_line_set_value(pinEN,0); // sets EN pin to low 
+        int status = i2c_readByte(VIBRO_MODE_REG);
+        i2c_writeByte(VIBRO_MODE_REG,status|DEV_RESET);
         gpiod_line_release(pinEN);
         gpiod_chip_close(chipEN);
 }
@@ -215,20 +195,3 @@ unsigned VIBRO4_rpi::i2c_readByte(uint8_t reg){
     close(fd_i2c);
     return ((uint8_t)(data[0]));
 }
-
-/*
-int VIBRO4_rpi::i2c_readConversion()
-{
-	const int reg = 0;
-	char tmp[3];
-	tmp[0] = reg;
-	write(fd_i2c,&tmp,1);
-        long int r = read(fd_i2c, tmp, 2);
-        if (r < 0) {
-        #ifdef DEBUG
-                fprintf(stderr,"Could not read ADC value. ret=%d.\n",r);
-        #endif
-                throw "Could not read from i2c.";
-        }
-        return ((int)(tmp[0]) << 8) | (int)(tmp[1]);
-}*/
