@@ -7,7 +7,7 @@
 #include <unistd.h>
 //#include <sys/ioctl.h>
 
-void GROVE_EMG::startMagnet(GROVE_settings settings){
+void GROVE_EMG::initMagnet(GROVE_settings settings){
 
     magnetSettings = settings;
 
@@ -15,14 +15,19 @@ void GROVE_EMG::startMagnet(GROVE_settings settings){
     pinSIG = gpiod_chip_get_line(chipSIG,settings.SIG_gpio);
 
     gpiod_line_request_output(pinSIG,"Magnet",0); // open the pin to drive as output
-    gpiod_line_set_value(pinSIG,1); // sets signal pin to high
+    gpiod_line_set_value(pinSIG,settings.OFF); // sets signal pin to high
+}
+
+void GROVE_EMG::startMagnet(){
+    gpiod_line_set_value(pinSIG,magnetSettings.ON);
 }
 
 void GROVE_EMG::stopMagnet(){
-    gpiod_line_set_value(pinSIG,0); // set pin to low to turn off the magnet
+    gpiod_line_set_value(pinSIG,magnetSettings.OFF); // set pin to low to turn off the magnet
 }
 
 void GROVE_EMG::stop(){
+    gpiod_line_set_value(pinSIG,magnetSettings.OFF); // set pin to low to turn off the magnet
     gpiod_line_release(pinSIG);
     gpiod_chip_close(chipSIG);
 }

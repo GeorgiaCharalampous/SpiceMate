@@ -36,7 +36,9 @@ class GROVE_EMG{
     **/
     ~GROVE_EMG() {stop();}
 
-    void startMagnet(GROVE_settings groveSettings = GROVE_settings());
+    void initMagnet(GROVE_settings groveSettings = GROVE_settings())
+
+    void startMagnet();
 
     void stopMagnet();
 
