@@ -17,11 +17,11 @@
 //#define DEFAULT_VIBRO_ADDRESS 0x5a
 
 // default GPIO pin for EN pin
-#define DEFAULT_EN_PIN 25
+#define DEFAULT_SIG_PIN 25
 
 struct GROVE_settings{
-    int EN_chip = 0;
-    int EN_gpio = DEFAULT_EN_PIN;
+    int SIG_chip = 0;
+    int SIG_gpio = DEFAULT_SIG_PIN;
 
     uint8_t ON  = 1;
     uint8_t OFF = 0;
@@ -34,11 +34,13 @@ class GROVE_EMG{
     /**
      * destructor 
     **/
-    ~GROVE_EMG() {stopMagnet();}
+    ~GROVE_EMG() {stop();}
 
-    void startMagnet();
+    void startMagnet(GROVE_settings groveSettings = GROVE_settings());
 
     void stopMagnet();
+
+    void stop();
 
     private:
     GROVE_settings  magnetSettings;
