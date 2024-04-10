@@ -17,7 +17,7 @@
 //#define DEFAULT_VIBRO_ADDRESS 0x5a
 
 // default GPIO pin for EN pin
-#define DEFAULT_SIG_PIN 25
+#define DEFAULT_SIG_PIN 16
 
 struct GROVE_settings{
     int SIG_chip = 0;
