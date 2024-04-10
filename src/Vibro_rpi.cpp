@@ -42,8 +42,11 @@ void VIBRO4_rpi::autoCal(){
 
         while (i2c_readByte(VIBRO_GO_REG)==1)
         {
-                printf("Callibration in process")
-        }
+                printf("Callibration in process");
+        };
+
+        printf("Callibration value is %u \n",i2c_readByte(VIBRO_A_CAL_COMP_REG));
+
 
         if (i2c_readByte(VIBRO_STATUS_REG)==DIAG_RESULT_FAIL){
                 #ifdef DEBUG
@@ -71,15 +74,21 @@ void VIBRO4_rpi::playHaptic_preDef(){
         i2c_writeByte(VIBRO_WAV_SEQ_REG8,0x00);
 
         i2c_writeByte(VIBRO_GO_REG,VIBRO_GO);
+        printf("Go Bit value is %u \n",i2c_readByte(VIBRO_GO_REG));
+
 }
 
 void VIBRO4_rpi::playHaptic_realTime(uint8_t amplitude){
         
+        i2c_writeByte(VIBRO_MODE_REG,DEVICE_RDY); 
         // Wake up and set to internal trigger
         i2c_writeByte(VIBRO_MODE_REG,MODE_RTPLAYBACK); 
 
         // Write amplitude for continuous vibration
         i2c_writeByte(VIBRO_RTP_REG,amplitude);
+
+        i2c_writeByte(VIBRO_GO_REG,1);
+        printf("Go Bit value is %u \n",i2c_readByte(VIBRO_GO_REG));
 
 }
 

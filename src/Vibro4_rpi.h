@@ -15,10 +15,10 @@
 static const char could_not_open_i2c[] = "Could not open I2C.\n";
 
 // default i2c address
-#define DEFAULT_VIBRO_ADDRESS 0x5A
+#define DEFAULT_VIBRO_ADDRESS 0x5a
 
 // default GPIO pin for EN pin
-#define DEFAULT_EN_PIN 25
+#define DEFAULT_EN_PIN 26
 
 struct VIBRO4_settings{
     int default_i2c_bus = 1;

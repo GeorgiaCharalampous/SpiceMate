@@ -1,4 +1,4 @@
-#ifndef stdint.h
+#ifndef stdint
 #include <stdint.h>
 #endif
 
@@ -62,7 +62,7 @@ enum{
 #define VIBRO_ATH_MIN_INPUT_REG 0x12
 #define VIBRO_ATH_MAX_INPUT_REG 0x13
 #define VIBRO_ATH_MIN_DRIVE_REG 0x14
-#define VIBRO_ATH_MIN_DRIVE_REG 0x15
+#define VIBRO_ATH_MAX_DRIVE_REG 0x15
 
 #define VIBRO_RATED_VOLTAGE_REG 0x16        //sets ref voltage for fullscale output needed by auto-cal
 enum{
