@@ -8,5 +8,6 @@
         "type_traits": "cpp",
         "utility": "cpp",
         "compare": "cpp"
-    }
+    },
+    "C_Cpp.errorSquiggles": "enabled"
 }
