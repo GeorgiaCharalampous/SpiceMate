@@ -3,14 +3,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <thread>
+#ifndef DPcallbackChild
+#include <DPcallbackChild.h>
+#endif
 
 #ifndef NDEBUG
 #define DEBUG
 #endif
 
-#ifndef  DPcallbackChild
-#include <DPcallbackChild.h>
-#endif
+
+
 /**
  * Processes input from the VL6180_x proximity sensor 
 **/

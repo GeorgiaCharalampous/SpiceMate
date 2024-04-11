@@ -1,4 +1,6 @@
+#ifndef DataProcess
 #include <DataProcess.h>
+#endif
 
 void DataProcess::start(){
 	running = true;

@@ -6,13 +6,15 @@
 #include <thread>
 #include <linux/i2c-dev.h>
 #include <gpiod.h>
-#include <Vibro_reg.h>
 
+#ifndef Vibro_reg
+#include <Vibro_reg.h>
+#endif
 #ifndef NDEBUG
 #define DEBUG
 #endif
 
-static const char could_not_open_i2c[] = "Could not open I2C.\n";
+static const char could_not_open_i2c2[] = "Could not open I2C.\n";
 
 // default i2c address
 #define DEFAULT_VIBRO_ADDRESS 0x5a
