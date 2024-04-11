@@ -56,7 +56,9 @@ class VIBRO4_rpi{
      * Current status of the motor. 
     **/
 
-    bool isActive = false;
+    bool activate = false;
+
+    bool changedState = false;
 
     /**
      * destructor 
@@ -76,7 +78,7 @@ class VIBRO4_rpi{
     void initVibro(VIBRO4_settings vibro4settings = VIBRO4_settings());
 
     /**
-     * stop data acquisition 
+     * stop the motor
     **/
     void stop();
 
@@ -95,6 +97,17 @@ class VIBRO4_rpi{
     */
     void stopHaptic();
 
+    /**
+     * Starts the motor on a separate thread
+    **/
+    void start();
+    
+    /**
+     * Amplitude setter
+    **/
+
+    void setAmplitude(uint8_t amplitude){vAmplitude = amplitude;};
+
 
     private:
     VIBRO4_settings motorSettings;
@@ -105,10 +118,14 @@ class VIBRO4_rpi{
     //unsigned i2c_readTwoBytes(uint8_t reg);
     unsigned i2c_readByte(uint8_t reg);
     //int i2c_readConversion();
+    void worker();
 
     struct gpiod_chip *chipEN = nullptr;
     struct gpiod_line *pinEN = nullptr;
 
     int fd_i2c = -1;
     bool cal_in_process = true;
+    bool running = false;
+    std::thread motorThread;
+    uint8_t vAmplitude = 0;
 };

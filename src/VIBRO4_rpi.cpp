@@ -106,6 +106,12 @@ void VIBRO4_rpi::stopHaptic(){
         i2c_writeByte(VIBRO_MODE_REG,STANDBY);
 }
 
+void VIBRO4_rpi::start()
+{
+        running = true;
+        motorThread = std::thread(&VIBRO4_rpi::worker,this);
+
+}
 void VIBRO4_rpi::stop(){
         i2c_writeByte(VIBRO_MODE_REG,STANDBY);
         //gpiod_line_set_value(pinEN,0); // sets EN pin to low 
@@ -115,6 +121,14 @@ void VIBRO4_rpi::stop(){
         gpiod_chip_close(chipEN);
 }
 
+void VIBRO4_rpi::worker(){
+        while (running){
+                if(activate){
+                        playHaptic_realTime();
+                }
+
+        };
+}
 // i2c read and write protocols
 void VIBRO4_rpi::i2c_writeByte(uint8_t reg, unsigned data)
 {

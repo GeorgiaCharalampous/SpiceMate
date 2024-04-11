@@ -5,5 +5,6 @@ void DPcallbackChild::dataProcessed(bool status){
 		throw "Null pointer to motor class";
 	};
     
-    vmotor->isActive=status;
+    vmotor->activate=status;
+    vmotor->changedState = true;
 };
