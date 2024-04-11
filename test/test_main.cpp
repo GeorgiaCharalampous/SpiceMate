@@ -40,9 +40,9 @@ int main(int argc, char *argv[]){
 
     sensor_Instance.startRangeContinuous(sensor_Settings);
     printThreshold.start();
-    motor_Instance.start();
     motor_Instance.initVibro(motor_Settings);
     motor_Instance.setAmplitude(255);
+    motor_Instance.start();
     printf("Motor initialised \n");
     printf("Acquisisition started \n");
     getchar();

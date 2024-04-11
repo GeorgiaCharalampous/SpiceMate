@@ -124,6 +124,9 @@ void VIBRO4_rpi::stop(){
         running = 0;
         changedState = false;
         motorThread.join();
+        #ifdef DEBUG
+	fprintf(stderr,"Motor thread stopped.\n");
+        #endif	
 
 }
 
