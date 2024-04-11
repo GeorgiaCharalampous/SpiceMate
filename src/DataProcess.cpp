@@ -60,6 +60,7 @@ void DataProcess::thresholding(){
 };
 
 void DataProcess::stop(){
+	
 	if(!running) return;
 	running = 0;
 	prosThread.join();
@@ -67,3 +68,7 @@ void DataProcess::stop(){
 	fprintf(stderr,"Processing thread stopped.\n");
     #endif	
 }
+
+void DataProcess::registerCallback(DPcallbackInterface* cb){
+    processCallback = cb;
+};

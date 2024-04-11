@@ -113,12 +113,15 @@ void VIBRO4_rpi::start()
 
 }
 void VIBRO4_rpi::stop(){
+        if(!running) return;
+        
         i2c_writeByte(VIBRO_MODE_REG,STANDBY);
         //gpiod_line_set_value(pinEN,0); // sets EN pin to low 
         int status = i2c_readByte(VIBRO_MODE_REG);
         i2c_writeByte(VIBRO_MODE_REG,status|DEV_RESET);
         gpiod_line_release(pinEN);
         gpiod_chip_close(chipEN);
+        running = 0;
         changedState = false;
         motorThread.join();
 

@@ -34,13 +34,17 @@ int main(int argc, char *argv[]){
     */
     sensor_Instance.registerCallback(&passCallback);
     passCallback.registerDP(&printThreshold);
+    printThreshold.registerCallback(&processingCallback);
     processingCallback.registerMotor(&motor_Instance);
+
+
     sensor_Instance.startRangeContinuous(sensor_Settings);
+    printThreshold.start();
+    motor_Instance.start();
     motor_Instance.initVibro(motor_Settings);
     motor_Instance.setAmplitude(255);
     printf("Motor initialised \n");
     printf("Acquisisition started \n");
-    printThreshold.start();
     getchar();
 	sensor_Instance.stop();
     printThreshold.stop();
