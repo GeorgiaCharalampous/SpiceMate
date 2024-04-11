@@ -58,6 +58,10 @@ class VIBRO4_rpi{
 
     bool activate = false;
 
+    /**
+     * When true indicates a change of state must happen
+    **/
+
     bool changedState = false;
 
     /**
@@ -106,7 +110,7 @@ class VIBRO4_rpi{
      * Amplitude setter
     **/
 
-    void setAmplitude(uint8_t amplitude){vAmplitude = amplitude;};
+    void setAmplitude(uint8_t value){vAmplitude = value;};
 
 
     private:

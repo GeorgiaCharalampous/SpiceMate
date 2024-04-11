@@ -18,8 +18,6 @@ int main(int argc, char *argv[]){
     VL6180xcallbackChild passCallback;
     DataProcess printThreshold;
 
-
-
     int Range_Intermeasurement_period = 100; //ms
     int Range_Max_convergence_time = 15; //ms
 
@@ -41,31 +39,14 @@ int main(int argc, char *argv[]){
     passCallback.registerDP(&printThreshold);
     sensor_Instance.startRangeContinuous(sensor_Settings);
     motor_Instance.initVibro(motor_Settings);
+    motor_Instance.setAmplitude(255);
     printf("Motor initialised \n");
     printf("Acquisisition started \n");
     printThreshold.start();
     getchar();
 	sensor_Instance.stop();
     printThreshold.stop();
+    motor_Instance.stop();
 	return 0;
     
 }
-/*
- VIBRO4_rpi motor_Instance;
-    VIBRO4_settings Settings_Struct;
-
-    uint8_t hapticAmp = 255;
-    motor_Instance.initVibro(Settings_Struct);
-    motor_Instance.playHaptic_realTime(hapticAmp);
-    printf("Motor started \n");
-    
-    getchar();
-    
-    motor_Instance.stopHaptic();
-
-    getchar();
-    
-    motor_Instance.stop();
-
-    return 0;    
-    */

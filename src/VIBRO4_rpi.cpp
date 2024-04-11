@@ -119,14 +119,22 @@ void VIBRO4_rpi::stop(){
         i2c_writeByte(VIBRO_MODE_REG,status|DEV_RESET);
         gpiod_line_release(pinEN);
         gpiod_chip_close(chipEN);
+        changedState = false;
+        motorThread.join();
+
 }
 
 void VIBRO4_rpi::worker(){
         while (running){
-                if(activate){
-                        playHaptic_realTime();
-                }
-
+                if(changedState){
+                        if(activate){
+                                playHaptic_realTime(vAmplitude);
+                        }
+                        else {
+                                stopHaptic();
+                        };
+                        changedState = false;
+                };
         };
 }
 // i2c read and write protocols
