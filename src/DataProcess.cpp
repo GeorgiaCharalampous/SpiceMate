@@ -23,29 +23,29 @@ void DataProcess::thresholding(){
 
 	if(isDispensing)
 	{
-		counterStart = 0;
+		counterAbove = 0;
 		if(!currentValueInRange){
-			counterStop +=1;
+			counterBelow +=1;
 		}
-		else {counterStop = 0;};
-		if(10==counterStop){
+		else {counterBelow = 0;};
+		if(10==counterBelow){
 			printf("Stop Dispensing! \n");
-			counterStop = 0;
+			counterBelow= 0;
 			isDispensing = false;
 		};
 
 	};
 	if(!isDispensing)
 	{
-		counterStop = 0;
+		counterBelow = 0;
 		if(currentValueInRange){
-			counterStart +=1;
+			counterAbove +=1;
 		}
-		else {counterStart = 0;};
+		else {counterAbove = 0;};
 
-		if(10 == counterStart){
+		if(10 == counterAbove){
 			printf("Start Dispensing! \n");
-			counterStart = 0;
+			counterAbove = 0;
 			isDispensing = true;
 		};
 	};
