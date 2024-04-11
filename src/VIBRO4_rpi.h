@@ -53,6 +53,12 @@ class VIBRO4_rpi{
     public:
 
     /**
+     * Current status of the motor. 
+    **/
+
+    bool isActive = false;
+
+    /**
      * destructor 
     **/
     ~VIBRO4_rpi() {stop();}

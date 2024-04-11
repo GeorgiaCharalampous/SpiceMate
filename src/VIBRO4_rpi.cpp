@@ -1,5 +1,5 @@
-#ifndef Vibro4_rpi
-#include "Vibro4_rpi.h"
+#ifndef VIBRO4_rpi
+#include "VIBRO4_rpi.h"
 #endif
 
 #include <bitset>

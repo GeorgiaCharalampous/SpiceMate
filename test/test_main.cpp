@@ -1,8 +1,8 @@
 #ifndef VL6180x_rpi
 #include "VL6180x_rpi.h"
 #endif
-#ifndef Vibro4_rpi
-#include "Vibro4_rpi.h"
+#ifndef VIBRO4_rpi
+#include "VIBRO4_rpi.h"
 #endif
 
 // #ifndef VL6180xcallbackChild
@@ -13,15 +13,18 @@
 
 int main(int argc, char *argv[]){
     
-    VL6180x_rpi Sensor_Instance;
+    VL6180x_rpi sensor_Instance;
     VL6180xcallbackChild passCallback;
     DataProcess printThreshold;
+    VIBRO4_rpi motor_Instance;
+
 
     int Range_Intermeasurement_period = 100; //ms
     int Range_Max_convergence_time = 15; //ms
 
-    VL6180x_settings Settings_Struct;
-    printf("Range threshold low is %u . \n",Settings_Struct.sysrange_thresh_low);
+    VL6180x_settings sensor_Settings;
+    VIBRO4_settings motor_Settings;
+    printf("Range threshold low is %u . \n",sensor_Settings.sysrange_thresh_low);
     /*
     Sensor_Instance.registerCallback(&printCallback);
     Sensor_Instance.startRangeContinuous(Settings_Struct);
@@ -33,13 +36,13 @@ int main(int argc, char *argv[]){
     printf("Test finished \n");
     return 0;
     */
-    Sensor_Instance.registerCallback(&passCallback);
+    sensor_Instance.registerCallback(&passCallback);
     passCallback.registerDP(&printThreshold);
-    Sensor_Instance.startRangeContinuous(Settings_Struct);
+    sensor_Instance.startRangeContinuous(sensor_Settings);
     printf("Acquisisition started \n");
     printThreshold.start();
     getchar();
-	Sensor_Instance.stop();
+	sensor_Instance.stop();
     printThreshold.stop();
 	return 0;
     
