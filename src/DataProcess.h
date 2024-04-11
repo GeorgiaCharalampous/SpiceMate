@@ -8,6 +8,9 @@
 #define DEBUG
 #endif
 
+#ifndef  DPcallbackChild
+#include <DPcallbackChild.h>
+#endif
 /**
  * Processes input from the VL6180_x proximity sensor 
 **/
@@ -31,6 +34,8 @@ class DataProcess {
      * Stops data processing and joins the thread
     **/
     void stop();
+
+    void registerCallback(DPcallbackInterface* cb);
     
     private:
     /**
@@ -96,5 +101,7 @@ class DataProcess {
      *  True when in the dispensing range, false otherwise
     **/
     bool currentValueInRange = false;
+
+    DPcallbackInterface* processCallback = nullptr;
 
 };

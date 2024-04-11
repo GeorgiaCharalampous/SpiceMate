@@ -16,6 +16,7 @@ int main(int argc, char *argv[]){
     VL6180x_rpi sensor_Instance;
     VIBRO4_rpi motor_Instance;
     VL6180xcallbackChild passCallback;
+    DPcallbackChild processingCallback;
     DataProcess printThreshold;
 
     int Range_Intermeasurement_period = 100; //ms
@@ -37,6 +38,7 @@ int main(int argc, char *argv[]){
     */
     sensor_Instance.registerCallback(&passCallback);
     passCallback.registerDP(&printThreshold);
+    processingCallback.registerMotor(&motor_Instance);
     sensor_Instance.startRangeContinuous(sensor_Settings);
     motor_Instance.initVibro(motor_Settings);
     motor_Instance.setAmplitude(255);
