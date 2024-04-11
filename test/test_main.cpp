@@ -13,15 +13,10 @@ int main(int argc, char *argv[]){
     VL6180xcallbackChild passCallback;
     DataProcess printThreshold;
 
-    int Range_Threshold_Low = 100;//mm
-    int Range_Threshold_HIGH = 100; //mm
     int Range_Intermeasurement_period = 100; //ms
     int Range_Max_convergence_time = 15; //ms
 
     VL6180x_settings Settings_Struct;
-    Settings_Struct.sysrange_thresh_low = 100;
-    Settings_Struct.sysrange_thresh_low = 128;
-
     printf("Range threshold low is %u . \n",Settings_Struct.sysrange_thresh_low);
     /*
     Sensor_Instance.registerCallback(&printCallback);

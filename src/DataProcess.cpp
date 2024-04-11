@@ -50,6 +50,7 @@ void DataProcess::thresholding(){
 		};
 	};
 	lastValueInRange = currentValueInRange;
+	dataReceived = false;
 };
 
 void DataProcess::stop(){
