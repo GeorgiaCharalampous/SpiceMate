@@ -16,6 +16,7 @@ void VIBRO4_rpi::initVibro(VIBRO4_settings settings){
 
         gpiod_line_request_output(pinEN,"Motor",0); // open the pin to drive as output
         gpiod_line_set_value(pinEN,1); // sets EN pin to high 
+        usleep(300);
 
         // Initialise and autocallibrate
         i2c_writeByte(VIBRO_MODE_REG,DEVICE_RDY); // decide on whether we need both
@@ -26,6 +27,7 @@ void VIBRO4_rpi::initVibro(VIBRO4_settings settings){
         i2c_writeByte(VIBRO_CONTROL3_REG,settings.init_control3_reg);
         // put on standby for low pwer mode
         i2c_writeByte(VIBRO_MODE_REG,settings.standby); // also sets this to internal trigger
+        running = 1;
 }
 
 void VIBRO4_rpi::autoCal(){
@@ -45,11 +47,6 @@ void VIBRO4_rpi::autoCal(){
         i2c_writeByte(VIBRO_CONTROL2_REG,motorSettings.init_control2_reg);
 
         i2c_writeByte(VIBRO_GO_REG,1);
-
-        while (i2c_readByte(VIBRO_GO_REG)==1)
-        {
-                //Waiting for Auto Calibration
-        };
 
         if (i2c_readByte(VIBRO_STATUS_REG)==DIAG_RESULT_FAIL){
                 #ifdef DEBUG
@@ -78,7 +75,7 @@ void VIBRO4_rpi::playHaptic_preDef(){
         // Wake up and set to internal trigger
         i2c_writeByte(VIBRO_MODE_REG,MODE_INT_TRIGGER); 
         // wake up and set to external trigger
-//        i2c_writeByte(VIBRO_MODE_REG,MODE_EXT_TRIGGER_EDGE);
+        //i2c_writeByte(VIBRO_MODE_REG,MODE_EXT_TRIGGER_EDGE);
 
         // Haptic sequence for internal trigger
         i2c_writeByte(VIBRO_WAV_SEQ_REG1,0x01);
@@ -95,24 +92,27 @@ void VIBRO4_rpi::playHaptic_preDef(){
 
 void VIBRO4_rpi::playHaptic_realTime(uint8_t amplitude){
 
-        // Wake up and set to internal trigger
-        i2c_writeByte(VIBRO_MODE_REG,MODE_RTPLAYBACK);
+        if(1 == running) {
+                i2c_writeByte(VIBRO_MODE_REG,0);
 
-        // Write amplitude for continuous vibration
-        i2c_writeByte(VIBRO_RTP_REG,amplitude);
+                i2c_writeByte(VIBRO_MODE_REG,MODE_RTPLAYBACK);
+
+                // Write amplitude for continuous vibration
+                i2c_writeByte(VIBRO_RTP_REG,amplitude);
+                
+        };
+ 
 }
 
 void VIBRO4_rpi::stopHaptic(){
-        i2c_writeByte(VIBRO_GO_REG,0);
-        gpiod_line_set_value(pinEN,0); 
+        i2c_writeByte(VIBRO_RTP_REG,0);
         i2c_writeByte(VIBRO_MODE_REG,STANDBY);
-
 }
 
 void VIBRO4_rpi::stop(){
+        if (!running) return;
         //i2c_writeByte(VIBRO_MODE_REG,STANDBY);
-        //gpiod_line_set_value(pinEN,0); // sets EN pin to low 
-        if (chipEN == nullptr) return;
+        gpiod_line_set_value(pinEN,0); // sets EN pin to low 
         int status = i2c_readByte(VIBRO_MODE_REG);
         printf("Stop 1\n");
         //i2c_writeByte(VIBRO_MODE_REG,status|DEV_RESET);
@@ -121,6 +121,7 @@ void VIBRO4_rpi::stop(){
         printf("Stop 3\n");
         gpiod_chip_close(chipEN);
         printf("Stop 4\n");
+        running = 0;
 }
 
 // i2c read and write protocols

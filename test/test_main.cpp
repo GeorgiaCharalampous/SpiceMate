@@ -11,7 +11,12 @@ int main(int argc, char *argv[]){
 
     motor_Instance.initVibro(Settings_Struct);
     printf("Driver initialised \n");
+    // for (int i = 0; i < 100; i++)
+    // {
+    //     printf("... \n");
+    // };
 
+    //sleep(5);
     motor_Instance.playHaptic_realTime(hapticAmp);
     printf("Motor started \n");
     
