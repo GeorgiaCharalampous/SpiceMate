@@ -5,6 +5,7 @@
 void DataProcess::start(){
 	running = true;
 	prosThread = std::thread(&DataProcess::worker,this);
+	printf("Data Processing is initiated"); 
 };
 
 void DataProcess::worker(){

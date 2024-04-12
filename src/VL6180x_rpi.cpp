@@ -11,12 +11,7 @@ void VL6180x_rpi::startRangeContinuous(VL6180x_settings settings){
     if (running) return;
 
     sensorSettings = settings;
-    /*
-    Hardware reset sensor using EN gpio pin
-    gpioSetMode(settings.en_gpio,PI_OUTPUT);
-    gpioWrite(settings.en_gpio,0);
-    gpioWrite(settings.en_gpio,1);
-    */
+
     chipEN = gpiod_chip_open_by_number(settings.en_chip);
     pinEN = gpiod_chip_get_line(chipEN,settings.en_gpio);
     gpiod_line_request_output(pinEN,"Consumer",0);
