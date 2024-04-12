@@ -92,13 +92,8 @@ class VIBRO4_rpi{
 
     private:
     VIBRO4_settings motorSettings;
-    //std::thread proxThread;//Proximity sensor thread
-    //int running = 0;
-    //void i2c_writeTwoBytes(uint8_t reg, unsigned data);
     void i2c_writeByte(uint8_t reg, unsigned data);
-    //unsigned i2c_readTwoBytes(uint8_t reg);
     unsigned i2c_readByte(uint8_t reg);
-    //int i2c_readConversion();
 
     struct gpiod_chip *chipEN = nullptr;
     struct gpiod_line *pinEN = nullptr;

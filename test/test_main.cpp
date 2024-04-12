@@ -17,15 +17,20 @@ int main(int argc, char *argv[]){
     //motor_Instance.playHaptic_preDef();
     printf("Motor started \n");
     
-    getchar();
-    
-    motor_Instance.stopHaptic();
-
-    getchar();
-    
-    motor_Instance.stop();
+    char a = getchar();
+    if(a == '1')
+    {
+        motor_Instance.stopHaptic();
+        printf("Haptic stopped\n");
+        sleep(1);
+        //motor_Instance.stop();
+    }
+    // else if (a == '2')
+    // {
+    //     motor_Instance.stopHaptic();
+    //     sleep(1);
+    //     motor_Instance.stop();
+    // }
 
     return 0;    
-
-
 }

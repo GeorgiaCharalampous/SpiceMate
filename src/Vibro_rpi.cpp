@@ -103,16 +103,23 @@ void VIBRO4_rpi::playHaptic_realTime(uint8_t amplitude){
 }
 
 void VIBRO4_rpi::stopHaptic(){
+        i2c_writeByte(VIBRO_GO_REG,0);
+        gpiod_line_set_value(pinEN,0); 
         i2c_writeByte(VIBRO_MODE_REG,STANDBY);
+
 }
 
 void VIBRO4_rpi::stop(){
-        i2c_writeByte(VIBRO_MODE_REG,STANDBY);
+        //i2c_writeByte(VIBRO_MODE_REG,STANDBY);
         //gpiod_line_set_value(pinEN,0); // sets EN pin to low 
         int status = i2c_readByte(VIBRO_MODE_REG);
-        i2c_writeByte(VIBRO_MODE_REG,status|DEV_RESET);
+        printf("Stop 1\n");
+        //i2c_writeByte(VIBRO_MODE_REG,status|DEV_RESET);
+        printf("Stop 2\n");
         gpiod_line_release(pinEN);
+        printf("Stop 3\n");
         gpiod_chip_close(chipEN);
+        printf("Stop 4\n");
 }
 
 // i2c read and write protocols
@@ -186,12 +193,11 @@ unsigned VIBRO4_rpi::i2c_readByte(uint8_t reg){
         uint8_t data[1];
         r = read(fd_i2c,data,1);
         if (r<0){
-        
-        #ifdef DEBUG
-            fprintf(stderr, "Could not read from %02x.\n",motorSettings.address);
-        #endif
+                #ifdef DEBUG
+                fprintf(stderr, "Could not read from %02x.\n",motorSettings.address);
+                #endif
                 throw "Could not read from sensor.";
         }
-    close(fd_i2c);
-    return ((uint8_t)(data[0]));
+        close(fd_i2c);
+        return ((uint8_t)(data[0]));
 }
