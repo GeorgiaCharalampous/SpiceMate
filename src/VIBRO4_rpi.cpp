@@ -213,12 +213,11 @@ unsigned VIBRO4_rpi::i2c_readByte(uint8_t reg){
         uint8_t data[1];
         r = read(fd_i2c,data,1);
         if (r<0){
-        
-        #ifdef DEBUG
-            fprintf(stderr, "Could not read from %02x.\n",motorSettings.address);
-        #endif
+                #ifdef DEBUG
+                fprintf(stderr, "Could not read from %02x.\n",motorSettings.address);
+                #endif
                 throw "Could not read from sensor.";
         }
-    close(fd_i2c);
-    return ((uint8_t)(data[0]));
+        close(fd_i2c);
+        return ((uint8_t)(data[0]));
 }

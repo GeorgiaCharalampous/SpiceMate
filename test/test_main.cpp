@@ -35,9 +35,12 @@ int main(int argc, char *argv[]){
     printf("Motor initialised \n");
     printf("Acquisisition started \n");
     getchar();
-	sensor_Instance.stop();
+    motor_Instance.~VIBRO4_rpi();
     printThreshold.stop();
-    motor_Instance.stop();
+	sensor_Instance.stop();
+
+    sensor_Instance.unRegisterCallback();
+    printThreshold.unRegisterCallback();
 	return 0;
     
 }
