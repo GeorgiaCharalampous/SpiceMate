@@ -37,7 +37,16 @@ class DataProcess {
     **/
     void stop();
 
-    void registerCallback(DPcallbackInterface* cb);
+    /**
+     * Registers the callback to the next process 
+    **/
+
+    void registerCallback(DPcallback* cb);
+
+    /**
+     * Unregisters the callback
+    **/
+    void unRegisterCallback();
     
     private:
     /**
@@ -85,7 +94,7 @@ class DataProcess {
     /**
      * Flag that data processing is active/inactive 
     **/
-    bool running = false;
+    int running = 0;
 
     /**
      * Current operation status (dispensing active/inactive)
@@ -104,6 +113,6 @@ class DataProcess {
     **/
     bool currentValueInRange = false;
 
-    DPcallbackInterface* processCallback = nullptr;
+    DPcallback* processCallback = nullptr;
 
 };

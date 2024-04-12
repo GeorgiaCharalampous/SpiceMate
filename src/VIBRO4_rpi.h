@@ -73,7 +73,7 @@ class VIBRO4_rpi{
 
     /**
      * Executes autocallibration procedure
-    */
+    **/
     void autoCal();
 
     void vibroDiagnostic();
@@ -90,17 +90,17 @@ class VIBRO4_rpi{
 
     /**
      * Play prefedined haptic sequence
-    */
+    **/
     void playHaptic_preDef();
 
     /**
      * Play haptic sequence in real time
-    */
+    **/
     void playHaptic_realTime(uint8_t amplitude);
 
     /**
      * Play haptic sequence in real time
-    */
+    **/
     void stopHaptic();
 
     /**
@@ -117,8 +117,6 @@ class VIBRO4_rpi{
 
     private:
     VIBRO4_settings motorSettings;
-    //std::thread proxThread;//Proximity sensor thread
-    //int running = 0;
     //void i2c_writeTwoBytes(uint8_t reg, unsigned data);
     void i2c_writeByte(uint8_t reg, unsigned data);
     //unsigned i2c_readTwoBytes(uint8_t reg);
@@ -131,7 +129,7 @@ class VIBRO4_rpi{
 
     int fd_i2c = -1;
     bool cal_in_process = true;
-    bool running = false;
+    int running = 0;
     std::thread motorThread;
     uint8_t vAmplitude = 0;
 };

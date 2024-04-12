@@ -21,17 +21,6 @@ int main(int argc, char *argv[]){
     VL6180x_settings sensor_Settings;
     VIBRO4_settings motor_Settings;
     printf("Range threshold low is %u . \n",sensor_Settings.sysrange_thresh_low);
-    /*
-    Sensor_Instance.registerCallback(&printCallback);
-    Sensor_Instance.startRangeContinuous(Settings_Struct);
-    for(int i = 0; i < 1000000; i++){
-        Sensor_Instance.getStatus();
-    }
-    printf("Done \n");
-    Sensor_Instance.stop();
-    printf("Test finished \n");
-    return 0;
-    */
     sensor_Instance.registerCallback(&passCallback);
     passCallback.registerDP(&printThreshold);
     printThreshold.registerCallback(&processingCallback);

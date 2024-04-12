@@ -8,20 +8,23 @@ void DataProcess::start(){
 };
 
 void DataProcess::worker(){
-	while (running){
+	while (1 == running){
 		thresholding();
 	}
 };
 
 void DataProcess::thresholding(){
     if (!dataReceived) return;
+	dataReceived = false;
 	
 	printf("Incomming reading: %u \n",value); 
 	if ((value > lowerLimit)&&(value < upperLimit))
 	{
 		currentValueInRange = true;
 	}
-	else {currentValueInRange = false;};
+	else {
+		currentValueInRange = false;
+	};
 
 	if(isDispensing)
 	{
@@ -29,8 +32,10 @@ void DataProcess::thresholding(){
 		if(!currentValueInRange){
 			counterBelow +=1;
 		}
-		else {counterBelow = 0;};
-		if(10==counterBelow){
+		else {
+			counterBelow = 0;
+		};
+		if(10 == counterBelow){
 			printf("Stop Dispensing! \n");
 			bool status = false;
 			processCallback->dataProcessed(status);
@@ -56,7 +61,7 @@ void DataProcess::thresholding(){
 		};
 	};
 	lastValueInRange = currentValueInRange;
-	dataReceived = false;
+
 };
 
 void DataProcess::stop(){
@@ -69,6 +74,11 @@ void DataProcess::stop(){
     #endif	
 }
 
-void DataProcess::registerCallback(DPcallbackInterface* cb){
+void DataProcess::registerCallback(DPcallback* cb){
     processCallback = cb;
+};
+
+void DataProcess::unRegisterCallback()
+{
+	processCallback = nullptr;
 };

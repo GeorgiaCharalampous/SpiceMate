@@ -108,22 +108,21 @@ void VIBRO4_rpi::stopHaptic(){
 
 void VIBRO4_rpi::start()
 {
-        running = true;
+        running = 1;
         motorThread = std::thread(&VIBRO4_rpi::worker,this);
 
 }
 void VIBRO4_rpi::stop(){
         if(!running) return;
-        
+        running = 0;
+        changedState = false;
+        motorThread.join();   
         i2c_writeByte(VIBRO_MODE_REG,STANDBY);
         //gpiod_line_set_value(pinEN,0); // sets EN pin to low 
         int status = i2c_readByte(VIBRO_MODE_REG);
         i2c_writeByte(VIBRO_MODE_REG,status|DEV_RESET);
         gpiod_line_release(pinEN);
         gpiod_chip_close(chipEN);
-        running = 0;
-        changedState = false;
-        motorThread.join();
         #ifdef DEBUG
 	fprintf(stderr,"Motor thread stopped.\n");
         #endif	
@@ -131,15 +130,15 @@ void VIBRO4_rpi::stop(){
 }
 
 void VIBRO4_rpi::worker(){
-        while (running){
+        while (1 == running){
                 if(changedState){
+                        changedState = false;
                         if(activate){
                                 playHaptic_realTime(vAmplitude);
                         }
                         else {
                                 stopHaptic();
                         };
-                        changedState = false;
                 };
         };
 }

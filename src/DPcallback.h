@@ -1,4 +1,4 @@
-class DPcallbackInterface {
+class DPcallback{
 /** 
  * Abstract callback interface.
  * Called after sample processing is finalised.

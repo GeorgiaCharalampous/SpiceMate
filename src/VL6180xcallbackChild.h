@@ -1,8 +1,8 @@
 #ifndef stdint
 #include <stdint.h>
 #endif
-#ifndef  VL6180xcallbackInterface
-#include <VL6180xcallbackInterface.h>
+#ifndef  VL6180xcallback
+#include <VL6180xcallback.h>
 #endif
 #ifndef DataProcess
 #include <DataProcess.h>
