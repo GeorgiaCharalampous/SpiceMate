@@ -112,6 +112,7 @@ void VIBRO4_rpi::stopHaptic(){
 void VIBRO4_rpi::stop(){
         //i2c_writeByte(VIBRO_MODE_REG,STANDBY);
         //gpiod_line_set_value(pinEN,0); // sets EN pin to low 
+        if (chipEN == nullptr) return;
         int status = i2c_readByte(VIBRO_MODE_REG);
         printf("Stop 1\n");
         //i2c_writeByte(VIBRO_MODE_REG,status|DEV_RESET);
