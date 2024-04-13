@@ -11,9 +11,11 @@
 class VL6180xcallbackChild : public VL6180xcallback {
 
 	/**
-	 * Callback 
+	 * Callback for when sensor reading is obtained
 	**/
 	virtual void hasSample(uint8_t sample);
+
+	public:
 
 	/**
 	 * Registers the pointer to the data processing object 

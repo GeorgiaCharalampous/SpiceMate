@@ -6,12 +6,26 @@
 #endif
 
 class DPcallbackChild : public DPcallback{
+
+    /**
+     * Callback for when data has been processed 
+    **/
     virtual void dataProcessed(bool status);
-    VIBRO4_rpi* vmotor = NULL;
+
 
     public:
+    /**
+	 * Registers the pointer to the output device (motor)
+	**/
     void registerMotor(VIBRO4_rpi* motor){
         vmotor = motor;
     }
 
+    private:
+
+    /**
+	 * Pointer to output device.
+	 * For setting states.
+	**/
+    VIBRO4_rpi* vmotor = NULL;
 };
