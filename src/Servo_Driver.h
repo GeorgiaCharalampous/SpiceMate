@@ -27,12 +27,12 @@ class Servo_Driver {
     /**
      * set Pulse Width Modulation frequency for servo motor (Note: Must be set before angle!)
     **/
-    void setFrequency(uint8_t f_hz);
+    void setFrequency(float f_hz);
 
     /**
      * set rotation angle for servo motor (Min:0 degrees, Ma:180 degrees)
     **/
-    void setAngle(uint8_t angle_deg);
+    void setAngle(float angle_deg);
 
     /**
      * send Pulse Width Modulation signal to PWM pin
@@ -46,9 +46,9 @@ class Servo_Driver {
 
     private:
 
-    string pwm_path;
+    std::string pwm_path;
     uint8_t pin_num;
-    int period_ns;
-    int dutycycle_ns;
+    float period_ns;
+    float dutycycle_ns;
 
 };

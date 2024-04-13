@@ -2,7 +2,7 @@
 #include "Servo_Driver.h"
 #endif
 // Only used for sleep
-#ifndef
+#ifndef unistd
 #include<unistd.h>  
 #endif
 
@@ -20,11 +20,7 @@ int main(int argc, char *argv[]){
 
     sleep(2);
 
-    Servo_Instance.setAngle(180);
-
-    sleep(2);
-
-    Servo_Instance.setAngle(135);
+    Servo_Instance.setAngle(45);
 
     sleep(2);
 
@@ -32,7 +28,11 @@ int main(int argc, char *argv[]){
 
     sleep(2);
 
-    Servo_Instance.setAngle(45);
+    Servo_Instance.setAngle(135);
+
+    sleep(2);
+
+    Servo_Instance.setAngle(180);
 
     sleep(2);
 
