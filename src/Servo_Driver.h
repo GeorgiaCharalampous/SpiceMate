@@ -17,12 +17,12 @@ class Servo_Driver {
     /**
      * constructor 
     **/
-    Servo_Driver(uint8_t pin_num) {};
+    Servo_Driver(uint8_t pin_num);
 
     /**
      * destructor 
     **/
-    ~Servo_Driver() {};
+    ~Servo_Driver();
 
     /**
      * set Pulse Width Modulation frequency for servo motor (Note: Must be set before angle!)
