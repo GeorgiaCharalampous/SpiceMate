@@ -2,7 +2,7 @@
 #include "Servo_Driver.h"
 #endif
 
-void Servo_Driver::Servo_Driver(uint8_t pin_num){
+Servo_Driver::Servo_Driver(uint8_t pin_num){
     
     Servo_Driver.pin_num = pin_num
 
@@ -23,7 +23,7 @@ void Servo_Driver::Servo_Driver(uint8_t pin_num){
 };
 
 
-void Servo_Driver::~Servo_Driver(){
+Servo_Driver::~Servo_Driver(){
 
     if (Servo_Driver.pin_num == (12||18)){
         FILE* fd = fopen("/sys/class/pwm/pwmchip0/unexport","w");
@@ -39,7 +39,7 @@ void Servo_Driver::~Servo_Driver(){
 };
 
 
-void Servo_Driver::setFrequency(unint_8 f_hz){
+void Servo_Driver::setFrequency(uint8_t f_hz){
     Servo_Driver.period_ns = (1/f_hz)*pow(10,9);
     FILE* fd = fopen(Servo_Driver.pwm_path+"/period","w");
     fprintf(fd,Servo_Driver.period_ns);
@@ -48,7 +48,7 @@ void Servo_Driver::setFrequency(unint_8 f_hz){
 };
 
 
-void Servo_Driver::setAngle(unint_8 angle_deg){
+void Servo_Driver::setAngle(uint8_t angle_deg){
     Servo_Driver.dutycycle_ns = ((angle_deg/180)*(Servo_Driver.period_ns/10)+500000);
     FILE* fd = fopen(Servo_Driver.pwm_path+"/duty_cycle","w");
     fprintf(fd,Servo_Driver.dutycycle_ns);
@@ -57,11 +57,11 @@ void Servo_Driver::setAngle(unint_8 angle_deg){
 };
 
 
-void Servo_Driver::startPWM() {
+void Servo_Driver::startPWM(){
     FILE* fd = fopen(Servo_Driver.pwm_path+"/enable","w");
     fprintf(pwm_path,1);
     fclose(fd);
-    printf("Servo activated at pin %u.\n",angle_deg,Servo_Driver.pin_num);
+    printf("Servo activated at pin %u.\n",Servo_Driver.pin_num);
 }
 
 
@@ -69,5 +69,5 @@ void Servo_Driver::stopPWM() {
     FILE* fd = fopen(Servo_Driver.pwm_path+"/enable","w");
     fprintf(pwm_path,0);
     fclose(fd);
-    printf("Servo deactivated at pin %u.\n",angle_deg,Servo_Driver.pin_num);
+    printf("Servo deactivated at pin %u.\n",Servo_Driver.pin_num);
 }

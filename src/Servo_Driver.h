@@ -5,7 +5,7 @@
 #include <stdio.h>
 #endif
 #ifndef string
-#include <string.h>
+#include <string>
 #endif
 
 #ifndef NDEBUG
@@ -27,12 +27,12 @@ class Servo_Driver {
     /**
      * set Pulse Width Modulation frequency for servo motor (Note: Must be set before angle!)
     **/
-    void setFrequency(uint_8 f_hz);
+    void setFrequency(uint8_t f_hz);
 
     /**
      * set rotation angle for servo motor (Min:0 degrees, Ma:180 degrees)
     **/
-    void setAngle(uint_8 angle_deg);
+    void setAngle(uint8_t angle_deg);
 
     /**
      * send Pulse Width Modulation signal to PWM pin
