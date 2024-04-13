@@ -21,12 +21,15 @@ void VIBRO4_rpi::initVibro(VIBRO4_settings settings){
         // Initialise and autocallibrate
         i2c_writeByte(VIBRO_MODE_REG,DEVICE_RDY); // decide on whether we need both
         autoCal();
-        
-        i2c_writeByte(VIBRO_REGFIELD_REG,settings.vibro_library);
 
-        i2c_writeByte(VIBRO_CONTROL3_REG,settings.init_control3_reg);
+        i2c_writeByte(VIBRO_CONTROL1_REG,93);
+
+        i2c_writeByte(VIBRO_CONTROL3_REG,80);
+
+        i2c_writeByte(VIBRO_REGFIELD_REG,2);
+
         // put on standby for low pwer mode
-        i2c_writeByte(VIBRO_MODE_REG,settings.standby); // also sets this to internal trigger
+        i2c_writeByte(VIBRO_MODE_REG,motorSettings.standby); // also sets this to internal trigger
         running = 1;
 }
 
@@ -44,9 +47,15 @@ void VIBRO4_rpi::autoCal(){
     
         i2c_writeByte(VIBRO_CONTROL1_REG,motorSettings.init_control1_reg);
 
+        i2c_writeByte(VIBRO_CONTROL3_REG,motorSettings.init_control3_reg);
+
         i2c_writeByte(VIBRO_CONTROL2_REG,motorSettings.init_control2_reg);
 
         i2c_writeByte(VIBRO_GO_REG,1);
+
+        while (i2c_readByte(VIBRO_GO_REG)==1) {
+                printf("Auto-calibration in progress.\n");
+        }
 
         if (i2c_readByte(VIBRO_STATUS_REG)==DIAG_RESULT_FAIL){
                 #ifdef DEBUG
@@ -55,6 +64,7 @@ void VIBRO4_rpi::autoCal(){
                 throw "Auto-calibration failed";
         };
         
+        printf("Auto-calibration finished.\n");
 }
 
 void VIBRO4_rpi::vibroDiagnostic(){
@@ -93,13 +103,14 @@ void VIBRO4_rpi::playHaptic_preDef(){
 void VIBRO4_rpi::playHaptic_realTime(uint8_t amplitude){
 
         if(1 == running) {
-                i2c_writeByte(VIBRO_MODE_REG,0);
+                printf("Motor started \n");
 
                 i2c_writeByte(VIBRO_MODE_REG,MODE_RTPLAYBACK);
 
                 // Write amplitude for continuous vibration
                 i2c_writeByte(VIBRO_RTP_REG,amplitude);
-                
+
+                i2c_writeByte(VIBRO_GO_REG,1);
         };
  
 }

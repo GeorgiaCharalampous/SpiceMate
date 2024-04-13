@@ -31,17 +31,17 @@ struct VIBRO4_settings{
     uint8_t rdy_internalTrig        = MODE_INT_TRIGGER;
     uint8_t rdy_externalTrig_edge   = MODE_EXT_TRIGGER_EDGE;
     uint8_t rdy_realTIME            = MODE_RTPLAYBACK;
-    uint8_t init_autocal_mode       = MODE_AUTO_CALIBRATION; // idle with internal trigger
     uint8_t init_diagnostic_mode    = MODE_DIAGNOSTIC; // idle with internal trigger
 
 
     // Auto-calibration register config section
-    uint8_t init_feedBack_reg       = (LRA_MODE|FB_BRAKE_FACTOR_3x|LOOP_GAIN_HIGH|BEMF_GAIN_LRA_20x);
-    uint8_t init_ratedVoltage_reg   = RATED_VOLTAGE_170Hz; //currently based on motor datasheet values
-    uint8_t init_odClamp_reg        = OD_CLAMP_MOTOR; //currently based on motor datasheet values
-    uint8_t init_control4_reg       = AUTO_CAL_TIME_150um;
-    uint8_t init_control1_reg       = (STARTUP_BOOST|DRIVE_TIME); //default needs to change?
-    uint8_t init_control2_reg       = (INPUT_MODE_BIDIR|BRAKE_STABILISER|SAMPLE_TIME_300um|BLANKING_TIME|IDISS_TIME);
+    uint8_t init_autocal_mode       = MODE_AUTO_CALIBRATION; // idle with internal trigger
+    uint8_t init_feedBack_reg       = (ERM_MODE|FB_BRAKE_FACTOR_3x|LOOP_GAIN_HIGH|BEMF_GAIN_LRA_20x);
+    uint8_t init_ratedVoltage_reg   = RATED_VOLTAGE_ERM; //currently based on motor datasheet values
+    uint8_t init_odClamp_reg        = OD_CLAMP_ERM; //currently based on motor datasheet values
+    uint8_t init_control4_reg       = AUTO_CAL_TIME_150um; //AUTO_CAL_TIME_150um
+    uint8_t init_control1_reg       = (STARTUP_BOOST|DRIVE_TIME); //default needs to change? //STARTUP_BOOST
+    uint8_t init_control2_reg       = (BRAKE_STABILISER|INPUT_MODE_BIDIR|SAMPLE_TIME_300um|BLANKING_TIME|IDISS_TIME); //BRAKE_STABILISER
     uint8_t init_control3_reg       = (NG_THRESH_4pcnt|ERM_OPEN_LOOP|SUPPLY_COMP_DIS|DATA_FORMAT_RTP_SNG|LRA_DRIVE_MODE_1|INPUT_MODE_PWM|LRA_OPEN_LOOP);
     uint8_t init_go                 = VIBRO_GO;
 
