@@ -26,18 +26,19 @@ int main(int argc, char *argv[]){
     printThreshold.registerCallback(&processingCallback);
     processingCallback.registerMotor(&motor_Instance);
 
+    motor_Instance.initVibro(motor_Settings);
+    sleep(3);
+    motor_Instance.setAmplitude(255);
 
     sensor_Instance.startRangeContinuous(sensor_Settings);
     printThreshold.start();
-    motor_Instance.initVibro(motor_Settings);
-    motor_Instance.setAmplitude(255);
     motor_Instance.start();
-    printf("Motor initialised \n");
-    printf("Acquisisition started \n");
+    // printf("Motor initialised \n");
+    // printf("Acquisisition started \n");
     getchar();
-    motor_Instance.~VIBRO4_rpi();
-    printThreshold.stop();
 	sensor_Instance.stop();
+    printThreshold.stop();
+    motor_Instance.stop();   
 
     sensor_Instance.unRegisterCallback();
     printThreshold.unRegisterCallback();

@@ -76,6 +76,9 @@ class VIBRO4_rpi{
     **/
     void autoCal();
 
+    /**
+     * Diagnosis
+    **/
     void vibroDiagnostic();
 
     /**
@@ -117,19 +120,16 @@ class VIBRO4_rpi{
 
     private:
     VIBRO4_settings motorSettings;
-    //void i2c_writeTwoBytes(uint8_t reg, unsigned data);
+    std::thread motorThread;
+    int running = 0;
     void i2c_writeByte(uint8_t reg, unsigned data);
-    //unsigned i2c_readTwoBytes(uint8_t reg);
     unsigned i2c_readByte(uint8_t reg);
-    //int i2c_readConversion();
-    void worker();
 
+    void worker();
     struct gpiod_chip *chipEN = nullptr;
     struct gpiod_line *pinEN = nullptr;
 
-    int fd_i2c = -1;
-    bool cal_in_process = true;
-    int running = 0;
-    std::thread motorThread;
+ 
     uint8_t vAmplitude = 0;
+    int fd_i2c = -1;
 };

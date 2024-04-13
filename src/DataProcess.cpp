@@ -5,7 +5,7 @@
 void DataProcess::start(){
 	running = true;
 	prosThread = std::thread(&DataProcess::worker,this);
-	printf("Data Processing is initiated"); 
+	printf("Data processing thread opened \n"); 
 };
 
 void DataProcess::worker(){
@@ -18,7 +18,7 @@ void DataProcess::thresholding(){
     if (!dataReceived) return;
 	dataReceived = false;
 	
-	printf("Incomming reading: %u \n",value); 
+	//printf("Incomming reading: %u \n",value); 
 	if ((value > lowerLimit)&&(value < upperLimit))
 	{
 		currentValueInRange = true;

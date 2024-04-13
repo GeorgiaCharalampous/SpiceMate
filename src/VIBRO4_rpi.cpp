@@ -10,22 +10,26 @@
 void VIBRO4_rpi::initVibro(VIBRO4_settings settings){
         
         motorSettings = settings;
+        printf("Motor initialisation begins\n");
 
         chipEN = gpiod_chip_open_by_number(settings.EN_chip);
         pinEN = gpiod_chip_get_line(chipEN,settings.EN_gpio);
-
-        gpiod_line_request_output(pinEN,"Motor",0); // open the pin to drive as output
+        
+        gpiod_line_request_output(pinEN,"Motor",0);  // open the pin to drive as output
         gpiod_line_set_value(pinEN,1); // sets EN pin to high 
 
+        //CLASHES HERE WHEN RAN TWO TIMES IN A ROW
         // Initialise and autocallibrate
         i2c_writeByte(VIBRO_MODE_REG,DEVICE_RDY); // decide on whether we need both
         autoCal();
+        printf("Command written \n");
         
         i2c_writeByte(VIBRO_REGFIELD_REG,settings.vibro_library);
 
         i2c_writeByte(VIBRO_CONTROL3_REG,settings.init_control3_reg);
         // put on standby for low pwer mode
         i2c_writeByte(VIBRO_MODE_REG,settings.standby); // also sets this to internal trigger
+
 }
 
 void VIBRO4_rpi::autoCal(){
@@ -95,14 +99,15 @@ void VIBRO4_rpi::playHaptic_preDef(){
 
 void VIBRO4_rpi::playHaptic_realTime(uint8_t amplitude){
 
-        // Wake up and set to internal trigger
-        i2c_writeByte(VIBRO_MODE_REG,MODE_RTPLAYBACK);
-
-        // Write amplitude for continuous vibration
-        i2c_writeByte(VIBRO_RTP_REG,amplitude);
+        if (1 == running) {
+                i2c_writeByte(VIBRO_MODE_REG,0);
+                i2c_writeByte(VIBRO_MODE_REG,MODE_RTPLAYBACK);
+                i2c_writeByte(VIBRO_RTP_REG,amplitude);
+        };
 }
 
 void VIBRO4_rpi::stopHaptic(){
+        i2c_writeByte(VIBRO_RTP_REG,0);
         i2c_writeByte(VIBRO_MODE_REG,STANDBY);
 }
 
@@ -116,9 +121,8 @@ void VIBRO4_rpi::stop(){
         if(!running) return;
         running = 0;
         changedState = false;
-        motorThread.join();   
-        i2c_writeByte(VIBRO_MODE_REG,STANDBY);
-        //gpiod_line_set_value(pinEN,0); // sets EN pin to low 
+        motorThread.join();  
+        gpiod_line_set_value(pinEN,0);
         int status = i2c_readByte(VIBRO_MODE_REG);
         i2c_writeByte(VIBRO_MODE_REG,status|DEV_RESET);
         gpiod_line_release(pinEN);
@@ -126,6 +130,7 @@ void VIBRO4_rpi::stop(){
         #ifdef DEBUG
 	fprintf(stderr,"Motor thread stopped.\n");
         #endif	
+
 
 }
 
