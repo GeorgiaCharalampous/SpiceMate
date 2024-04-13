@@ -22,7 +22,7 @@ Servo_Driver::Servo_Driver(uint8_t pin_num){
         fprintf(stderr,"%u is not a valid PWM pin.\n",pin_num);
         throw "Invalid PWM pin";
     }
-    printf("Servo driver initialised for PWM pin %u.\n",pin_num);
+    printf("Servo driver initialised at PWM pin %u.\n",pin_num);
 };
 
 Servo_Driver::~Servo_Driver(){
@@ -37,7 +37,7 @@ Servo_Driver::~Servo_Driver(){
         fprintf(fd,"1");
         fclose(fd);
     }
-    printf("Servo driver closed for PWM pin %u.\n",pin_num);
+    printf("Servo driver closed at PWM pin %u.\n",pin_num);
 };
 
 
@@ -53,7 +53,6 @@ void Servo_Driver::setFrequency(float f_hz){
 
 void Servo_Driver::setAngle(float angle_deg){
     dutycycle_ns = ((angle_deg/180)*(period_ns/10))+500000;
-    printf("Duty cycle is %u. /n",(int)dutycycle_ns);
     std::string path = pwm_path + "/duty_cycle";
     FILE* fd = fopen(path.c_str(),"w");
     fprintf(fd,"%u",(int)dutycycle_ns);
