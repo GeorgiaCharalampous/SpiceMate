@@ -54,21 +54,15 @@ struct VIBRO4_settings{
 class VIBRO4_rpi{
 
     public:
-
     /**
-     * Current status of the motor. 
+     * Constructor 
+     * \param amplitude the amplitude of vibration
     **/
 
-    bool activate = false;
+    VIBRO4_rpi(uint8_t amplitude);
 
     /**
-     * When true indicates a change of state must happen
-    **/
-
-    bool changedState = false;
-
-    /**
-     * destructor 
+     * Destructor 
     **/
     ~VIBRO4_rpi() {stop();}
 
@@ -95,7 +89,7 @@ class VIBRO4_rpi{
     /**
      * Play haptic sequence in real time
     **/
-    void playHaptic_realTime(uint8_t amplitude);
+    void playHaptic_realTime();
 
     /**
      * Play haptic sequence in real time
@@ -108,11 +102,17 @@ class VIBRO4_rpi{
 
     void setAmplitude(uint8_t value){vAmplitude = value;};
 
-    void setFileDescriptor(int* a)
-    {
-	    pfds_read = a;
-    };
+    /**
+    * Current status of the motor. 
+    **/
 
+    bool activate = false;
+
+    /**
+     * When true indicates a change of state must happen
+    **/
+
+    bool changedState = false;
 
 
     private:
@@ -129,5 +129,4 @@ class VIBRO4_rpi{
  
     uint8_t vAmplitude = 0;
     int fd_i2c = -1;
-    int* pfds_read;
 };

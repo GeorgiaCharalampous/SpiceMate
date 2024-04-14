@@ -7,6 +7,10 @@
 #include <unistd.h>
 #include <sys/ioctl.h>
 
+VIBRO4_rpi::VIBRO4_rpi(uint8_t amplitude){
+        vAmplitude = amplitude;
+}
+
 void VIBRO4_rpi::initVibro(VIBRO4_settings settings){
         
         motorSettings = settings;
@@ -30,13 +34,6 @@ void VIBRO4_rpi::initVibro(VIBRO4_settings settings){
         i2c_writeByte(VIBRO_REGFIELD_REG,2);
         // put on standby for low pwer mode
         i2c_writeByte(VIBRO_MODE_REG,settings.standby); // also sets this to internal trigger
-
-        #ifdef DEBUG
-	fprintf(stderr,"Motor thread started.\n");
-        #endif	
-        running = 1;
-        motorThread = std::thread(&VIBRO4_rpi::worker,this);
-
 }
 
 void VIBRO4_rpi::autoCal(){
@@ -77,7 +74,7 @@ void VIBRO4_rpi::vibroDiagnostic(){
 }
 
 
-void VIBRO4_rpi::playHaptic_realTime(uint8_t amplitude){
+void VIBRO4_rpi::playHaptic_realTime(){
 
         if(1 == running) {
                 i2c_writeByte(VIBRO_MODE_REG,0);
@@ -86,7 +83,7 @@ void VIBRO4_rpi::playHaptic_realTime(uint8_t amplitude){
                 i2c_writeByte(VIBRO_MODE_REG,MODE_RTPLAYBACK);
 
                 // Write amplitude for continuous vibration
-                i2c_writeByte(VIBRO_RTP_REG,amplitude);
+                i2c_writeByte(VIBRO_RTP_REG,vAmplitude);
 
 
                 i2c_writeByte(VIBRO_GO_REG,1);
@@ -115,21 +112,21 @@ void VIBRO4_rpi::stop(){
 
 }
 
-void VIBRO4_rpi::worker(){
-        while (1 == running){
-                char dataReady;
-		read(*pfds_read, &dataReady, sizeof(char));
-                if(changedState){
-                        changedState = false;
-                        if(activate){
-                                playHaptic_realTime(vAmplitude);
-                        }
-                        else {
-                                stopHaptic();
-                        };
-                };
-        };
-}
+// void VIBRO4_rpi::worker(){
+//         while (1 == running){
+//                 char dataReady;
+// 		read(*pfds_read, &dataReady, sizeof(char));
+//                 if(changedState){
+//                         changedState = false;
+//                         if(activate){
+//                                 playHaptic_realTime(vAmplitude);
+//                         }
+//                         else {
+//                                 stopHaptic();
+//                         };
+//                 };
+//         };
+// }
 // i2c read and write protocols
 void VIBRO4_rpi::i2c_writeByte(uint8_t reg, unsigned data)
 {
