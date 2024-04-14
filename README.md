@@ -1,5 +1,5 @@
 # SpiceMate Promotion
-# Social Media Channels:
+Social Media Channels:
 * [Instagram](https://www.instagram.com/spicemate.pi/)
 * [Facebook](https://www.facebook.com/profile.php?id=61555942478445)
 * [TikTok](https://www.tiktok.com/@spicemate.dispenser?is_from_webapp=1&sender_device=pc)
