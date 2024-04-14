@@ -117,6 +117,12 @@ class VIBRO4_rpi{
 
     void setAmplitude(uint8_t value){vAmplitude = value;};
 
+    void setFileDescriptor(int* a)
+    {
+	    pfds_read = a;
+    };
+
+
 
     private:
     VIBRO4_settings motorSettings;
@@ -132,4 +138,5 @@ class VIBRO4_rpi{
  
     uint8_t vAmplitude = 0;
     int fd_i2c = -1;
+    int* pfds_read;
 };

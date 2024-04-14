@@ -21,6 +21,11 @@ class DPcallbackChild : public DPcallback{
         vmotor = motor;
     }
 
+    void setFileDescriptor (int* a)
+	{
+		pfds_write = a;
+	}
+
     private:
 
     /**
@@ -28,4 +33,6 @@ class DPcallbackChild : public DPcallback{
 	 * For setting states.
 	**/
     VIBRO4_rpi* vmotor = NULL;
+
+    int* pfds_write;
 };

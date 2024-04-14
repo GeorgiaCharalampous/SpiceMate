@@ -136,6 +136,8 @@ void VIBRO4_rpi::stop(){
 
 void VIBRO4_rpi::worker(){
         while (1 == running){
+                uint8_t dataReady;
+		const long int s = read(*pfds_read, &dataReady, sizeof(uint8_t));
                 if(changedState){
                         changedState = false;
                         if(activate){

@@ -7,6 +7,7 @@
         "tuple": "cpp",
         "type_traits": "cpp",
         "utility": "cpp",
-        "compare": "cpp"
+        "compare": "cpp",
+        "*.tcc": "cpp"
     }
 }
