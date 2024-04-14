@@ -1,11 +1,10 @@
-#ifndef VIBRO4_rpi
-#include "VIBRO4_rpi.h"
-#endif
-
 #include <bitset>
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
+#ifndef VIBRO4_rpi
+#include "VIBRO4_rpi.h"
+#endif
 
 
 void VIBRO4_rpi::initVibro(VIBRO4_settings settings){

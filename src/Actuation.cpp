@@ -1,9 +1,10 @@
+#ifndef Actuation
 #include<Actuation.h>
+#endif
 
-Actuation::Actuation(VIBRO4_rpi* VibroMotor,Servo_Driver* ServoMotor,int* FD){
+Actuation::Actuation(VIBRO4_rpi* VibroMotor,Servo_Driver* ServoMotor){
     pvMotor = VibroMotor;
     psMotor = ServoMotor;
-    pfds_read = FD;
 
     pvMotor->setAmplitude(100);
     psMotor->setFrequency(50);
@@ -40,8 +41,6 @@ Actuation::~Actuation(){
     actuationThread.join();
     psMotor->setAngle(0);
     psMotor->stopPWM();
-    pvMotor->~VIBRO4_rpi();
-    psMotor->~Servo_Driver();
     #ifdef DEBUG
 	fprintf(stderr,"Motor thread stopped.\n");
     #endif	

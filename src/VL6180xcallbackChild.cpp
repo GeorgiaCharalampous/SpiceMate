@@ -1,5 +1,7 @@
 #include <stdio.h>
+#ifndef VL6180xcallbackChild
 #include <VL6180xcallbackChild.h>
+#endif
 
 void VL6180xcallbackChild::hasSample(uint8_t sample){
 	if(dp == nullptr){

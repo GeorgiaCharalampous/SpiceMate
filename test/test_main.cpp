@@ -1,10 +1,6 @@
 #ifndef VL6180x_rpi
 #include "VL6180x_rpi.h"
 #endif
-// #ifndef VIBRO4_rpi
-// #include "VIBRO4_rpi.h"
-// #endif
-
 
 
 int main(int argc, char *argv[]){
@@ -30,11 +26,12 @@ int main(int argc, char *argv[]){
     VL6180xcallbackChild passCallback;
     DPcallbackChild processingCallback;
     DataProcess printThreshold;
-    Actuation actuator(&vibro_Instance,&servo_Instance,pfds_readM);
+    Actuation actuator(&vibro_Instance,&servo_Instance);
 
     passCallback.setFileDescriptor(pfds_write);
     printThreshold.setFileDescriptor(pfds_read);
     processingCallback.setFileDescriptor(pfds_writeM);
+    actuator.setFileDescriptor(pfds_readM);
 
     VL6180x_settings sensor_Settings;
     sensor_Instance.registerCallback(&passCallback);

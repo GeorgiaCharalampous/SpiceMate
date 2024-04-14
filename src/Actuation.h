@@ -18,7 +18,7 @@ class Actuation{
      * \param  vMotor a pointer to a vibrational motor
      * \param sMotor a pointer to a servo motor
     **/
-   Actuation(VIBRO4_rpi* VibroMotor,Servo_Driver* ServoMotor,int* FD);
+   Actuation(VIBRO4_rpi* VibroMotor,Servo_Driver* ServoMotor);
 
    /**
     * Destructor
@@ -27,6 +27,11 @@ class Actuation{
     /**
     * Current status of the motor. 
     **/
+
+   void setFileDescriptor(int* a){
+        pfds_read = a;
+    };
+
    bool activate = false;
 
    bool dataReceived = false;
@@ -38,7 +43,7 @@ class Actuation{
    int running = 0;
    std::thread actuationThread;
    void worker();
-   int* pfds_read;
+   int* pfds_read = nullptr;
 
    
 };
