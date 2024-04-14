@@ -31,6 +31,7 @@ void VIBRO4_rpi::initVibro(VIBRO4_settings settings){
         i2c_writeByte(VIBRO_REGFIELD_REG,2);
         // put on standby for low pwer mode
         i2c_writeByte(VIBRO_MODE_REG,settings.standby); // also sets this to internal trigger
+        running = 1;
 }
 
 void VIBRO4_rpi::autoCal(){

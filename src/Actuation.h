@@ -29,6 +29,8 @@ class Actuation{
     **/
    bool activate = false;
 
+   bool dataReceived = false;
+
    private:
    VIBRO4_rpi* pvMotor;
    Servo_Driver* psMotor;

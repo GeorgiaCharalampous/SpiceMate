@@ -7,5 +7,6 @@ void DPcallbackChild::dataProcessed(bool status){
 	};
     
     pactuator->activate = status;
+    pactuator->dataReceived = true;
     write(*pfds_write,"1\n",1);
 };
