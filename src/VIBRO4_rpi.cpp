@@ -17,7 +17,7 @@ void VIBRO4_rpi::initVibro(VIBRO4_settings settings){
         
         gpiod_line_request_output(pinEN,"Motor",0);  // open the pin to drive as output
         gpiod_line_set_value(pinEN,1); // sets EN pin to high 
-
+        
         //CLASHES HERE WHEN RAN TWO TIMES IN A ROW
         // Initialise and autocallibrate
         i2c_writeByte(VIBRO_MODE_REG,DEVICE_RDY); // decide on whether we need both
@@ -48,8 +48,8 @@ void VIBRO4_rpi::autoCal(){
 
         i2c_writeByte(VIBRO_GO_REG,1);
 
+        //Wait for hardware calibration to complete
         while (i2c_readByte(VIBRO_GO_REG)==1) {
-                printf("Auto-calibration in progress.\n");
         }
 
         if (i2c_readByte(VIBRO_STATUS_REG)==DIAG_RESULT_FAIL){
@@ -96,19 +96,17 @@ void VIBRO4_rpi::playHaptic_realTime(uint8_t amplitude){
 
 void VIBRO4_rpi::stopHaptic(){
         i2c_writeByte(VIBRO_RTP_REG,0);
-        i2c_writeByte(VIBRO_MODE_REG,STANDBY);
+        i2c_writeByte(VIBRO_GO_REG,0);
 }
  
 void VIBRO4_rpi::stop(){
         if(!running) return;
+        i2c_writeByte(VIBRO_GO_REG,0);
         running = 0;
         changedState = false;
         motorThread.join();
         gpiod_line_set_value(pinEN,0);
-        int status = i2c_readByte(VIBRO_MODE_REG);
-        i2c_writeByte(VIBRO_MODE_REG,status|DEV_RESET);
         gpiod_line_release(pinEN);
- 
         gpiod_chip_close(chipEN);
         #ifdef DEBUG
 	fprintf(stderr,"Motor thread stopped.\n");
@@ -164,7 +162,7 @@ void VIBRO4_rpi::i2c_writeByte(uint8_t reg, unsigned data)
         uint8_t message[2];
         message[0] = reg & 0xFF; // MSB of register address
         message[1] = data & 0xFF; 
-	long int r = write(fd_i2c, message ,2);
+	long int r = write(fd_i2c, message,2);
         if (r < 0) {
                 #ifdef DEBUG
                 fprintf(stderr,"Could not write byte to %02x. ret=%ld.\n",motorSettings.address,r);
