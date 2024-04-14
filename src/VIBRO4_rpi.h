@@ -93,11 +93,6 @@ class VIBRO4_rpi{
     void stop();
 
     /**
-     * Play prefedined haptic sequence
-    **/
-    void playHaptic_preDef();
-
-    /**
      * Play haptic sequence in real time
     **/
     void playHaptic_realTime(uint8_t amplitude);

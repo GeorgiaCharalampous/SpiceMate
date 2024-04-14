@@ -43,16 +43,20 @@ int main(int argc, char *argv[]){
     printThreshold.registerCallback(&processingCallback);
     processingCallback.registerMotor(&motor_Instance);
 
-    motor_Instance.initVibro(motor_Settings);
-    motor_Instance.setAmplitude(50);
-
     sensor_Instance.startRangeContinuous(sensor_Settings);
     printThreshold.start();
+    motor_Instance.initVibro(motor_Settings);
+    motor_Instance.setAmplitude(50);
     
     getchar();
     sensor_Instance.stop();
+    close(*pfds_read);
+    close(*pfds_write);
     printThreshold.stop();
-    motor_Instance.stop();   
+    close(*pfds_readM);
+    close(*pfds_writeM);
+    motor_Instance.stop();
+
 
     sensor_Instance.unRegisterCallback();
     printThreshold.unRegisterCallback();

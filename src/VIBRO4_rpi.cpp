@@ -31,6 +31,9 @@ void VIBRO4_rpi::initVibro(VIBRO4_settings settings){
         // put on standby for low pwer mode
         i2c_writeByte(VIBRO_MODE_REG,settings.standby); // also sets this to internal trigger
 
+        #ifdef DEBUG
+	fprintf(stderr,"Motor thread started.\n");
+        #endif	
         running = 1;
         motorThread = std::thread(&VIBRO4_rpi::worker,this);
 
@@ -73,25 +76,6 @@ void VIBRO4_rpi::vibroDiagnostic(){
         };        
 }
 
-void VIBRO4_rpi::playHaptic_preDef(){
-        
-        // Wake up and set to internal trigger
-        i2c_writeByte(VIBRO_MODE_REG,MODE_INT_TRIGGER); 
-        // wake up and set to external trigger
-//        i2c_writeByte(VIBRO_MODE_REG,MODE_EXT_TRIGGER_EDGE);
-
-        // Haptic sequence for internal trigger
-        i2c_writeByte(VIBRO_WAV_SEQ_REG1,0x01);
-        i2c_writeByte(VIBRO_WAV_SEQ_REG2,0xC);
-        i2c_writeByte(VIBRO_WAV_SEQ_REG3,0xE);
-        i2c_writeByte(VIBRO_WAV_SEQ_REG4,0x00);
-        i2c_writeByte(VIBRO_WAV_SEQ_REG5,0x00);
-        i2c_writeByte(VIBRO_WAV_SEQ_REG6,0x00);
-        i2c_writeByte(VIBRO_WAV_SEQ_REG7,0x00);
-        i2c_writeByte(VIBRO_WAV_SEQ_REG8,0x00);
-
-        i2c_writeByte(VIBRO_GO_REG,1);
-}
 
 void VIBRO4_rpi::playHaptic_realTime(uint8_t amplitude){
 
@@ -119,11 +103,12 @@ void VIBRO4_rpi::stop(){
         if(!running) return;
         running = 0;
         changedState = false;
-        motorThread.join();  
+        motorThread.join();
         gpiod_line_set_value(pinEN,0);
         int status = i2c_readByte(VIBRO_MODE_REG);
         i2c_writeByte(VIBRO_MODE_REG,status|DEV_RESET);
         gpiod_line_release(pinEN);
+ 
         gpiod_chip_close(chipEN);
         #ifdef DEBUG
 	fprintf(stderr,"Motor thread stopped.\n");
@@ -151,29 +136,29 @@ void VIBRO4_rpi::worker(){
 void VIBRO4_rpi::i2c_writeByte(uint8_t reg, unsigned data)
 {
         if (data > 0xFF) {
-        #ifdef DEBUG
-            fprintf(stderr,"Data %.2X is larger than 1 byte.\n",data);
-        #endif
-            throw "Data larger than 1 byte.";
+                #ifdef DEBUG
+                fprintf(stderr,"Data %.2X is larger than 1 byte.\n",data);
+                #endif
+                throw "Data larger than 1 byte.";
         }
             
         char gpioFilename[20];
 	snprintf(gpioFilename, 19, "/dev/i2c-%d", motorSettings.default_i2c_bus);
 	fd_i2c = open(gpioFilename, O_RDWR);
 	if (fd_i2c < 0) {
-	    char i2copen[] = "Could not open I2C.\n";
-        #ifdef DEBUG
-	    fprintf(stderr,i2copen);
-        #endif
-	    throw i2copen;
+                char i2copen[] = "Could not open I2C.\n";
+                #ifdef DEBUG
+                fprintf(stderr,i2copen);
+                #endif
+                throw i2copen;
 	}
 	
 	if (ioctl(fd_i2c, I2C_SLAVE, motorSettings.address) < 0) {
-	    char i2cslave[] = "Could not access I2C adress.\n";
-        #ifdef DEBUG
-	    fprintf(stderr,i2cslave);
-        #endif
-	    throw i2cslave;
+                char i2cslave[] = "Could not access I2C adress.\n";
+                #ifdef DEBUG
+                fprintf(stderr,i2cslave);
+                #endif
+                throw i2cslave;
         }
 	
         uint8_t message[2];
@@ -181,9 +166,9 @@ void VIBRO4_rpi::i2c_writeByte(uint8_t reg, unsigned data)
         message[1] = data & 0xFF; 
 	long int r = write(fd_i2c, message ,2);
         if (r < 0) {
-        #ifdef DEBUG
+                #ifdef DEBUG
                 fprintf(stderr,"Could not write byte to %02x. ret=%ld.\n",motorSettings.address,r);
-        #endif
+                #endif
                 throw "Could not write to i2c.";
         }
 
@@ -195,19 +180,19 @@ unsigned VIBRO4_rpi::i2c_readByte(uint8_t reg){
 	snprintf(gpioFilename, 19, "/dev/i2c-%d", motorSettings.default_i2c_bus);
 	fd_i2c = open(gpioFilename, O_RDWR);
 	if (fd_i2c < 0) {
-	    char i2copen[] = "Could not open I2C.\n";
-        #ifdef DEBUG
-	    fprintf(stderr,i2copen);
-        #endif
-	    throw i2copen;
+                char i2copen[] = "Could not open I2C.\n";
+                #ifdef DEBUG
+                fprintf(stderr,i2copen);
+                #endif
+                throw i2copen;
 	}
 	
 	if (ioctl(fd_i2c, I2C_SLAVE, motorSettings.address) < 0) {
-	    char i2cslave[] = "Could not access I2C adress.\n";
-        #ifdef DEBUG
-	    fprintf(stderr,i2cslave);
-        #endif
-	    throw i2cslave;
+                char i2cslave[] = "Could not access I2C adress.\n";
+                #ifdef DEBUG
+                fprintf(stderr,i2cslave);
+                #endif
+                throw i2cslave;
 	}
 
 	uint8_t reg_address[1];

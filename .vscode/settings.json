@@ -8,6 +8,7 @@
         "type_traits": "cpp",
         "utility": "cpp",
         "compare": "cpp",
-        "*.tcc": "cpp"
+        "*.tcc": "cpp",
+        "thread": "cpp"
     }
 }
