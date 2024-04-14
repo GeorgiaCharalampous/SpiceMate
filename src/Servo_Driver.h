@@ -16,6 +16,7 @@ class Servo_Driver {
     public:
     /**
      * constructor 
+     * \param pin_num an unsigned integer of the PWM pin on the RPI
     **/
     Servo_Driver(uint8_t pin_num);
 
@@ -26,11 +27,13 @@ class Servo_Driver {
 
     /**
      * set Pulse Width Modulation frequency for servo motor (Note: Must be set before angle!)
+     * \param f_hz a float with the frequency in hz
     **/
     void setFrequency(float f_hz);
 
     /**
      * set rotation angle for servo motor (Min:0 degrees, Ma:180 degrees)
+     * \param angle_deg a float with the angle in degrees
     **/
     void setAngle(float angle_deg);
 
