@@ -43,7 +43,7 @@ int main(int argc, char *argv[]){
     printThreshold.registerCallback(&processingCallback);
     processingCallback.registerMotor(&motor_Instance);
 
-    //motor_Instance.initVibro(motor_Settings);
+    motor_Instance.initVibro(motor_Settings);
     sleep(3);
     motor_Instance.setAmplitude(255);
 
