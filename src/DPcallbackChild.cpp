@@ -2,11 +2,11 @@
 #include <DPcallbackChild.h>
 #endif
 void DPcallbackChild::dataProcessed(bool status){
-    if(vmotor == nullptr){
-		throw "Null pointer to motor class";
+    if(pactuator == nullptr){
+		throw "Null pointer to actuating class";
 	};
     
-    vmotor->activate = status;
-    vmotor->changedState = true;
+    pactuator->activate = status;
+    pactuator->dataReceived = true;
     write(*pfds_write,"1\n",1);
 };

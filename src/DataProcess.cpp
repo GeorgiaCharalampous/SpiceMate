@@ -38,7 +38,7 @@ void DataProcess::thresholding(){
 		else {
 			counterBelow = 0;
 		};
-		if(10 == counterBelow){
+		if(5 == counterBelow){
 			printf("Stop Dispensing! \n");
 			bool status = false;
 			processCallback->dataProcessed(status);
@@ -55,7 +55,7 @@ void DataProcess::thresholding(){
 		}
 		else {counterAbove = 0;};
 
-		if(10 == counterAbove){
+		if(30 == counterAbove){
 			printf("Start Dispensing! \n");
 			bool status = true;
 			processCallback->dataProcessed(status);

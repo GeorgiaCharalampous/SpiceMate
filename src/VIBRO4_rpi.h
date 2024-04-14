@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-#include <thread>
 #include <linux/i2c-dev.h>
 #include <gpiod.h>
 
@@ -56,19 +55,7 @@ class VIBRO4_rpi{
     public:
 
     /**
-     * Current status of the motor. 
-    **/
-
-    bool activate = false;
-
-    /**
-     * When true indicates a change of state must happen
-    **/
-
-    bool changedState = false;
-
-    /**
-     * destructor 
+     * Destructor 
     **/
     ~VIBRO4_rpi() {stop();}
 
@@ -95,7 +82,7 @@ class VIBRO4_rpi{
     /**
      * Play haptic sequence in real time
     **/
-    void playHaptic_realTime(uint8_t amplitude);
+    void playHaptic_realTime();
 
     /**
      * Play haptic sequence in real time
@@ -108,26 +95,16 @@ class VIBRO4_rpi{
 
     void setAmplitude(uint8_t value){vAmplitude = value;};
 
-    void setFileDescriptor(int* a)
-    {
-	    pfds_read = a;
-    };
-
-
 
     private:
     VIBRO4_settings motorSettings;
-    std::thread motorThread;
     int running = 0;
     void i2c_writeByte(uint8_t reg, unsigned data);
     unsigned i2c_readByte(uint8_t reg);
 
-    void worker();
     struct gpiod_chip *chipEN = nullptr;
     struct gpiod_line *pinEN = nullptr;
-
  
     uint8_t vAmplitude = 0;
     int fd_i2c = -1;
-    int* pfds_read;
 };

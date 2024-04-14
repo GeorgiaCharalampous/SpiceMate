@@ -1,8 +1,8 @@
 #ifndef  DPcallback
 #include <DPcallback.h>
 #endif
-#ifndef VIBRO4_rpi
-#include <VIBRO4_rpi.h>
+#ifndef Actuation
+#include <Actuation.h>
 #endif
 
 class DPcallbackChild : public DPcallback{
@@ -17,10 +17,13 @@ class DPcallbackChild : public DPcallback{
     /**
 	 * Registers the pointer to the output device (motor)
 	**/
-    void registerMotor(VIBRO4_rpi* motor){
-        vmotor = motor;
+    void registerActuation(Actuation* Actuator){
+        pactuator = Actuator;
     }
 
+    /**
+     * Setter to the writing file descriptor 
+    **/
     void setFileDescriptor (int* a)
 	{
 		pfds_write = a;
@@ -29,10 +32,14 @@ class DPcallbackChild : public DPcallback{
     private:
 
     /**
-	 * Pointer to output device.
-	 * For setting states.
+	 * Pointer to actuation class.
+	 * For setting states and initiating action.
 	**/
-    VIBRO4_rpi* vmotor = NULL;
+    Actuation* pactuator = nullptr;
 
-    int* pfds_write;
+    /**
+     * pointer to writing file descriptor of a pipe 
+    **/
+
+    int* pfds_write = nullptr;
 };

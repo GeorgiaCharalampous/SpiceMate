@@ -1,10 +1,6 @@
 #ifndef VL6180x_rpi
 #include "VL6180x_rpi.h"
 #endif
-// #ifndef VIBRO4_rpi
-// #include "VIBRO4_rpi.h"
-// #endif
-
 
 
 int main(int argc, char *argv[]){
@@ -20,46 +16,44 @@ int main(int argc, char *argv[]){
     int* pfds_readM = &fdsM[0];
     int* pfds_writeM = &fdsM[1];
 
-
+    VIBRO4_settings vmotor_Settings;
     VL6180x_rpi sensor_Instance;
-    VIBRO4_rpi motor_Instance;
+    VIBRO4_rpi vibro_Instance;
+    Servo_Driver servo_Instance(18);
+
+    vibro_Instance.initVibro(vmotor_Settings);
+
     VL6180xcallbackChild passCallback;
     DPcallbackChild processingCallback;
     DataProcess printThreshold;
+    Actuation actuator(&vibro_Instance,&servo_Instance);
 
     passCallback.setFileDescriptor(pfds_write);
     printThreshold.setFileDescriptor(pfds_read);
     processingCallback.setFileDescriptor(pfds_writeM);
-    motor_Instance.setFileDescriptor(pfds_readM);
-
-    int Range_Intermeasurement_period = 100; //ms
-    int Range_Max_convergence_time = 15; //ms
+    actuator.setFileDescriptor(pfds_readM);
 
     VL6180x_settings sensor_Settings;
-    VIBRO4_settings motor_Settings;
-    //printf("Range threshold low is %u . \n",sensor_Settings.sysrange_thresh_low);
     sensor_Instance.registerCallback(&passCallback);
     passCallback.registerDP(&printThreshold);
     printThreshold.registerCallback(&processingCallback);
-    processingCallback.registerMotor(&motor_Instance);
+    processingCallback.registerActuation(&actuator);
 
     sensor_Instance.startRangeContinuous(sensor_Settings);
     printThreshold.start();
-    motor_Instance.initVibro(motor_Settings);
-    motor_Instance.setAmplitude(50);
-    
     getchar();
+
     sensor_Instance.stop();
     close(*pfds_read);
     close(*pfds_write);
     printThreshold.stop();
     close(*pfds_readM);
     close(*pfds_writeM);
-    motor_Instance.stop();
-
+    actuator.~Actuation();
 
     sensor_Instance.unRegisterCallback();
     printThreshold.unRegisterCallback();
+
 	return 0;
     
 }
