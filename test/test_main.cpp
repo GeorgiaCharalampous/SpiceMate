@@ -45,7 +45,7 @@ int main(int argc, char *argv[]){
 
     motor_Instance.initVibro(motor_Settings);
     sleep(3);
-    motor_Instance.setAmplitude(255);
+    motor_Instance.setAmplitude(50);
 
     sensor_Instance.startRangeContinuous(sensor_Settings);
     printThreshold.start();

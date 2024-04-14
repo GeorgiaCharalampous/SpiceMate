@@ -70,12 +70,14 @@ enum{
 enum{
     RATED_VOLTAGE_DEFAULT       = 0b00111111,
     RATED_VOLTAGE_170Hz         = 105,
+    RATED_VOLTAGE_ERM           = 0x90,
 };
 
 #define VIBRO_OD_CLAMP_REG      0x17
 enum{
     OD_CLAMP_DEFAULT            = 0b10001001,// 3V
-    OD_CLAMP_MOTOR              = 0b01111111 // 2.8V
+    OD_CLAMP_MOTOR              = 0b01111111, // 2.8V
+    OD_CLAMP_ERM                = 0xA4,
 };
 #define VIBRO_A_CAL_COMP_REG    0x18
 enum{
