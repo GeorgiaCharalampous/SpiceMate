@@ -47,6 +47,15 @@ class DataProcess {
      * Unregisters the callback
     **/
     void unRegisterCallback();
+
+    /**
+     *  ????
+    **/
+    void setFileDescriptor(int* a)
+    {
+	    pfds_read = a;
+    };
+
     
     private:
     /**
@@ -115,4 +124,5 @@ class DataProcess {
 
     DPcallback* processCallback = nullptr;
 
+    int* pfds_read;
 };

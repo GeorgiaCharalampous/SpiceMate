@@ -24,6 +24,11 @@ class VL6180xcallbackChild : public VL6180xcallback {
 		dp = object;
 	};
 
+	void setFileDescriptor (int* a)
+	{
+		pfds_write = a;
+	}
+
 	private:
 	/**
 	 * Pointer to data processing object.
@@ -31,4 +36,7 @@ class VL6180xcallbackChild : public VL6180xcallback {
 	 * in the process chain.
 	**/
 	DataProcess* dp = NULL;
+
+	int* pfds_write;
+
 };

@@ -8,4 +8,5 @@ void VL6180xcallbackChild::hasSample(uint8_t sample){
 	//Passing the reading to the processing class
 	dp->value = sample;
 	dp->dataReceived = true;
+	write(*pfds_write,"1",1);
 };
