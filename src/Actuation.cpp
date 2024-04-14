@@ -20,6 +20,7 @@ void Actuation::worker(){
         char dataReady;
         read(*pfds_read, &dataReady, sizeof(char));
         if(dataReceived){
+            dataReceived = false;
             if(activate){
                 psMotor->setAngle(180);
                 psMotor->startPWM();
@@ -30,7 +31,6 @@ void Actuation::worker(){
                 psMotor->setAngle(0);
             }
         };
-       dataReceived = false;
     }
 };
 

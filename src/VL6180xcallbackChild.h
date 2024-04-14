@@ -35,7 +35,7 @@ class VL6180xcallbackChild : public VL6180xcallback {
 	 * For passing to the next unit (class)
 	 * in the process chain.
 	**/
-	DataProcess* dp = NULL;
+	DataProcess* dp = nullptr;
 
 	int* pfds_write;
 

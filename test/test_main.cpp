@@ -45,6 +45,7 @@ int main(int argc, char *argv[]){
     sensor_Instance.startRangeContinuous(sensor_Settings);
     printThreshold.start();
     getchar();
+
     sensor_Instance.stop();
     close(*pfds_read);
     close(*pfds_write);
@@ -53,9 +54,9 @@ int main(int argc, char *argv[]){
     close(*pfds_writeM);
     actuator.~Actuation();
 
-
     sensor_Instance.unRegisterCallback();
     printThreshold.unRegisterCallback();
+
 	return 0;
     
 }
