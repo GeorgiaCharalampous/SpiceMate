@@ -7,9 +7,6 @@
 #include <unistd.h>
 #include <sys/ioctl.h>
 
-VIBRO4_rpi::VIBRO4_rpi(uint8_t amplitude){
-        vAmplitude = amplitude;
-}
 
 void VIBRO4_rpi::initVibro(VIBRO4_settings settings){
         
@@ -98,35 +95,13 @@ void VIBRO4_rpi::stopHaptic(){
  
 void VIBRO4_rpi::stop(){
         if(!running) return;
-        i2c_writeByte(VIBRO_GO_REG,0);
         running = 0;
-        changedState = false;
-        motorThread.join();
+        i2c_writeByte(VIBRO_GO_REG,0);
         gpiod_line_set_value(pinEN,0);
         gpiod_line_release(pinEN);
         gpiod_chip_close(chipEN);
-        #ifdef DEBUG
-	fprintf(stderr,"Motor thread stopped.\n");
-        #endif	
-
-
 }
 
-// void VIBRO4_rpi::worker(){
-//         while (1 == running){
-//                 char dataReady;
-// 		read(*pfds_read, &dataReady, sizeof(char));
-//                 if(changedState){
-//                         changedState = false;
-//                         if(activate){
-//                                 playHaptic_realTime(vAmplitude);
-//                         }
-//                         else {
-//                                 stopHaptic();
-//                         };
-//                 };
-//         };
-// }
 // i2c read and write protocols
 void VIBRO4_rpi::i2c_writeByte(uint8_t reg, unsigned data)
 {

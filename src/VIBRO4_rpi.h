@@ -54,12 +54,6 @@ struct VIBRO4_settings{
 class VIBRO4_rpi{
 
     public:
-    /**
-     * Constructor 
-     * \param amplitude the amplitude of vibration
-    **/
-
-    VIBRO4_rpi(uint8_t amplitude);
 
     /**
      * Destructor 
@@ -102,18 +96,6 @@ class VIBRO4_rpi{
 
     void setAmplitude(uint8_t value){vAmplitude = value;};
 
-    /**
-    * Current status of the motor. 
-    **/
-
-    bool activate = false;
-
-    /**
-     * When true indicates a change of state must happen
-    **/
-
-    bool changedState = false;
-
 
     private:
     VIBRO4_settings motorSettings;
@@ -121,11 +103,9 @@ class VIBRO4_rpi{
     int running = 0;
     void i2c_writeByte(uint8_t reg, unsigned data);
     unsigned i2c_readByte(uint8_t reg);
-
-    void worker();
+    
     struct gpiod_chip *chipEN = nullptr;
     struct gpiod_line *pinEN = nullptr;
-
  
     uint8_t vAmplitude = 0;
     int fd_i2c = -1;

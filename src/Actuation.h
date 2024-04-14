@@ -18,7 +18,18 @@ class Actuation{
      * \param  vMotor a pointer to a vibrational motor
      * \param sMotor a pointer to a servo motor
     **/
-   Actuation(VIBRO4_rpi* VibroMotor,Servo_Driver* ServoMotor,int* FD); 
+   Actuation(VIBRO4_rpi* VibroMotor,Servo_Driver* ServoMotor,int* FD);
+
+   /**
+    * 
+    **/ 
+
+   void stop();
+
+    /**
+    * Current status of the motor. 
+    **/
+   bool activate = false;
 
    private:
    VIBRO4_rpi* pvMotor;
@@ -28,6 +39,7 @@ class Actuation{
    std::thread actuationThread;
    void worker();
    int* pfds_read;
+
 
    
 };
