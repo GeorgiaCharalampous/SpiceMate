@@ -1,9 +1,5 @@
 # SpiceMate Promotion
-
-The folders contain SpiceMate's logos and media posts. 
-
 # Social Media Channels:
-This content and more can also be found on our socials:
 * [Instagram](https://www.instagram.com/spicemate.pi/)
 * [Facebook](https://www.facebook.com/profile.php?id=61555942478445)
 * [TikTok](https://www.tiktok.com/@spicemate.dispenser?is_from_webapp=1&sender_device=pc)
