@@ -21,6 +21,9 @@ class DPcallbackChild : public DPcallback{
         pactuator = Actuator;
     }
 
+    /**
+     * Setter to the writing file descriptor 
+    **/
     void setFileDescriptor (int* a)
 	{
 		pfds_write = a;
@@ -29,10 +32,14 @@ class DPcallbackChild : public DPcallback{
     private:
 
     /**
-	 * Pointer to output device.
-	 * For setting states.
+	 * Pointer to actuation class.
+	 * For setting states and initiating action.
 	**/
-    Actuation* pactuator = NULL;
+    Actuation* pactuator = nullptr;
 
-    int* pfds_write;
+    /**
+     * pointer to writing file descriptor of a pipe 
+    **/
+
+    int* pfds_write = nullptr;
 };

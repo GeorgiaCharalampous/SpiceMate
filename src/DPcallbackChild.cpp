@@ -3,7 +3,7 @@
 #endif
 void DPcallbackChild::dataProcessed(bool status){
     if(pactuator == nullptr){
-		throw "Null pointer to motor class";
+		throw "Null pointer to actuating class";
 	};
     
     pactuator->activate = status;
