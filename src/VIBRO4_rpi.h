@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-#include <thread>
 #include <linux/i2c-dev.h>
 #include <gpiod.h>
 
@@ -99,11 +98,10 @@ class VIBRO4_rpi{
 
     private:
     VIBRO4_settings motorSettings;
-    std::thread motorThread;
     int running = 0;
     void i2c_writeByte(uint8_t reg, unsigned data);
     unsigned i2c_readByte(uint8_t reg);
-    
+
     struct gpiod_chip *chipEN = nullptr;
     struct gpiod_line *pinEN = nullptr;
  

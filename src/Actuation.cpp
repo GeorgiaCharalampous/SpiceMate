@@ -30,14 +30,13 @@ void Actuation::worker(){
     }
 };
 
-void Actuation::stop(){
+Actuation::~Actuation(){
     if(!running) return;
     running = 0;
     actuationThread.join();
-    pvMotor->stop();
+    pvMotor->~VIBRO4_rpi();
     psMotor->~Servo_Driver();
     #ifdef DEBUG
 	fprintf(stderr,"Motor thread stopped.\n");
     #endif	
-
-}
+};

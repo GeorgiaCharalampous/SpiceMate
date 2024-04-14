@@ -21,11 +21,9 @@ class Actuation{
    Actuation(VIBRO4_rpi* VibroMotor,Servo_Driver* ServoMotor,int* FD);
 
    /**
-    * 
+    * Destructor
     **/ 
-
-   void stop();
-
+   ~Actuation();
     /**
     * Current status of the motor. 
     **/
@@ -39,7 +37,6 @@ class Actuation{
    std::thread actuationThread;
    void worker();
    int* pfds_read;
-
 
    
 };
