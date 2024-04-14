@@ -106,11 +106,6 @@ class VIBRO4_rpi{
      * Play haptic sequence in real time
     **/
     void stopHaptic();
-
-    /**
-     * Starts the motor on a separate thread
-    **/
-    void start();
     
     /**
      * Amplitude setter

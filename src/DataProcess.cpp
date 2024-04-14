@@ -10,8 +10,8 @@ void DataProcess::start(){
 
 void DataProcess::worker(){
 	while (1 == running){
-		uint8_t dataReady;
-		const long int s = read(*pfds_read, &dataReady, sizeof(uint8_t));
+		char dataReady;
+		read(*pfds_read, &dataReady, sizeof(char));
 		thresholding();
 	}
 };
@@ -20,7 +20,7 @@ void DataProcess::thresholding(){
     if (!dataReceived) return;
 	dataReceived = false;
 	
-	printf("Incomming reading: %u \n",value); 
+	//printf("Incomming reading: %u \n",value); 
 	if ((value > lowerLimit)&&(value < upperLimit))
 	{
 		currentValueInRange = true;
@@ -64,7 +64,6 @@ void DataProcess::thresholding(){
 		};
 	};
 	lastValueInRange = currentValueInRange;
-
 };
 
 void DataProcess::stop(){

@@ -8,5 +8,5 @@ void DPcallbackChild::dataProcessed(bool status){
     
     vmotor->activate = status;
     vmotor->changedState = true;
-    write(*pfds_write,"1",1);
+    write(*pfds_write,"1\n",1);
 };

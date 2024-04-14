@@ -31,6 +31,9 @@ void VIBRO4_rpi::initVibro(VIBRO4_settings settings){
         // put on standby for low pwer mode
         i2c_writeByte(VIBRO_MODE_REG,settings.standby); // also sets this to internal trigger
 
+        running = 1;
+        motorThread = std::thread(&VIBRO4_rpi::worker,this);
+
 }
 
 void VIBRO4_rpi::autoCal(){
@@ -111,13 +114,7 @@ void VIBRO4_rpi::stopHaptic(){
         i2c_writeByte(VIBRO_RTP_REG,0);
         i2c_writeByte(VIBRO_MODE_REG,STANDBY);
 }
-
-void VIBRO4_rpi::start()
-{
-        running = 1;
-        motorThread = std::thread(&VIBRO4_rpi::worker,this);
-
-}
+ 
 void VIBRO4_rpi::stop(){
         if(!running) return;
         running = 0;
@@ -137,8 +134,8 @@ void VIBRO4_rpi::stop(){
 
 void VIBRO4_rpi::worker(){
         while (1 == running){
-                uint8_t dataReady;
-		const long int s = read(*pfds_read, &dataReady, sizeof(uint8_t));
+                char dataReady;
+		read(*pfds_read, &dataReady, sizeof(char));
                 if(changedState){
                         changedState = false;
                         if(activate){

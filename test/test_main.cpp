@@ -12,13 +12,13 @@ int main(int argc, char *argv[]){
     pipe(fds);
     pipe(fdsM);
 
-    int* pfds_read = &fds[1];
-    int* pfds_write = &fds[2];
+    //File descriptor for blocking the processing thread
+    int* pfds_read = &fds[0];
+    int* pfds_write = &fds[1];
 
-    //File descriptor for communication between
-    //the processing and motor classes
-    int* pfds_readM = &fdsM[1];
-    int* pfds_writeM = &fdsM[2];
+    //File descriptor for blocking the actuating thread
+    int* pfds_readM = &fdsM[0];
+    int* pfds_writeM = &fdsM[1];
 
 
     VL6180x_rpi sensor_Instance;
@@ -37,23 +37,20 @@ int main(int argc, char *argv[]){
 
     VL6180x_settings sensor_Settings;
     VIBRO4_settings motor_Settings;
-    printf("Range threshold low is %u . \n",sensor_Settings.sysrange_thresh_low);
+    //printf("Range threshold low is %u . \n",sensor_Settings.sysrange_thresh_low);
     sensor_Instance.registerCallback(&passCallback);
     passCallback.registerDP(&printThreshold);
     printThreshold.registerCallback(&processingCallback);
     processingCallback.registerMotor(&motor_Instance);
 
     motor_Instance.initVibro(motor_Settings);
-    sleep(3);
     motor_Instance.setAmplitude(50);
 
     sensor_Instance.startRangeContinuous(sensor_Settings);
     printThreshold.start();
-    motor_Instance.start();
-    // printf("Motor initialised \n");
-    // printf("Acquisisition started \n");
+    
     getchar();
-	sensor_Instance.stop();
+    sensor_Instance.stop();
     printThreshold.stop();
     motor_Instance.stop();   
 
