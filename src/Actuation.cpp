@@ -40,8 +40,6 @@ Actuation::~Actuation(){
     actuationThread.join();
     psMotor->setAngle(0);
     psMotor->stopPWM();
-    pvMotor->~VIBRO4_rpi();
-    psMotor->~Servo_Driver();
     #ifdef DEBUG
 	fprintf(stderr,"Motor thread stopped.\n");
     #endif	

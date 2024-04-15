@@ -24,7 +24,6 @@ class Actuation{
     * Destructor
     **/ 
    ~Actuation();
-<<<<<<< HEAD
 
     /**
     * Sets a pointer to a file descriptor to be used
@@ -38,11 +37,7 @@ class Actuation{
     /**
      * Boolean to describe if the motors should be activated
      * Motors are powered off by default
-=======
-    /**
-    * Current status of the motor. 
->>>>>>> parent of 2d80e4e (Memory leak fixed)
-    **/
+     **/
    bool activate = false;
 
    /**
@@ -77,7 +72,6 @@ class Actuation{
     * Blocked until data is read from the file descriptor 
    **/
    void worker();
-<<<<<<< HEAD
 
    /**
     * Pointer to a file descriptor to read from.
@@ -86,9 +80,4 @@ class Actuation{
     * setFileDescriptor()
     **/
    int* pfds_read = nullptr;
-=======
-   int* pfds_read;
->>>>>>> parent of 2d80e4e (Memory leak fixed)
-
-   
 };
