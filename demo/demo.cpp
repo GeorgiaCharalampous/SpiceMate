@@ -1,3 +1,20 @@
+/*
+ * Demo program for spice dispenser utilising classes for a proximity sensor (VL6180X), ERM vibrational 
+ * motor driven by the DRV2605/L and an SG90 Micro Servo.
+ * During operation, dispensing is triggered when an object is introduced to the region monitored by the sensor. Motor activation
+ * deactivation occurs in response to retained presence of the object within the sensor field.
+ *
+ * Copyright (c) 2007  MontaVista Software, Inc.
+ * Copyright (c) 2007  Anton Vorontsov <avorontsov@ru.mvista.com>
+ * Copyright (c) 2013-2022  Bernd Porr <mail@berndporr.me.uk>
+ * Copyright (c) 2024 Viktoriya Kaleva, Hasitha Senevirathne, Georgia Charalampous <spicemate_auto@outlook.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License.
+ *
+ */
+
 #ifndef VL6180x_rpi
 #include "VL6180x_rpi.h"
 #endif
