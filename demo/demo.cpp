@@ -44,8 +44,9 @@ int main(int argc, char *argv[]){
     processor.registerCallback(&processingCallback);
     processingCallback.registerActuation(&actuator);
 
-    sensor.startRangeContinuous(sensor_Settings);
+    actuator.start();
     processor.start();
+    sensor.startRangeContinuous(sensor_Settings);
     getchar();
 
     sensor.stop();
@@ -56,8 +57,8 @@ int main(int argc, char *argv[]){
     close(*pfds_writeM);
     actuator.~Actuation();
     
-    sensor.unRegisterCallback();
-    processor.unRegisterCallback();
+    // sensor.unRegisterCallback();
+    // processor.unRegisterCallback();
 
 	return 0;
     

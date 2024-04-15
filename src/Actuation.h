@@ -25,6 +25,12 @@ class Actuation{
     **/ 
    ~Actuation();
 
+   /**
+    * Open a thread for actuation 
+   **/
+
+   void start();
+
     /**
     * Sets a pointer to a file descriptor to be used
     * for read() blocking
@@ -50,12 +56,12 @@ class Actuation{
    /**
     * Pointer to the vibrational motor 
    **/
-   VIBRO4_rpi* pvMotor;
+   VIBRO4_rpi* pvMotor = nullptr;
 
    /**
     * Pointer to the servo motor 
    **/
-   Servo_Driver* psMotor;
+   Servo_Driver* psMotor = nullptr;
 
    /**
     * Current state of the class
@@ -88,4 +94,5 @@ class Actuation{
    **/
 
    bool status = false;
+
 };

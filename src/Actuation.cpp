@@ -6,7 +6,9 @@ Actuation::Actuation(VIBRO4_rpi* VibroMotor,Servo_Driver* ServoMotor){
 
     pvMotor->setAmplitude(100);
     psMotor->setFrequency(50);
+};
 
+void Actuation::start(){
     running = 1;
 	actuationThread = std::thread(&Actuation::worker,this);
     #ifdef DEBUG
