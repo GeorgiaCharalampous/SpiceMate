@@ -1,0 +1,63 @@
+\doxysection{VL6180x\+\_\+settings Struct Reference}
+\hypertarget{struct_v_l6180x__settings}{}\label{struct_v_l6180x__settings}\index{VL6180x\_settings@{VL6180x\_settings}}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{struct_v_l6180x__settings_af53347b6388bb1429e69dc12d4239834}\label{struct_v_l6180x__settings_af53347b6388bb1429e69dc12d4239834} 
+int {\bfseries default\+\_\+i2c\+\_\+bus} = 1
+\item 
+\Hypertarget{struct_v_l6180x__settings_abee786df101c36f15b02abb1340bba05}\label{struct_v_l6180x__settings_abee786df101c36f15b02abb1340bba05} 
+uint8\+\_\+t {\bfseries sensor\+\_\+address} = DEFAULT\+\_\+\+VL6180\+X\+\_\+\+ADDRESS
+\item 
+\Hypertarget{struct_v_l6180x__settings_a3fa2d540adc6a6057f620df23c8503d2}\label{struct_v_l6180x__settings_a3fa2d540adc6a6057f620df23c8503d2} 
+int {\bfseries int\+\_\+chip} = 0
+\item 
+\Hypertarget{struct_v_l6180x__settings_a69a92b67a02ef2f22fe8191e1b7af752}\label{struct_v_l6180x__settings_a69a92b67a02ef2f22fe8191e1b7af752} 
+int {\bfseries int\+\_\+gpio} = DEFAULT\+\_\+\+INT\+\_\+\+TO\+\_\+\+GPIO
+\item 
+\Hypertarget{struct_v_l6180x__settings_aaa48fdebed47b37144db6b63ed16f34f}\label{struct_v_l6180x__settings_aaa48fdebed47b37144db6b63ed16f34f} 
+int {\bfseries en\+\_\+chip} = 0
+\item 
+\Hypertarget{struct_v_l6180x__settings_a45117c72455bc0ce632aeba1aedb111f}\label{struct_v_l6180x__settings_a45117c72455bc0ce632aeba1aedb111f} 
+int {\bfseries en\+\_\+gpio} = DEFAULT\+\_\+\+EN\+\_\+\+TO\+\_\+\+GPIO
+\item 
+uint8\+\_\+t \mbox{\hyperlink{struct_v_l6180x__settings_a5da4fc34064752231ea55d44d94c72a3}{system\+\_\+mode\+\_\+gpio1}} = (ACTIVE\+\_\+\+HIGH\texorpdfstring{$\vert$}{|}GPIO\+\_\+\+INTERRUPT\+\_\+\+OUTPUT)
+\item 
+\Hypertarget{struct_v_l6180x__settings_a3c2a1f89e9556fd78a50bb23e43ce583}\label{struct_v_l6180x__settings_a3c2a1f89e9556fd78a50bb23e43ce583} 
+uint8\+\_\+t {\bfseries system\+\_\+interrupt\+\_\+config\+\_\+gpio} = RANGE\+\_\+\+NEW\+\_\+\+SAMPLE\+\_\+\+READY
+\item 
+\Hypertarget{struct_v_l6180x__settings_ae2d6a12c0e34f6707a65b8bee9d5c742}\label{struct_v_l6180x__settings_ae2d6a12c0e34f6707a65b8bee9d5c742} 
+uint8\+\_\+t {\bfseries system\+\_\+interrupt\+\_\+clear} = (CLEAR\+\_\+\+RANGE\+\_\+\+INT\texorpdfstring{$\vert$}{|}CLEAR\+\_\+\+ALS\+\_\+\+INT\texorpdfstring{$\vert$}{|}CLEAR\+\_\+\+ERROR\+\_\+\+INT)
+\item 
+\Hypertarget{struct_v_l6180x__settings_ab0eb88c95f8053c0a3c128a29b4bdad3}\label{struct_v_l6180x__settings_ab0eb88c95f8053c0a3c128a29b4bdad3} 
+uint8\+\_\+t {\bfseries sysrange\+\_\+thresh\+\_\+low} = 0x00
+\item 
+\Hypertarget{struct_v_l6180x__settings_a846b52ffdf1e8340ae18fa465507c168}\label{struct_v_l6180x__settings_a846b52ffdf1e8340ae18fa465507c168} 
+uint8\+\_\+t {\bfseries sysrange\+\_\+thresh\+\_\+high} = 0x\+FF
+\item 
+\Hypertarget{struct_v_l6180x__settings_ad17c905d31a36d78132c7359b942a449}\label{struct_v_l6180x__settings_ad17c905d31a36d78132c7359b942a449} 
+uint8\+\_\+t {\bfseries sysrange\+\_\+intermeasurement\+\_\+period} = 0x\+FF
+\item 
+\Hypertarget{struct_v_l6180x__settings_adedb573099c243241413f84d8b770701}\label{struct_v_l6180x__settings_adedb573099c243241413f84d8b770701} 
+uint8\+\_\+t {\bfseries sysrange\+\_\+max\+\_\+convergence\+\_\+time} = 63
+\item 
+\Hypertarget{struct_v_l6180x__settings_ae663e8b229e37fd17c4b4506529fa69a}\label{struct_v_l6180x__settings_ae663e8b229e37fd17c4b4506529fa69a} 
+uint8\+\_\+t {\bfseries sysrange\+\_\+range\+\_\+check\+\_\+enables} = (SIGNAL\+\_\+\+TO\+\_\+\+NOISE\+\_\+\+ENABLE)
+\item 
+\Hypertarget{struct_v_l6180x__settings_a1a245837310b86c87b0d1d76df1a0e16}\label{struct_v_l6180x__settings_a1a245837310b86c87b0d1d76df1a0e16} 
+uint8\+\_\+t {\bfseries sysrange\+\_\+start} = (RANGING\+\_\+\+MODE\+\_\+\+CONTINUOUS\texorpdfstring{$\vert$}{|}RANGE\+\_\+\+START\+\_\+\+STOP\+\_\+\+TRIGGER)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{struct_v_l6180x__settings_a5da4fc34064752231ea55d44d94c72a3}\label{struct_v_l6180x__settings_a5da4fc34064752231ea55d44d94c72a3} 
+\index{VL6180x\_settings@{VL6180x\_settings}!system\_mode\_gpio1@{system\_mode\_gpio1}}
+\index{system\_mode\_gpio1@{system\_mode\_gpio1}!VL6180x\_settings@{VL6180x\_settings}}
+\doxysubsubsection{\texorpdfstring{system\_mode\_gpio1}{system\_mode\_gpio1}}
+{\footnotesize\ttfamily uint8\+\_\+t VL6180x\+\_\+settings\+::system\+\_\+mode\+\_\+gpio1 = (ACTIVE\+\_\+\+HIGH\texorpdfstring{$\vert$}{|}GPIO\+\_\+\+INTERRUPT\+\_\+\+OUTPUT)}
+
+Initial sensor register settings 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Georgia/\+Documents/\+Git\+Hub/\+Spice\+Mate/src/VL6180x\+\_\+rpi.\+h\end{DoxyCompactItemize}

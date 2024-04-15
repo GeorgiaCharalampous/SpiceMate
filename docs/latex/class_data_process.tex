@@ -1,0 +1,96 @@
+\doxysection{Data\+Process Class Reference}
+\hypertarget{class_data_process}{}\label{class_data_process}\index{DataProcess@{DataProcess}}
+
+
+{\ttfamily \#include $<$Data\+Process.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_data_process_a8ad6c658902518eef30efefdfaa3e0d4}{start}} ()
+\item 
+void \mbox{\hyperlink{class_data_process_a31754efce56708c99fa1b540daa92cc7}{stop}} ()
+\item 
+void \mbox{\hyperlink{class_data_process_a50cce891b4224eda9a3fd02d534c8b57}{register\+Callback}} (\mbox{\hyperlink{class_d_pcallback}{DPcallback}} \texorpdfstring{$\ast$}{*}cb)
+\item 
+void \mbox{\hyperlink{class_data_process_a580495e6ea90fb023427e83c13fe3870}{un\+Register\+Callback}} ()
+\item 
+void \mbox{\hyperlink{class_data_process_a1a8bdd211ba98337ac3b31d4408a583a}{set\+File\+Descriptor}} (int \texorpdfstring{$\ast$}{*}a)
+\item 
+void \mbox{\hyperlink{class_data_process_a97d3adfef505f9c07a10457e0f1f0199}{thresholding}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{class_data_process_ad04bb624e035da0753ec99c758a298fb}{value}}
+\item 
+bool \mbox{\hyperlink{class_data_process_a048bba526d1d022f97204186228e9ebf}{data\+Received}} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Processes input from the VL6180\+\_\+x proximity sensor 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_data_process_a50cce891b4224eda9a3fd02d534c8b57}\label{class_data_process_a50cce891b4224eda9a3fd02d534c8b57} 
+\index{DataProcess@{DataProcess}!registerCallback@{registerCallback}}
+\index{registerCallback@{registerCallback}!DataProcess@{DataProcess}}
+\doxysubsubsection{\texorpdfstring{registerCallback()}{registerCallback()}}
+{\footnotesize\ttfamily void Data\+Process\+::register\+Callback (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_d_pcallback}{DPcallback}} \texorpdfstring{$\ast$}{*}}]{cb }\end{DoxyParamCaption})}
+
+Registers the callback to the next process \Hypertarget{class_data_process_a1a8bdd211ba98337ac3b31d4408a583a}\label{class_data_process_a1a8bdd211ba98337ac3b31d4408a583a} 
+\index{DataProcess@{DataProcess}!setFileDescriptor@{setFileDescriptor}}
+\index{setFileDescriptor@{setFileDescriptor}!DataProcess@{DataProcess}}
+\doxysubsubsection{\texorpdfstring{setFileDescriptor()}{setFileDescriptor()}}
+{\footnotesize\ttfamily void Data\+Process\+::set\+File\+Descriptor (\begin{DoxyParamCaption}\item[{int \texorpdfstring{$\ast$}{*}}]{a }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Sets a file descriptor to read from For blocking the thread until data is received 
+\begin{DoxyParams}{Parameters}
+{\em a} & a pointer to an existing file descriptor \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_data_process_a8ad6c658902518eef30efefdfaa3e0d4}\label{class_data_process_a8ad6c658902518eef30efefdfaa3e0d4} 
+\index{DataProcess@{DataProcess}!start@{start}}
+\index{start@{start}!DataProcess@{DataProcess}}
+\doxysubsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily void Data\+Process\+::start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Starts data processing on a separate thread \Hypertarget{class_data_process_a31754efce56708c99fa1b540daa92cc7}\label{class_data_process_a31754efce56708c99fa1b540daa92cc7} 
+\index{DataProcess@{DataProcess}!stop@{stop}}
+\index{stop@{stop}!DataProcess@{DataProcess}}
+\doxysubsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily void Data\+Process\+::stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Stops data processing and joins the thread \Hypertarget{class_data_process_a97d3adfef505f9c07a10457e0f1f0199}\label{class_data_process_a97d3adfef505f9c07a10457e0f1f0199} 
+\index{DataProcess@{DataProcess}!thresholding@{thresholding}}
+\index{thresholding@{thresholding}!DataProcess@{DataProcess}}
+\doxysubsubsection{\texorpdfstring{thresholding()}{thresholding()}}
+{\footnotesize\ttfamily void Data\+Process\+::thresholding (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Performs data thresholding and determines the action to be performed \Hypertarget{class_data_process_a580495e6ea90fb023427e83c13fe3870}\label{class_data_process_a580495e6ea90fb023427e83c13fe3870} 
+\index{DataProcess@{DataProcess}!unRegisterCallback@{unRegisterCallback}}
+\index{unRegisterCallback@{unRegisterCallback}!DataProcess@{DataProcess}}
+\doxysubsubsection{\texorpdfstring{unRegisterCallback()}{unRegisterCallback()}}
+{\footnotesize\ttfamily void Data\+Process\+::un\+Register\+Callback (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Unregisters the callback 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_data_process_a048bba526d1d022f97204186228e9ebf}\label{class_data_process_a048bba526d1d022f97204186228e9ebf} 
+\index{DataProcess@{DataProcess}!dataReceived@{dataReceived}}
+\index{dataReceived@{dataReceived}!DataProcess@{DataProcess}}
+\doxysubsubsection{\texorpdfstring{dataReceived}{dataReceived}}
+{\footnotesize\ttfamily bool Data\+Process\+::data\+Received = false}
+
+Flag that data has been received \Hypertarget{class_data_process_ad04bb624e035da0753ec99c758a298fb}\label{class_data_process_ad04bb624e035da0753ec99c758a298fb} 
+\index{DataProcess@{DataProcess}!value@{value}}
+\index{value@{value}!DataProcess@{DataProcess}}
+\doxysubsubsection{\texorpdfstring{value}{value}}
+{\footnotesize\ttfamily uint8\+\_\+t Data\+Process\+::value}
+
+Incoming reading 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Georgia/\+Documents/\+Git\+Hub/\+Spice\+Mate/src/Data\+Process.\+h\item 
+C\+:/\+Users/\+Georgia/\+Documents/\+Git\+Hub/\+Spice\+Mate/src/Data\+Process.\+cpp\end{DoxyCompactItemize}

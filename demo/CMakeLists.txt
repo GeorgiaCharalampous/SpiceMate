@@ -3,5 +3,5 @@ include_directories("${PROJECT_SOURCE_DIR}/demo")
 
 link_directories("${PROJECT_SOURCE_DIR}/demo")
 
-add_executable(TestDriver demo.cpp)
-target_link_libraries(TestDriver gpiod src_Lib)
+add_executable(DemoDriver demo.cpp)
+target_link_libraries(DemoDriver gpiod src_Lib)

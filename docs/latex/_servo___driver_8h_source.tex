@@ -1,0 +1,44 @@
+\doxysection{Servo\+\_\+\+Driver.\+h}
+\hypertarget{_servo___driver_8h_source}{}\label{_servo___driver_8h_source}\index{C:/Users/Georgia/Documents/GitHub/SpiceMate/src/Servo\_Driver.h@{C:/Users/Georgia/Documents/GitHub/SpiceMate/src/Servo\_Driver.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ stdint}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#ifndef\ stdio}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#ifndef\ string}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#ifndef\ NDEBUG}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ DEBUG}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_servo___driver}{Servo\_Driver}}\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{class_servo___driver_a9787488b1534cb8daabe1025facd339e}{Servo\_Driver}}(uint8\_t\ pin\_num);}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{class_servo___driver_a21dadfee5479577957353c2e4ccc0a13}{\string~Servo\_Driver}}();}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_servo___driver_ab0458f1603a8fe34ee32bc036bf9dd63}{setFrequency}}(\textcolor{keywordtype}{float}\ f\_hz);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_servo___driver_a6fb85d3bc3f8f9634902af4c0a671354}{setAngle}}(\textcolor{keywordtype}{float}\ angle\_deg);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_servo___driver_a51cfc690edfae9bbd4e9e28bac195414}{startPWM}}();}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_servo___driver_a09393774251f3544d027a3449054decf}{stopPWM}}();}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00055\ \ \ \ \ std::string\ pwm\_path;}
+\DoxyCodeLine{00059\ \ \ \ \ uint8\_t\ pin\_num;}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{float}\ period\_ns;}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{float}\ dutycycle\_ns;}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \};}
+
+\end{DoxyCode}

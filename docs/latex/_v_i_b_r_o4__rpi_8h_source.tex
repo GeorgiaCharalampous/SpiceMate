@@ -1,0 +1,95 @@
+\doxysection{VIBRO4\+\_\+rpi.\+h}
+\hypertarget{_v_i_b_r_o4__rpi_8h_source}{}\label{_v_i_b_r_o4__rpi_8h_source}\index{C:/Users/Georgia/Documents/GitHub/SpiceMate/src/VIBRO4\_rpi.h@{C:/Users/Georgia/Documents/GitHub/SpiceMate/src/VIBRO4\_rpi.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <unistd.h>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <assert.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <linux/i2c-\/dev.h>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <gpiod.h>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#ifndef\ Vibro\_reg}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <Vibro\_reg.h>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#ifndef\ NDEBUG}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ DEBUG}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ could\_not\_open\_i2c2[]\ =\ \textcolor{stringliteral}{"{}Could\ not\ open\ I2C.\(\backslash\)n"{}};}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ default\ i2c\ address}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ DEFAULT\_VIBRO\_ADDRESS\ 0x5a}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ default\ GPIO\ pin\ for\ EN\ pin}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ DEFAULT\_EN\_PIN\ 26}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_v_i_b_r_o4__settings}{VIBRO4\_settings}}\{}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{int}\ default\_i2c\_bus\ =\ 1;}
+\DoxyCodeLine{00026\ \ \ \ \ uint8\_t\ address\ =\ DEFAULT\_VIBRO\_ADDRESS;}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{int}\ EN\_chip\ =\ 0;}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{int}\ EN\_gpio\ =\ DEFAULT\_EN\_PIN;}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{comment}{//\ Mode\ setup}}
+\DoxyCodeLine{00031\ \ \ \ \ uint8\_t\ standby\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ STANDBY;}
+\DoxyCodeLine{00032\ \ \ \ \ uint8\_t\ rdy\_internalTrig\ \ \ \ \ \ \ \ =\ MODE\_INT\_TRIGGER;}
+\DoxyCodeLine{00033\ \ \ \ \ uint8\_t\ rdy\_externalTrig\_edge\ \ \ =\ MODE\_EXT\_TRIGGER\_EDGE;}
+\DoxyCodeLine{00034\ \ \ \ \ uint8\_t\ rdy\_realTIME\ \ \ \ \ \ \ \ \ \ \ \ =\ MODE\_RTPLAYBACK;}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{comment}{//uint8\_t\ init\_autocal\_mode\ \ \ \ \ \ \ =\ MODE\_AUTO\_CALIBRATION;\ //\ idle\ with\ internal\ trigger}}
+\DoxyCodeLine{00036\ \ \ \ \ uint8\_t\ init\_diagnostic\_mode\ \ \ \ =\ MODE\_DIAGNOSTIC;\ \textcolor{comment}{//\ idle\ with\ internal\ trigger}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{comment}{//\ Auto-\/calibration\ register\ config\ section}}
+\DoxyCodeLine{00040\ \ \ \ \ uint8\_t\ init\_autocal\_mode\ \ \ \ \ \ \ =\ MODE\_AUTO\_CALIBRATION;\ \textcolor{comment}{//\ idle\ with\ internal\ trigger}}
+\DoxyCodeLine{00041\ \ \ \ \ uint8\_t\ init\_feedBack\_reg\ \ \ \ \ \ \ =\ (ERM\_MODE|FB\_BRAKE\_FACTOR\_3x|LOOP\_GAIN\_HIGH|BEMF\_GAIN\_LRA\_20x);}
+\DoxyCodeLine{00042\ \ \ \ \ uint8\_t\ init\_ratedVoltage\_reg\ \ \ =\ RATED\_VOLTAGE\_ERM;\ \textcolor{comment}{//currently\ based\ on\ motor\ datasheet\ values}}
+\DoxyCodeLine{00043\ \ \ \ \ uint8\_t\ init\_odClamp\_reg\ \ \ \ \ \ \ \ =\ OD\_CLAMP\_ERM;\ \textcolor{comment}{//currently\ based\ on\ motor\ datasheet\ values}}
+\DoxyCodeLine{00044\ \ \ \ \ uint8\_t\ init\_control4\_reg\ \ \ \ \ \ \ =\ AUTO\_CAL\_TIME\_150um;\ \textcolor{comment}{//AUTO\_CAL\_TIME\_150um}}
+\DoxyCodeLine{00045\ \ \ \ \ uint8\_t\ init\_control1\_reg\ \ \ \ \ \ \ =\ (STARTUP\_BOOST|DRIVE\_TIME);\ \textcolor{comment}{//default\ needs\ to\ change?\ //STARTUP\_BOOST}}
+\DoxyCodeLine{00046\ \ \ \ \ uint8\_t\ init\_control2\_reg\ \ \ \ \ \ \ =\ (BRAKE\_STABILISER|INPUT\_MODE\_BIDIR|SAMPLE\_TIME\_300um|BLANKING\_TIME|IDISS\_TIME);\ \textcolor{comment}{//BRAKE\_STABILISER}}
+\DoxyCodeLine{00047\ \ \ \ \ uint8\_t\ init\_control3\_reg\ \ \ \ \ \ \ =\ (NG\_THRESH\_4pcnt|ERM\_OPEN\_LOOP|SUPPLY\_COMP\_DIS|DATA\_FORMAT\_RTP\_SNG|LRA\_DRIVE\_MODE\_1|INPUT\_MODE\_PWM|LRA\_OPEN\_LOOP);}
+\DoxyCodeLine{00048\ \ \ \ \ uint8\_t\ init\_go\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ VIBRO\_GO;}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ uint8\_t\ vibro\_library\ =\ LIBRARY\_SELECT\_LRA;}
+\DoxyCodeLine{00051\ \};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_v_i_b_r_o4__rpi}{VIBRO4\_rpi}}\{}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00060\ \ \ \ \ \mbox{\hyperlink{class_v_i_b_r_o4__rpi_ad0fb8ea1d975ae6e5d29b60e8d642830}{\string~VIBRO4\_rpi}}()\ \{\mbox{\hyperlink{class_v_i_b_r_o4__rpi_a4ff9954035b6eef4ad8798aace9ff097}{stop}}();\}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_v_i_b_r_o4__rpi_aea001257a3cb8b53784b3acdff746e5e}{autoCal}}();}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_v_i_b_r_o4__rpi_a86f5b76dc381ac64fcc3ba4bab06a17f}{vibroDiagnostic}}();}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_v_i_b_r_o4__rpi_ae44eeeccf63c0c0e199b079249408ce4}{initVibro}}(\mbox{\hyperlink{struct_v_i_b_r_o4__settings}{VIBRO4\_settings}}\ vibro4settings\ =\ \mbox{\hyperlink{struct_v_i_b_r_o4__settings}{VIBRO4\_settings}}());}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_v_i_b_r_o4__rpi_a4ff9954035b6eef4ad8798aace9ff097}{stop}}();}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_v_i_b_r_o4__rpi_af5a1797820495a249e237a57c7e96b92}{playHaptic\_realTime}}();}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_v_i_b_r_o4__rpi_a9cb26da6e29dbe813aede8c8186c3e11}{stopHaptic}}();}
+\DoxyCodeLine{00091\ \ \ \ \ }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_v_i_b_r_o4__rpi_a02450d8e5e31d91d8a231ef071eb484c}{setAmplitude}}(uint8\_t\ value)\{vAmplitude\ =\ value;\};}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00103\ \ \ \ \ \mbox{\hyperlink{struct_v_i_b_r_o4__settings}{VIBRO4\_settings}}\ motorSettings;}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordtype}{int}\ running\ =\ 0;}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keywordtype}{void}\ i2c\_writeByte(uint8\_t\ reg,\ \textcolor{keywordtype}{unsigned}\ data);}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ i2c\_readByte(uint8\_t\ reg);}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keyword}{struct\ }gpiod\_chip\ *chipEN\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keyword}{struct\ }gpiod\_line\ *pinEN\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00139\ \ \ \ \ uint8\_t\ vAmplitude\ =\ 0;}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordtype}{int}\ fd\_i2c\ =\ -\/1;}
+\DoxyCodeLine{00145\ \};}
+
+\end{DoxyCode}

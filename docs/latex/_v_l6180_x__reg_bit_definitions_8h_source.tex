@@ -1,0 +1,75 @@
+\doxysection{VL6180\+X\+\_\+reg\+Bit\+Definitions.\+h}
+\hypertarget{_v_l6180_x__reg_bit_definitions_8h_source}{}\label{_v_l6180_x__reg_bit_definitions_8h_source}\index{C:/Users/Georgia/Documents/GitHub/SpiceMate/src/VL6180X\_regBitDefinitions.h@{C:/Users/Georgia/Documents/GitHub/SpiceMate/src/VL6180X\_regBitDefinitions.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ stdint}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{comment}{//SYSTEM\_\_MODE\_GPIO1}}
+\DoxyCodeLine{00006\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00007\ \ \ \ \ RESET\_MODE\_GPIO1\ \ \ \ \ \ \ \ \ \ \ \ =\ 0x60,}
+\DoxyCodeLine{00008\ \ \ \ \ ACTIVE\_HIGH\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00100000,}
+\DoxyCodeLine{00009\ \ \ \ \ ACTIVE\_LOW\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00000000,}
+\DoxyCodeLine{00010\ \ \ \ \ OFF\_MODE\_GPIO1\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00000000,}
+\DoxyCodeLine{00011\ \ \ \ \ GPIO\_INTERRUPT\_OUTPUT\ \ \ \ \ \ \ =\ 0b00010000,}
+\DoxyCodeLine{00012\ \};}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{comment}{//SYSTEM\_INTERRUPT\_CONFIG\_GPIO}}
+\DoxyCodeLine{00015\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ RESET\_CONFIG\_GPIO\ \ \ \ \ \ \ \ \ \ \ =\ 0x0,}
+\DoxyCodeLine{00017\ \ \ \ \ ALS\_LEVEL\_LOW\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00001000,}
+\DoxyCodeLine{00018\ \ \ \ \ ALS\_LEVEL\_HIGH\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00010000,}
+\DoxyCodeLine{00019\ \ \ \ \ ALS\_OUT\_OF\_WINDOW\ \ \ \ \ \ \ \ \ \ \ =\ 0b00011000,}
+\DoxyCodeLine{00020\ \ \ \ \ ALS\_NEW\_SAMPLE\_READY\ \ \ \ \ \ \ \ =\ 0b00100000,}
+\DoxyCodeLine{00021\ \ \ \ \ RANGE\_LEVEL\_LOW\ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00000001,}
+\DoxyCodeLine{00022\ \ \ \ \ RANGE\_LEVEL\_HIGH\ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00000010,}
+\DoxyCodeLine{00023\ \ \ \ \ RANGE\_OUT\_OF\_WINDOW\ \ \ \ \ \ \ \ \ =\ 0b00000011,}
+\DoxyCodeLine{00024\ \ \ \ \ RANGE\_NEW\_SAMPLE\_READY\ \ \ \ \ \ =\ 0b00000100,}
+\DoxyCodeLine{00025\ \};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{comment}{//\ SYSTEM\_INTERRUPT\_CLEAR}}
+\DoxyCodeLine{00028\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ RESET\_INTERRUPT\_CLEAR\ \ \ \ \ \ \ =\ 0x0,}
+\DoxyCodeLine{00030\ \ \ \ \ CLEAR\_RANGE\_INT\ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00000001,}
+\DoxyCodeLine{00031\ \ \ \ \ CLEAR\_ALS\_INT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00000010,}
+\DoxyCodeLine{00032\ \ \ \ \ CLEAR\_ERROR\_INT\ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00000100,}
+\DoxyCodeLine{00033\ \};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{comment}{//\ SYSRANGE\_START}}
+\DoxyCodeLine{00036\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ RANGING\_MODE\_SINGLE\_SHOT\ \ \ \ =\ 0b00000000,}
+\DoxyCodeLine{00038\ \ \ \ \ RANGING\_MODE\_CONTINUOUS\ \ \ \ \ =\ 0b00000010,}
+\DoxyCodeLine{00039\ \ \ \ \ RANGE\_START\_STOP\_TRIGGER\ \ \ \ =\ 0b00000001,}
+\DoxyCodeLine{00040\ \};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{comment}{//\ SYSALS\_START}}
+\DoxyCodeLine{00043\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ ALS\_MODE\_SINGLE\_SHOT\ \ \ \ \ \ \ \ =\ 0b00000000,}
+\DoxyCodeLine{00045\ \ \ \ \ ALS\_MODE\_CONTINUOUS\ \ \ \ \ \ \ \ \ =\ 0b00000010,}
+\DoxyCodeLine{00046\ \ \ \ \ ALS\_START\_STOP\_TRIGGER\ \ \ \ \ \ =\ 0b00000001,}
+\DoxyCodeLine{00047\ \};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{comment}{//\ SYSALS\_ANALOGUE\_GAIN}}
+\DoxyCodeLine{00050\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00051\ \ \ \ \ RESET\_ALS\_GAIN\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x06,}
+\DoxyCodeLine{00052\ \ \ \ \ ALS\_GAIN\_20\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b01000000,}
+\DoxyCodeLine{00053\ \ \ \ \ ALS\_GAIN\_10\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b01000001,}
+\DoxyCodeLine{00054\ \ \ \ \ ALS\_GAIN\_5\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b01000010,}
+\DoxyCodeLine{00055\ \ \ \ \ ALS\_GAIN\_2\_5\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b01000011,}
+\DoxyCodeLine{00056\ \ \ \ \ ALS\_GAIN\_1\_67\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b01000100,}
+\DoxyCodeLine{00057\ \ \ \ \ ALS\_GAIN\_1\_25\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b01000101,}
+\DoxyCodeLine{00058\ \ \ \ \ ALS\_GAIN\_1\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b01000110,}
+\DoxyCodeLine{00059\ \ \ \ \ ALS\_GAIN\_40\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b01000111,}
+\DoxyCodeLine{00060\ \};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \textcolor{comment}{//\ SYSRANGE\_\_RANGE\_CHECK\_ENABLES}}
+\DoxyCodeLine{00064\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00065\ \ \ \ \ RESET\_RANGE\_CHECK\_ENABLES\ \ \ =\ 0x11,}
+\DoxyCodeLine{00066\ \ \ \ \ SIGNAL\_TO\_NOISE\_ENABLE\ \ \ \ \ \ =\ 0b00010000,}
+\DoxyCodeLine{00067\ \ \ \ \ RANGE\_IGNORE\_ENABLE\ \ \ \ \ \ \ \ \ =\ 0b00000010,}
+\DoxyCodeLine{00068\ \ \ \ \ EARLY\_CONVERGENCE\_ENABLE\ \ \ \ =\ 0b00000001,}
+\DoxyCodeLine{00069\ \};}
+
+\end{DoxyCode}

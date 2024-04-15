@@ -1,0 +1,168 @@
+\doxysection{VL6180x\+\_\+reg\+Address.\+h}
+\hypertarget{_v_l6180x__reg_address_8h_source}{}\label{_v_l6180x__reg_address_8h_source}\index{C:/Users/Georgia/Documents/GitHub/SpiceMate/src/VL6180x\_regAddress.h@{C:/Users/Georgia/Documents/GitHub/SpiceMate/src/VL6180x\_regAddress.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ registers\ for\ model\ identification}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ SENSOR\_IDENTIFICATION\_MODEL\_ID\ \ \ \ \ \ \ \ \ \ \ \ \ 0x000\ \ \ \ \ \ \ \ \ \ \ }\textcolor{comment}{//default\ 0xB4}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#define\ SENSOR\_IDENTIFICATION\_MODEL\_REV\_MAJOR\ \ \ \ \ \ 0x001}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#define\ SENSOR\_IDENTIFICATION\_MODEL\_REV\_MINOR\ \ \ \ \ \ 0x002}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#define\ SENSOR\_IDENTIFICATION\_MODULE\_REV\_MAJOR\ \ \ \ \ 0x003}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ SENSOR\_IDENTIFICATION\_MODULE\_REV\_MINOR\ \ \ \ \ 0x004}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ SENSOR\_IDENTIFICATION\_DATE\_HI\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x006}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ SENSOR\_IDENTIFICATION\_DATE\_LO\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x007}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ SENSOR\_IDENTIFICATION\_TIME\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x008:0x009}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ registers\ for\ system\ setup}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ SENSOR\_SYSTEM\_MODE\_GPIO0\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x010}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ SENSOR\_SYSTEM\_MODE\_GPIO1\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x011}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00016\ \textcolor{comment}{struct\ systemMode\_GPIO1\ \{}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ \ \ \ uint8\_t\ \ \ \ \ reserved\_bit0:\ 1;}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ \ \ \ uint8\_t\ \ \ \ \ select:4;}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ \ \ \ uint8\_t\ \ \ \ \ polarity:1;}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ \ \ \ uint8\_t\ \ \ \ \ reserved\_bit6\_7:2;\ \ \ }}
+\DoxyCodeLine{00021\ \textcolor{comment}{\}}}
+\DoxyCodeLine{00022\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#define\ SENSOR\_SYSTEM\_HISTORY\_CTRL\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x012}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#define\ SENSOR\_SYSTEM\_INTERRUPT\_CONFIG\_GPIO\ \ \ \ \ \ \ \ 0x014}}
+\DoxyCodeLine{00026\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00027\ \textcolor{comment}{struct\ interruptConfig\ \{}}
+\DoxyCodeLine{00028\ \textcolor{comment}{\ \ \ \ uint8\_t\ \ \ \ \ range\_interrupt\_mode:3;}}
+\DoxyCodeLine{00029\ \textcolor{comment}{\ \ \ \ uint8\_t\ \ \ \ \ als\_interrupt\_mode:3;}}
+\DoxyCodeLine{00030\ \textcolor{comment}{\ \ \ \ uint8\_t\ \ \ \ \ reserved\_bits:2;}}
+\DoxyCodeLine{00031\ \textcolor{comment}{\}}}
+\DoxyCodeLine{00032\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#define\ SENSOR\_SYSTEM\_INTERRUPT\_CLEAR\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x015\ \ \ \ \ \ \ \ \ \ \ }\textcolor{comment}{//used\ for\ clear\ interrupts}}
+\DoxyCodeLine{00035\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00036\ \textcolor{comment}{struct\ interruptClear\{}}
+\DoxyCodeLine{00037\ \textcolor{comment}{\ \ \ \ uint8\_t\ \ \ \ \ clearSignal:3;}}
+\DoxyCodeLine{00038\ \textcolor{comment}{\ \ \ \ uint8\_t\ \ \ \ \ reservedBits:5;}}
+\DoxyCodeLine{00039\ \textcolor{comment}{\}*/}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#define\ SENSOR\_SYSTEM\_FRESH\_OUT\_OF\_RESET\ \ \ \ \ \ \ \ \ \ \ 0x016\ \ \ \ \ \ \ \ \ \ \ }\textcolor{comment}{//used\ for\ initialisation\ func}}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#define\ SENSOR\_SYSTEM\_GROUPED\_PARAMETER\_HOLD\ \ \ \ \ \ \ 0x017}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{comment}{//\ registers\ for\ range\ setup}}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#define\ SENSOR\_SYSRANGE\_START\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x018}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00048\ \textcolor{comment}{struct\ rangeStart\{}}
+\DoxyCodeLine{00049\ \textcolor{comment}{\ \ \ \ uint8\_t\ \ \ \ \ startstop:1;}}
+\DoxyCodeLine{00050\ \textcolor{comment}{\ \ \ \ uint8\_t\ \ \ \ \ select:1;}}
+\DoxyCodeLine{00051\ \textcolor{comment}{\ \ \ \ uint8\_t\ \ \ \ \ reservedBits:6;}}
+\DoxyCodeLine{00052\ \textcolor{comment}{\}*/}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#define\ SENSOR\_SYSRANGE\_THRESH\_HIGH\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x019}}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#define\ SENSOR\_SYSRANGE\_THRESH\_LOW\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x01A}}
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#define\ SENSOR\_SYSRANGE\_INTERMEASUREMENT\_PERIOD\ \ \ \ \ 0x01B}}
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#define\ SENSOR\_SYSRANGE\_MAX\_CONVERGENCE\_TIME\ \ \ \ \ \ \ \ 0x01C}}
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#define\ SENSOR\_SYSRANGE\_CROSSTALK\_COMPENSATION\_RATE\ 0x01E}}
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#define\ SENSOR\_SYSRANGE\_CROSSTALK\_VALID\_HEIGHT\ \ \ \ \ \ 0x021\ \ \ \ \ \ \ \ \ \ \ }\textcolor{comment}{//used\ for\ defaultCrosstalkValidHeight\ func}}
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#define\ SENSOR\_SYSRANGE\_EALRY\_CONVERGENCE\_ESTIMATE\ \ 0x022}}
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#define\ SENSOR\_SYSRANGE\_PART\_TO\_PART\_RANGE\_OFFSET\ \ \ 0x024\ \ \ \ \ \ \ \ \ \ \ }\textcolor{comment}{//used\ for\ ptp\_offset}}
+\DoxyCodeLine{00062\ \textcolor{preprocessor}{\#define\ SENSOR\_SYSRANGE\_RANGE\_IGNORE\_VALID\_HEIGHT\ \ \ 0x025}}
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\#define\ SENSOR\_SYSRANGE\_RANGE\_IGNORE\_THRESHOLD\ \ \ \ \ \ 0x026}}
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\#define\ SENSOR\_SYSRANGE\_MAX\_AMBIENT\_LEVEL\_MULT\ \ \ \ \ \ 0x02C}}
+\DoxyCodeLine{00065\ \textcolor{preprocessor}{\#define\ SENSOR\_SYSRANGE\_RANGE\_CHECK\_ENABLES\ \ \ \ \ \ \ \ \ 0x02D\ \ \ \ \ \ \ \ \ \ \ }\textcolor{comment}{//used\ for\ rce\ var}}
+\DoxyCodeLine{00066\ \textcolor{preprocessor}{\#define\ SENSOR\_SYSRANGE\_VHV\_RECALIBRATE\ \ \ \ \ \ \ \ \ \ \ \ \ 0x02E}}
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\#define\ SENSOR\_SYSRANGE\_VHV\_REPEAT\_RATE\ \ \ \ \ \ \ \ \ \ \ \ \ 0x031}}
+\DoxyCodeLine{00068\ \textcolor{preprocessor}{\#define\ SENSRO\_SYSRANGE\_SCALER\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x096\ \ \ \ \ \ \ \ \ \ \ }\textcolor{comment}{//used\ for\ set\ scaling}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \textcolor{comment}{//\ registers\ for\ ambient\ light\ source\ (ALS)\ setup}}
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\#define\ SENSOR\_SYSALS\_START\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x038}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00074\ \textcolor{comment}{struct\ rangeStart\{}}
+\DoxyCodeLine{00075\ \textcolor{comment}{\ \ \ \ uint8\_t\ \ \ \ \ startstop:1;}}
+\DoxyCodeLine{00076\ \textcolor{comment}{\ \ \ \ uint8\_t\ \ \ \ \ select:1;}}
+\DoxyCodeLine{00077\ \textcolor{comment}{\ \ \ \ uint8\_t\ \ \ \ \ reservedBits:6;}}
+\DoxyCodeLine{00078\ \textcolor{comment}{\}*/}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \textcolor{preprocessor}{\#define\ SENSOR\_SYSALS\_THRESH\_HIGH\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x03A}}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#define\ SENSOR\_SYSALS\_THRESH\_LOW\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x03C}}
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\#define\ SENSOR\_SYSALS\_INTERMEASUREMENT\_PERIOD\ \ \ \ \ \ 0x03E}}
+\DoxyCodeLine{00083\ \textcolor{preprocessor}{\#define\ SENSOR\_SYSALS\_ANALOGUE\_GAIN\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x03F}}
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#define\ SENSOR\_SYSALS\_INTEGRATION\_PERIOD\ \ \ \ \ \ \ \ \ \ \ 0x040}}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \textcolor{comment}{//\ registers\ for\ resutls}}
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\#define\ SENSOR\_RESULT\_RANGE\_STATUS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x04D}}
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\#define\ SENSOR\_RESULT\_ALD\_STATUS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x04E}}
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\#define\ SENSOR\_RESULT\_INTERRUPT\_STATUS\_GPIO\ \ \ \ \ \ \ \ 0x04F\ \ \ \ \ \ \ \ \ \ \ }\textcolor{comment}{//used\ for\ poll\ (ex\ cd)\ and\ interrupt}}
+\DoxyCodeLine{00090\ \textcolor{preprocessor}{\#define\ SENSOR\_RESULT\_ALS\_VAL\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x050}}
+\DoxyCodeLine{00091\ \textcolor{preprocessor}{\#define\ SENSOR\_RESULT\_HISTORY\_BUFFER\_x\ \ \ \ \ \ \ \ \ \ \ \ \ 0x052:0x060}}
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\#define\ SENSOR\_RESULT\_RANGE\_VAL\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x062}}
+\DoxyCodeLine{00093\ \textcolor{preprocessor}{\#define\ SENSOR\_RESULT\_RANGE\_RAW\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x064}}
+\DoxyCodeLine{00094\ \textcolor{preprocessor}{\#define\ SENSOR\_RESULT\_RANGE\_RETURN\_RATE\ \ \ \ \ \ \ \ \ \ \ \ 0x066}}
+\DoxyCodeLine{00095\ \textcolor{preprocessor}{\#define\ SENSOR\_RESULT\_RANGE\_REFERENCE\_RATE\ \ \ \ \ \ \ \ \ 0x068}}
+\DoxyCodeLine{00096\ \textcolor{preprocessor}{\#define\ SENSOR\_RESULT\_RANGE\_RETURN\_SIGNAL\_COUNT\ \ \ \ 0x06C}}
+\DoxyCodeLine{00097\ \textcolor{preprocessor}{\#define\ SENSOR\_RESULT\_RANGE\_REFERENCE\_SIGNAL\_COUNT\ 0x070\ \ \ \ \ \ \ \ \ \ \ }\textcolor{comment}{//\ used\ also\ in\ interrupt\ func\ and\ clear\ interupts}}
+\DoxyCodeLine{00098\ \textcolor{preprocessor}{\#define\ SENSOR\_RESULT\_RANGE\_RANGE\_RETURN\_AMB\_COUNT\ 0x074}}
+\DoxyCodeLine{00099\ \textcolor{preprocessor}{\#define\ SENSOR\_RESULT\_RANGE\_REFERENCE\_AMB\_COUNT\ \ \ \ 0x078}}
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\#define\ SENSOR\_RESULT\_RANGE\_RETURN\_CONV\_TIME\ \ \ \ \ \ \ 0x07C}}
+\DoxyCodeLine{00101\ \textcolor{preprocessor}{\#define\ SENSOR\_RESULT\_RANGE\_REFERENCE\_CONV\_TIME\ \ \ \ 0x080}}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \textcolor{comment}{//\ other\ registers}}
+\DoxyCodeLine{00104\ \textcolor{preprocessor}{\#define\ SENSOR\_READOUT\_AVERAGING\_SAMPLE\_PERIOD\ \ \ \ \ 0x10A}}
+\DoxyCodeLine{00105\ \textcolor{preprocessor}{\#define\ SENSOR\_FIRMWARE\_BOOTUP\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x119}}
+\DoxyCodeLine{00106\ \textcolor{preprocessor}{\#define\ SENSOR\_FIRMWARE\_RESULT\_SCALER\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x120}}
+\DoxyCodeLine{00107\ \textcolor{preprocessor}{\#define\ SENSOR\_I2C\_SLAVE\_DEVICE\_ADDRESS\ \ \ \ \ \ \ \ \ \ \ \ 0x212\ \ \ \ \ \ \ \ \ \ }\textcolor{comment}{//\ can\ change\ the\ default\ sensor\ address}}
+\DoxyCodeLine{00108\ \textcolor{preprocessor}{\#define\ SENSOR\_INTERLEAVED\_MODE\_ENABLE\ \ \ \ \ \ \ \ \ \ \ \ \ 0x2A3}}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \textcolor{comment}{/*\ Robot\ headers}}
+\DoxyCodeLine{00111\ \textcolor{comment}{\#define\ VL6180X\_ID\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0xB4}}
+\DoxyCodeLine{00112\ \textcolor{comment}{}}
+\DoxyCodeLine{00113\ \textcolor{comment}{\#define\ VL6180X\_NO\_ERR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x00}}
+\DoxyCodeLine{00114\ \textcolor{comment}{\#define\ VL6180X\_EARLY\_CONV\_ERR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x06}}
+\DoxyCodeLine{00115\ \textcolor{comment}{\#define\ VL6180X\_MAX\_CONV\_ERR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x07}}
+\DoxyCodeLine{00116\ \textcolor{comment}{\#define\ VL6180X\_IGNORE\_ERR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x08}}
+\DoxyCodeLine{00117\ \textcolor{comment}{\#define\ VL6180X\_MAX\_S\_N\_ERR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0B}}
+\DoxyCodeLine{00118\ \textcolor{comment}{\#define\ VL6180X\_RAW\_Range\_UNDERFLOW\_ERR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0C}}
+\DoxyCodeLine{00119\ \textcolor{comment}{\#define\ VL6180X\_RAW\_Range\_OVERFLOW\_ERR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0D}}
+\DoxyCodeLine{00120\ \textcolor{comment}{\#define\ VL6180X\_Range\_UNDERFLOW\_ERR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0E}}
+\DoxyCodeLine{00121\ \textcolor{comment}{\#define\ VL6180X\_Range\_OVERFLOW\_ERR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x0F}}
+\DoxyCodeLine{00122\ \textcolor{comment}{}}
+\DoxyCodeLine{00123\ \textcolor{comment}{\#define\ VL6180X\_DIS\_INTERRUPT\ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{00124\ \textcolor{comment}{\#define\ VL6180X\_HIGH\_INTERRUPT\ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{00125\ \textcolor{comment}{\#define\ VL6180X\_LOW\_INTERRUPT\ \ \ \ \ \ \ \ 2}}
+\DoxyCodeLine{00126\ \textcolor{comment}{}}
+\DoxyCodeLine{00127\ \textcolor{comment}{\#define\ VL6180X\_INT\_DISABLE\ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{00128\ \textcolor{comment}{\#define\ VL6180X\_LEVEL\_LOW\ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{00129\ \textcolor{comment}{\#define\ VL6180X\_LEVEL\_HIGH\ \ \ \ \ \ \ \ \ \ \ 2}}
+\DoxyCodeLine{00130\ \textcolor{comment}{\#define\ VL6180X\_OUT\_OF\_WINDOW\ \ \ \ \ \ \ \ 3}}
+\DoxyCodeLine{00131\ \textcolor{comment}{\#define\ VL6180X\_NEW\_SAMPLE\_READY\ \ \ \ \ 4}}
+\DoxyCodeLine{00132\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ \textcolor{comment}{//Settings}}
+\DoxyCodeLine{00135\ \textcolor{preprocessor}{\#define\ SENSOR\_defaultID\ \ \ \ \ \ \ \ \ \ \ \ 0xB4}}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \textcolor{preprocessor}{\#define\ GPIO1\_default\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x20}}
+\DoxyCodeLine{00138\ \textcolor{preprocessor}{\#define\ GPIO1\_highInterrupt\ \ \ \ \ \ \ \ \ 0x10}}
+\DoxyCodeLine{00139\ \textcolor{preprocessor}{\#define\ GPIO1\_lowInterrupt\ \ \ \ \ \ \ \ \ \ 0x30}}
+\DoxyCodeLine{00140\ \textcolor{preprocessor}{\#define\ freshReset\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x00}}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \textcolor{preprocessor}{\#define\ interruptConfig\_Dis\ \ \ \ \ \ \ \ \ 0x00}}
+\DoxyCodeLine{00143\ \textcolor{preprocessor}{\#define\ interruptConfig\_Low\ \ \ \ \ \ \ \ \ 0x01}}
+\DoxyCodeLine{00144\ \textcolor{preprocessor}{\#define\ interruptConfig\_High\ \ \ \ \ \ \ \ 0x02\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00145\ \textcolor{preprocessor}{\#define\ interruptConfig\_OfW\ \ \ \ \ \ \ \ \ 0x03}}
+\DoxyCodeLine{00146\ \textcolor{preprocessor}{\#define\ interruptConfig\_Rdy\ \ \ \ \ \ \ \ \ 0x04}}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \textcolor{preprocessor}{\#define\ interruptClear\_Range\ \ \ \ \ \ \ \ 0x00}}
+\DoxyCodeLine{00149\ \textcolor{preprocessor}{\#define\ interruptClear\_ALS\ \ \ \ \ \ \ \ \ \ 0x01}}
+\DoxyCodeLine{00150\ \textcolor{preprocessor}{\#define\ interruptClear\_Error\ \ \ \ \ \ \ \ 0x02}}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \textcolor{preprocessor}{\#define\ singleMode\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x01}}
+\DoxyCodeLine{00153\ \textcolor{preprocessor}{\#define\ continuousMode\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x03}}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00155\ \textcolor{preprocessor}{\#define\ samplePeriod\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x30}}
+\DoxyCodeLine{00156\ \textcolor{preprocessor}{\#define\ vhvRepeat\_Rate\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0xFF}}
+\DoxyCodeLine{00157\ \textcolor{preprocessor}{\#define\ chcRecalibrate\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x01}}
+\DoxyCodeLine{00158\ \textcolor{preprocessor}{\#define\ integrationPeriod\ \ \ \ \ \ \ \ \ \ \ 0x63}}
+\DoxyCodeLine{00159\ \textcolor{preprocessor}{\#define\ intermeasurementPeriod\_Rng\ \ 0x09}}
+\DoxyCodeLine{00160\ \textcolor{preprocessor}{\#define\ intermeasurementPeriod\_ALS\ \ 0x31}}
+\DoxyCodeLine{00161\ \textcolor{preprocessor}{\#define\ rangeMax\_Convergence\_Time\ \ \ 0x31}}
+\DoxyCodeLine{00162\ \textcolor{preprocessor}{\#define\ interleavedMode\_Enable\ \ \ \ \ \ 0x00}}
+
+\end{DoxyCode}

@@ -1,0 +1,90 @@
+\doxysection{Actuation Class Reference}
+\hypertarget{class_actuation}{}\label{class_actuation}\index{Actuation@{Actuation}}
+
+
+{\ttfamily \#include $<$Actuation.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_actuation_a57d4e28d379505ad671d253536757aa5}{Actuation}} (\mbox{\hyperlink{class_v_i_b_r_o4__rpi}{VIBRO4\+\_\+rpi}} \texorpdfstring{$\ast$}{*}Vibro\+Motor, \mbox{\hyperlink{class_servo___driver}{Servo\+\_\+\+Driver}} \texorpdfstring{$\ast$}{*}Servo\+Motor)
+\item 
+\mbox{\hyperlink{class_actuation_a8446b3b773fa0cd24198cc67c2d373bd}{\texorpdfstring{$\sim$}{\string~}\+Actuation}} ()
+\item 
+void \mbox{\hyperlink{class_actuation_a648399a85f9f60f7a1bc5e779a45c28e}{start}} ()
+\item 
+void \mbox{\hyperlink{class_actuation_a39a24f63409fd4a8633a48301984c63f}{set\+File\+Descriptor}} (int \texorpdfstring{$\ast$}{*}a)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_actuation_a9adb2fb3c0e1f9b061f87c6e6c26cab6}{activate}} = false
+\item 
+bool \mbox{\hyperlink{class_actuation_a220306846bb891871042355b487521bc}{data\+Received}} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+the actuating class of the dispenser makes use of a vibrational and servo motors 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_actuation_a57d4e28d379505ad671d253536757aa5}\label{class_actuation_a57d4e28d379505ad671d253536757aa5} 
+\index{Actuation@{Actuation}!Actuation@{Actuation}}
+\index{Actuation@{Actuation}!Actuation@{Actuation}}
+\doxysubsubsection{\texorpdfstring{Actuation()}{Actuation()}}
+{\footnotesize\ttfamily Actuation\+::\+Actuation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_v_i_b_r_o4__rpi}{VIBRO4\+\_\+rpi}} \texorpdfstring{$\ast$}{*}}]{Vibro\+Motor,  }\item[{\mbox{\hyperlink{class_servo___driver}{Servo\+\_\+\+Driver}} \texorpdfstring{$\ast$}{*}}]{Servo\+Motor }\end{DoxyParamCaption})}
+
+Constructor 
+\begin{DoxyParams}{Parameters}
+{\em v\+Motor} & a pointer to a vibrational motor \\
+\hline
+{\em s\+Motor} & a pointer to a servo motor \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_actuation_a8446b3b773fa0cd24198cc67c2d373bd}\label{class_actuation_a8446b3b773fa0cd24198cc67c2d373bd} 
+\index{Actuation@{Actuation}!````~Actuation@{\texorpdfstring{$\sim$}{\string~}Actuation}}
+\index{````~Actuation@{\texorpdfstring{$\sim$}{\string~}Actuation}!Actuation@{Actuation}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Actuation()}{\string~Actuation()}}
+{\footnotesize\ttfamily Actuation\+::\texorpdfstring{$\sim$}{\string~}\+Actuation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Destructor 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_actuation_a39a24f63409fd4a8633a48301984c63f}\label{class_actuation_a39a24f63409fd4a8633a48301984c63f} 
+\index{Actuation@{Actuation}!setFileDescriptor@{setFileDescriptor}}
+\index{setFileDescriptor@{setFileDescriptor}!Actuation@{Actuation}}
+\doxysubsubsection{\texorpdfstring{setFileDescriptor()}{setFileDescriptor()}}
+{\footnotesize\ttfamily void Actuation\+::set\+File\+Descriptor (\begin{DoxyParamCaption}\item[{int \texorpdfstring{$\ast$}{*}}]{a }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Sets a pointer to a file descriptor to be used for read() blocking 
+\begin{DoxyParams}{Parameters}
+{\em a} & pointer to an existing descriptor \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_actuation_a648399a85f9f60f7a1bc5e779a45c28e}\label{class_actuation_a648399a85f9f60f7a1bc5e779a45c28e} 
+\index{Actuation@{Actuation}!start@{start}}
+\index{start@{start}!Actuation@{Actuation}}
+\doxysubsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily void Actuation\+::start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Open a thread for actuation 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_actuation_a9adb2fb3c0e1f9b061f87c6e6c26cab6}\label{class_actuation_a9adb2fb3c0e1f9b061f87c6e6c26cab6} 
+\index{Actuation@{Actuation}!activate@{activate}}
+\index{activate@{activate}!Actuation@{Actuation}}
+\doxysubsubsection{\texorpdfstring{activate}{activate}}
+{\footnotesize\ttfamily bool Actuation\+::activate = false}
+
+Boolean to describe if the motors should be activated Motors are powered off by default \Hypertarget{class_actuation_a220306846bb891871042355b487521bc}\label{class_actuation_a220306846bb891871042355b487521bc} 
+\index{Actuation@{Actuation}!dataReceived@{dataReceived}}
+\index{dataReceived@{dataReceived}!Actuation@{Actuation}}
+\doxysubsubsection{\texorpdfstring{dataReceived}{dataReceived}}
+{\footnotesize\ttfamily bool Actuation\+::data\+Received = false}
+
+Boolean to indicate if data has been received and the states of the motors required changing 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Georgia/\+Documents/\+Git\+Hub/\+Spice\+Mate/src/Actuation.\+h\item 
+C\+:/\+Users/\+Georgia/\+Documents/\+Git\+Hub/\+Spice\+Mate/src/Actuation.\+cpp\end{DoxyCompactItemize}

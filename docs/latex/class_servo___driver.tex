@@ -1,0 +1,80 @@
+\doxysection{Servo\+\_\+\+Driver Class Reference}
+\hypertarget{class_servo___driver}{}\label{class_servo___driver}\index{Servo\_Driver@{Servo\_Driver}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_servo___driver_a9787488b1534cb8daabe1025facd339e}{Servo\+\_\+\+Driver}} (uint8\+\_\+t pin\+\_\+num)
+\item 
+\mbox{\hyperlink{class_servo___driver_a21dadfee5479577957353c2e4ccc0a13}{\texorpdfstring{$\sim$}{\string~}\+Servo\+\_\+\+Driver}} ()
+\item 
+void \mbox{\hyperlink{class_servo___driver_ab0458f1603a8fe34ee32bc036bf9dd63}{set\+Frequency}} (float f\+\_\+hz)
+\item 
+void \mbox{\hyperlink{class_servo___driver_a6fb85d3bc3f8f9634902af4c0a671354}{set\+Angle}} (float angle\+\_\+deg)
+\item 
+void \mbox{\hyperlink{class_servo___driver_a51cfc690edfae9bbd4e9e28bac195414}{start\+PWM}} ()
+\item 
+void \mbox{\hyperlink{class_servo___driver_a09393774251f3544d027a3449054decf}{stop\+PWM}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_servo___driver_a9787488b1534cb8daabe1025facd339e}\label{class_servo___driver_a9787488b1534cb8daabe1025facd339e} 
+\index{Servo\_Driver@{Servo\_Driver}!Servo\_Driver@{Servo\_Driver}}
+\index{Servo\_Driver@{Servo\_Driver}!Servo\_Driver@{Servo\_Driver}}
+\doxysubsubsection{\texorpdfstring{Servo\_Driver()}{Servo\_Driver()}}
+{\footnotesize\ttfamily Servo\+\_\+\+Driver\+::\+Servo\+\_\+\+Driver (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{pin\+\_\+num }\end{DoxyParamCaption})}
+
+Constructor 
+\begin{DoxyParams}{Parameters}
+{\em pin\+\_\+num} & an unsigned integer of the PWM pin on the RPI \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_servo___driver_a21dadfee5479577957353c2e4ccc0a13}\label{class_servo___driver_a21dadfee5479577957353c2e4ccc0a13} 
+\index{Servo\_Driver@{Servo\_Driver}!````~Servo\_Driver@{\texorpdfstring{$\sim$}{\string~}Servo\_Driver}}
+\index{````~Servo\_Driver@{\texorpdfstring{$\sim$}{\string~}Servo\_Driver}!Servo\_Driver@{Servo\_Driver}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Servo\_Driver()}{\string~Servo\_Driver()}}
+{\footnotesize\ttfamily Servo\+\_\+\+Driver\+::\texorpdfstring{$\sim$}{\string~}\+Servo\+\_\+\+Driver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Destructor 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_servo___driver_a6fb85d3bc3f8f9634902af4c0a671354}\label{class_servo___driver_a6fb85d3bc3f8f9634902af4c0a671354} 
+\index{Servo\_Driver@{Servo\_Driver}!setAngle@{setAngle}}
+\index{setAngle@{setAngle}!Servo\_Driver@{Servo\_Driver}}
+\doxysubsubsection{\texorpdfstring{setAngle()}{setAngle()}}
+{\footnotesize\ttfamily void Servo\+\_\+\+Driver\+::set\+Angle (\begin{DoxyParamCaption}\item[{float}]{angle\+\_\+deg }\end{DoxyParamCaption})}
+
+Set rotation angle for servo motor (Min\+:0 degrees, Ma\+:180 degrees) 
+\begin{DoxyParams}{Parameters}
+{\em angle\+\_\+deg} & a float with the angle in degrees \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_servo___driver_ab0458f1603a8fe34ee32bc036bf9dd63}\label{class_servo___driver_ab0458f1603a8fe34ee32bc036bf9dd63} 
+\index{Servo\_Driver@{Servo\_Driver}!setFrequency@{setFrequency}}
+\index{setFrequency@{setFrequency}!Servo\_Driver@{Servo\_Driver}}
+\doxysubsubsection{\texorpdfstring{setFrequency()}{setFrequency()}}
+{\footnotesize\ttfamily void Servo\+\_\+\+Driver\+::set\+Frequency (\begin{DoxyParamCaption}\item[{float}]{f\+\_\+hz }\end{DoxyParamCaption})}
+
+Set Pulse Width Modulation frequency for servo motor (Note\+: Must be set before angle!) 
+\begin{DoxyParams}{Parameters}
+{\em f\+\_\+hz} & a float with the frequency in hz \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_servo___driver_a51cfc690edfae9bbd4e9e28bac195414}\label{class_servo___driver_a51cfc690edfae9bbd4e9e28bac195414} 
+\index{Servo\_Driver@{Servo\_Driver}!startPWM@{startPWM}}
+\index{startPWM@{startPWM}!Servo\_Driver@{Servo\_Driver}}
+\doxysubsubsection{\texorpdfstring{startPWM()}{startPWM()}}
+{\footnotesize\ttfamily void Servo\+\_\+\+Driver\+::start\+PWM (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Send Pulse Width Modulation signal to PWM pin \Hypertarget{class_servo___driver_a09393774251f3544d027a3449054decf}\label{class_servo___driver_a09393774251f3544d027a3449054decf} 
+\index{Servo\_Driver@{Servo\_Driver}!stopPWM@{stopPWM}}
+\index{stopPWM@{stopPWM}!Servo\_Driver@{Servo\_Driver}}
+\doxysubsubsection{\texorpdfstring{stopPWM()}{stopPWM()}}
+{\footnotesize\ttfamily void Servo\+\_\+\+Driver\+::stop\+PWM (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Stop sending Pulse Width Modulation signal to PWM pin 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Georgia/\+Documents/\+Git\+Hub/\+Spice\+Mate/src/Servo\+\_\+\+Driver.\+h\item 
+C\+:/\+Users/\+Georgia/\+Documents/\+Git\+Hub/\+Spice\+Mate/src/Servo\+\_\+\+Driver.\+cpp\end{DoxyCompactItemize}

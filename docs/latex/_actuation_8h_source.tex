@@ -1,0 +1,47 @@
+\doxysection{Actuation.\+h}
+\hypertarget{_actuation_8h_source}{}\label{_actuation_8h_source}\index{C:/Users/Georgia/Documents/GitHub/SpiceMate/src/Actuation.h@{C:/Users/Georgia/Documents/GitHub/SpiceMate/src/Actuation.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ VIBRO4\_rpi}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include<VIBRO4\_rpi.h>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#ifndef\ Servo\_Driver}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include<Servo\_Driver.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_actuation}{Actuation}}\{}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \mbox{\hyperlink{class_actuation_a57d4e28d379505ad671d253536757aa5}{Actuation}}(\mbox{\hyperlink{class_v_i_b_r_o4__rpi}{VIBRO4\_rpi}}*\ VibroMotor,\mbox{\hyperlink{class_servo___driver}{Servo\_Driver}}*\ ServoMotor);}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00026\ \ \ \ \mbox{\hyperlink{class_actuation_a8446b3b773fa0cd24198cc67c2d373bd}{\string~Actuation}}();}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00032\ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_actuation_a648399a85f9f60f7a1bc5e779a45c28e}{start}}();}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00039\ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_actuation_a39a24f63409fd4a8633a48301984c63f}{setFileDescriptor}}(\textcolor{keywordtype}{int}*\ a)\{}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ pfds\_read\ =\ a;}
+\DoxyCodeLine{00041\ \ \ \ \ \};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00047\ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_actuation_a9adb2fb3c0e1f9b061f87c6e6c26cab6}{activate}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00053\ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_actuation_a220306846bb891871042355b487521bc}{dataReceived}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00059\ \ \ \ \mbox{\hyperlink{class_v_i_b_r_o4__rpi}{VIBRO4\_rpi}}*\ pvMotor\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00064\ \ \ \ \mbox{\hyperlink{class_servo___driver}{Servo\_Driver}}*\ psMotor\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00069\ \ \ \ \textcolor{keywordtype}{int}\ running\ =\ 0;}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00074\ \ \ \ std::thread\ actuationThread;}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00080\ \ \ \ \textcolor{keywordtype}{void}\ worker();}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00088\ \ \ \ \textcolor{keywordtype}{int}*\ pfds\_read\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00096\ \ \ \ \textcolor{keywordtype}{bool}\ status\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \};}
+
+\end{DoxyCode}

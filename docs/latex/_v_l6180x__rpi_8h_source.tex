@@ -1,0 +1,113 @@
+\doxysection{VL6180x\+\_\+rpi.\+h}
+\hypertarget{_v_l6180x__rpi_8h_source}{}\label{_v_l6180x__rpi_8h_source}\index{C:/Users/Georgia/Documents/GitHub/SpiceMate/src/VL6180x\_rpi.h@{C:/Users/Georgia/Documents/GitHub/SpiceMate/src/VL6180x\_rpi.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <unistd.h>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//\#include\ <pigpio.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <linux/i2c-\/dev.h>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <gpiod.h>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <assert.h>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#ifndef\ \ VL6180xcallbackChild}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <VL6180xcallbackChild.h>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <VL6180x\_regAddress.h>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <VL6180X\_regBitDefinitions.h>}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#ifndef\ NDEBUG}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#define\ DEBUG}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ could\_not\_open\_i2c[]\ =\ \textcolor{stringliteral}{"{}Could\ not\ open\ I2C.\(\backslash\)n"{}};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{comment}{//\ default\ i2c\ address\ }}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#define\ DEFAULT\_VL6180X\_ADDRESS\ 0x29}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{comment}{//\ default\ GPIO\ pins\ for\ the\ interrupt\ and\ sensor\ enable}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#define\ DEFAULT\_INT\_TO\_GPIO\ 17}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#define\ DEFAULT\_EN\_TO\_GPIO\ 4}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{comment}{//\ default\ interrupt\ timeout}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#define\ ISR\_TIMEOUT\ 1000}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_v_l6180x__settings}{VL6180x\_settings}}\{}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{int}\ default\_i2c\_bus\ =\ 1;}
+\DoxyCodeLine{00035\ \ \ \ \ uint8\_t\ sensor\_address\ =\ DEFAULT\_VL6180X\_ADDRESS;}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{comment}{//bool\ initPIGPIO\ =\ true;}}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{int}\ int\_chip\ =\ 0;}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{int}\ int\_gpio\ =\ DEFAULT\_INT\_TO\_GPIO;}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{int}\ en\_chip\ =\ 0;}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{int}\ en\_gpio\ =\ DEFAULT\_EN\_TO\_GPIO;}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00045\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{struct_v_l6180x__settings_a5da4fc34064752231ea55d44d94c72a3}{system\_mode\_gpio1}}\ =\ (ACTIVE\_HIGH|GPIO\_INTERRUPT\_OUTPUT);}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ uint8\_t\ system\_interrupt\_config\_gpio\ =\ RANGE\_NEW\_SAMPLE\_READY;}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ uint8\_t\ system\_interrupt\_clear\ =\ (CLEAR\_RANGE\_INT|CLEAR\_ALS\_INT|CLEAR\_ERROR\_INT);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{comment}{//uint8\_t\ sysrange\_thresh\_low\ =\ *ptr\_range\_thresh\_low;}}
+\DoxyCodeLine{00052\ \ \ \ \ uint8\_t\ sysrange\_thresh\_low\ =\ 0x00;}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{comment}{//uint8\_t\ sysrange\_thresh\_high\ =\ *ptr\_range\_thresh\_high;}}
+\DoxyCodeLine{00055\ \ \ \ \ uint8\_t\ sysrange\_thresh\_high\ =\ 0xFF;}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{comment}{//uint8\_t\ sysrange\_intermeasurement\_period\ =\ *ptr\_intermeasurement\_period;}}
+\DoxyCodeLine{00058\ \ \ \ \ uint8\_t\ sysrange\_intermeasurement\_period\ =\ 0xFF;}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{comment}{//uint8\_t\ sysrange\_max\_convergence\_time\ =\ *ptr\_max\_convergence\_time;}}
+\DoxyCodeLine{00061\ \ \ \ \ uint8\_t\ sysrange\_max\_convergence\_time\ =\ 63;}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ uint8\_t\ sysrange\_range\_check\_enables\ =\ (SIGNAL\_TO\_NOISE\_ENABLE);}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ uint8\_t\ sysrange\_start\ =\ (RANGING\_MODE\_CONTINUOUS|RANGE\_START\_STOP\_TRIGGER);}
+\DoxyCodeLine{00066\ \};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_v_l6180x__rpi}{VL6180x\_rpi}}\ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00073\ \ \ \ \ \mbox{\hyperlink{class_v_l6180x__rpi_a4fe8075410a794f010c21798a2594a9b}{\string~VL6180x\_rpi}}()\ \{\mbox{\hyperlink{class_v_l6180x__rpi_a6ad73db74a831793d205540862be0706}{stop}}();\}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_v_l6180x__rpi_ad74c3cfb5692795ffa0df0e4c774ad11}{startRangeContinuous}}(\mbox{\hyperlink{struct_v_l6180x__settings}{VL6180x\_settings}}\ vl6180xsettings\ =\ \mbox{\hyperlink{struct_v_l6180x__settings}{VL6180x\_settings}}());}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_v_l6180x__rpi_a6ad73db74a831793d205540862be0706}{stop}}();}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_v_l6180x__rpi_ac0ddd9484407dfc20f58e5dc562efeec}{registerCallback}}(\mbox{\hyperlink{class_v_l6180xcallback}{VL6180xcallback}}*\ cb);}
+\DoxyCodeLine{00090\ \ \ \ \ }
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_v_l6180x__rpi_a581d91239c1ca2f0cf0fc66159959d87}{unRegisterCallback}}();}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00102\ \ \ \ \ \mbox{\hyperlink{struct_v_l6180x__settings}{VL6180x\_settings}}\ sensorSettings;}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00109\ \ \ \ \ \mbox{\hyperlink{class_v_l6180xcallback}{VL6180xcallback}}*\ sensorCallback\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00114\ \ \ \ \ std::thread\ proxThread;}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordtype}{int}\ running\ =\ 0;}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{keywordtype}{void}\ i2c\_writeTwoBytes(uint8\_t\ reg,\ \textcolor{keywordtype}{unsigned}\ data);}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordtype}{void}\ i2c\_writeByte(uint8\_t\ reg,\ \textcolor{keywordtype}{unsigned}\ data);}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ i2c\_readTwoBytes(uint8\_t\ reg);}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ i2c\_readByte(uint8\_t\ reg);}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keywordtype}{void}\ dataReady();}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keywordtype}{void}\ worker();}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keyword}{struct\ }gpiod\_chip\ *chipINT\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keyword}{struct\ }gpiod\_line\ *pinINT\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00172\ \ \ \ \ \textcolor{keyword}{struct\ }gpiod\_chip\ *chipEN\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{keyword}{struct\ }gpiod\_line\ *pinEN\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{keywordtype}{int}\ fd\_i2c\ =\ -\/1;}
+\DoxyCodeLine{00183\ \};}
+
+\end{DoxyCode}

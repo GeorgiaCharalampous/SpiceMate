@@ -1,0 +1,37 @@
+\doxysection{VL6180xcallback\+Child.\+h}
+\hypertarget{_v_l6180xcallback_child_8h_source}{}\label{_v_l6180xcallback_child_8h_source}\index{C:/Users/Georgia/Documents/GitHub/SpiceMate/src/VL6180xcallbackChild.h@{C:/Users/Georgia/Documents/GitHub/SpiceMate/src/VL6180xcallbackChild.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ stdint}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#ifndef\ \ VL6180xcallback}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <VL6180xcallback.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#ifndef\ DataProcess}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <DataProcess.h>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_v_l6180xcallback_child}{VL6180xcallbackChild}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_v_l6180xcallback}{VL6180xcallback}}\ \{}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ hasSample(uint8\_t\ sample);}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_v_l6180xcallback_child_a1ec7398da02a2f10fd32e4c16f88f93a}{registerDP}}(\mbox{\hyperlink{class_data_process}{DataProcess}}*\ \textcolor{keywordtype}{object})\{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ dp\ =\ object;}
+\DoxyCodeLine{00025\ \ \ \ \ \};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_v_l6180xcallback_child_a8b765b674960eba98610c77ec35c903e}{setFileDescriptor}}\ (\textcolor{keywordtype}{int}*\ a)}
+\DoxyCodeLine{00031\ \ \ \ \ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ pfds\_write\ =\ a;}
+\DoxyCodeLine{00033\ \ \ \ \ \}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{class_data_process}{DataProcess}}*\ dp\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{int}*\ pfds\_write\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \};}
+
+\end{DoxyCode}

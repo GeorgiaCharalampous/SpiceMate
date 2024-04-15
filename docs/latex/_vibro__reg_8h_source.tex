@@ -1,0 +1,188 @@
+\doxysection{Vibro\+\_\+reg.\+h}
+\hypertarget{_vibro__reg_8h_source}{}\label{_vibro__reg_8h_source}\index{C:/Users/Georgia/Documents/GitHub/SpiceMate/src/Vibro\_reg.h@{C:/Users/Georgia/Documents/GitHub/SpiceMate/src/Vibro\_reg.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ stdint}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{comment}{//Registers\ for\ Vibro\ 4}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ VIBRO\_STATUS\_REG\ \ \ \ \ \ \ \ 0x00\ \ \ \ \ \ \ \ }\textcolor{comment}{//\ ALL\ READ\ ONLY}}
+\DoxyCodeLine{00007\ \textcolor{keyword}{enum}\{}
+\DoxyCodeLine{00008\ \ \ \ \ DEFAULT\_STATUS\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b01100000,}
+\DoxyCodeLine{00009\ \ \ \ \ DIAG\_RESULT\_FAIL\ \ \ \ \ \ \ \ \ \ \ \ =\ 0b01101000,}
+\DoxyCodeLine{00010\ \ \ \ \ FB\_STS\_TIMEOUT\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b01100100,}
+\DoxyCodeLine{00011\ \ \ \ \ OVER\_TEMP\_DEVICE\ \ \ \ \ \ \ \ \ \ \ \ =\ 0b01100010,}
+\DoxyCodeLine{00012\ \ \ \ \ OVER\_CURRENT\_DEVICE\ \ \ \ \ \ \ \ \ =\ 0b01100001,}
+\DoxyCodeLine{00013\ \};}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#define\ VIBRO\_MODE\_REG\ \ \ \ \ \ \ \ \ \ 0x01\ \ \ \ \ \ \ }}
+\DoxyCodeLine{00015\ \textcolor{comment}{//settings}}
+\DoxyCodeLine{00016\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ DEV\_RESET\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b10000000,}
+\DoxyCodeLine{00018\ \ \ \ \ STANDBY\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b01000000,}
+\DoxyCodeLine{00019\ \ \ \ \ DEVICE\_RDY\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00000000,}
+\DoxyCodeLine{00020\ \ \ \ \ MODE\_INT\_TRIGGER\ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00000000,}
+\DoxyCodeLine{00021\ \ \ \ \ MODE\_EXT\_TRIGGER\_EDGE\ \ \ \ \ \ \ =\ 0b00000001,}
+\DoxyCodeLine{00022\ \ \ \ \ MODE\_EXT\_TRIGGER\_LVL\ \ \ \ \ \ \ \ =\ 0b00000010,}
+\DoxyCodeLine{00023\ \ \ \ \ MODE\_PWM\_TRIG\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00000011,}
+\DoxyCodeLine{00024\ \ \ \ \ MODE\_RTPLAYBACK\ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00000101,}
+\DoxyCodeLine{00025\ \ \ \ \ MODE\_DIAGNOSTIC\ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00000110,}
+\DoxyCodeLine{00026\ \ \ \ \ MODE\_AUTO\_CALIBRATION\ \ \ \ \ \ \ =\ 0b00000111,}
+\DoxyCodeLine{00027\ \};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#define\ VIBRO\_RTP\_REG\ \ \ \ \ \ \ \ \ \ \ 0x02}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#define\ VIBRO\_REGFIELD\_REG\ \ \ \ \ \ 0x03\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00031\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ HIGH\_IMP\_STATE\_DIS\ \ \ \ \ \ \ \ \ \ =\ 0b00000000,}
+\DoxyCodeLine{00033\ \ \ \ \ HIGH\_IMP\_STATE\_ENABLE\ \ \ \ \ \ \ =\ 0b00001000,}
+\DoxyCodeLine{00034\ \ \ \ \ LIBRARY\_SELECT\_LRA\ \ \ \ \ \ \ \ \ \ =\ 0b00000110,\ \textcolor{comment}{//lib\ 6\ for\ LRA}}
+\DoxyCodeLine{00035\ \};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ VIBRO\_WAV\_SEQ\_REG1\ \ \ \ \ \ 0x04}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#define\ VIBRO\_WAV\_SEQ\_REG2\ \ \ \ \ \ 0x05}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#define\ VIBRO\_WAV\_SEQ\_REG3\ \ \ \ \ \ 0x06}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#define\ VIBRO\_WAV\_SEQ\_REG4\ \ \ \ \ \ 0x07}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#define\ VIBRO\_WAV\_SEQ\_REG5\ \ \ \ \ \ 0x08}}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#define\ VIBRO\_WAV\_SEQ\_REG6\ \ \ \ \ \ 0x09}}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#define\ VIBRO\_WAV\_SEQ\_REG7\ \ \ \ \ \ 0x0A}}
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#define\ VIBRO\_WAV\_SEQ\_REG8\ \ \ \ \ \ 0x0B}}
+\DoxyCodeLine{00045\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ WAIT\_ENABLE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b10000000,\ \textcolor{comment}{//\ sets\ waveform\ sequencer\ to\ idle\ and\ delay\ is\ added\ between\ vibrations}}
+\DoxyCodeLine{00047\ \ \ \ \ WAV\_FRM\_SEQ\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00000000,\ \textcolor{comment}{//\ holds\ the\ waveform\ identifier\ of\ the\ waveform\ to\ be\ played}}
+\DoxyCodeLine{00048\ \};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#define\ VIBRO\_GO\_REG\ \ \ \ \ \ \ \ \ \ \ \ 0x0C\ \ \ \ \ \ \ \ }\textcolor{comment}{//[0]\ sets\ vibro\ to\ go\ and\ gives\ waveforms\ to\ sequencer}}
+\DoxyCodeLine{00051\ \textcolor{keyword}{enum}\{}
+\DoxyCodeLine{00052\ \ \ \ \ VIBRO\_GO\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00000001,}
+\DoxyCodeLine{00053\ \ \ \ \ VIBRO\_STOP\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00000000,}
+\DoxyCodeLine{00054\ \};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{comment}{//Offset\ registers}}
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#define\ VIBRO\_ODT\_OFFSET\_REG\ \ \ \ 0x0D\ \ \ \ \ \ \ \ }\textcolor{comment}{//automatic\ for\ closed\ loop\ mode}}
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#define\ VIBRO\_SPT\_OFFSET\_REG\ \ \ \ 0x0E\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#define\ VIBRO\_SNT\_OFFSET\_REG\ \ \ \ 0x0F\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#define\ VIBRO\_BRT\_OFFSET\_REG\ \ \ \ 0x10\ \ \ \ \ \ \ \ }\textcolor{comment}{//automatic\ for\ closed-\/loop\ mode}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \textcolor{comment}{//audio\ to\ haptic\ mode\ NA}}
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\#define\ VIBRO\_ATH\_REG\ \ \ \ \ \ \ \ \ \ \ 0x11}}
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\#define\ VIBRO\_ATH\_MIN\_INPUT\_REG\ 0x12}}
+\DoxyCodeLine{00065\ \textcolor{preprocessor}{\#define\ VIBRO\_ATH\_MAX\_INPUT\_REG\ 0x13}}
+\DoxyCodeLine{00066\ \textcolor{preprocessor}{\#define\ VIBRO\_ATH\_MIN\_DRIVE\_REG\ 0x14}}
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\#define\ VIBRO\_ATH\_MAX\_DRIVE\_REG\ 0x15}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\#define\ VIBRO\_RATED\_VOLTAGE\_REG\ 0x16\ \ \ \ \ \ \ \ }\textcolor{comment}{//sets\ ref\ voltage\ for\ fullscale\ output\ needed\ by\ auto-\/cal}}
+\DoxyCodeLine{00070\ \textcolor{keyword}{enum}\{}
+\DoxyCodeLine{00071\ \ \ \ \ RATED\_VOLTAGE\_DEFAULT\ \ \ \ \ \ \ =\ 0b00111111,}
+\DoxyCodeLine{00072\ \ \ \ \ RATED\_VOLTAGE\_170Hz\ \ \ \ \ \ \ \ \ =\ 105,}
+\DoxyCodeLine{00073\ \ \ \ \ RATED\_VOLTAGE\_ERM\ \ \ \ \ \ \ \ \ \ \ =\ 0x90,}
+\DoxyCodeLine{00074\ \};}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \textcolor{preprocessor}{\#define\ VIBRO\_OD\_CLAMP\_REG\ \ \ \ \ \ 0x17}}
+\DoxyCodeLine{00077\ \textcolor{keyword}{enum}\{}
+\DoxyCodeLine{00078\ \ \ \ \ OD\_CLAMP\_DEFAULT\ \ \ \ \ \ \ \ \ \ \ \ =\ 0b10001001,\textcolor{comment}{//\ 3V}}
+\DoxyCodeLine{00079\ \ \ \ \ OD\_CLAMP\_MOTOR\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b01111111,\ \textcolor{comment}{//\ 2.8V}}
+\DoxyCodeLine{00080\ \ \ \ \ OD\_CLAMP\_ERM\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0xA4,}
+\DoxyCodeLine{00081\ \};}
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\#define\ VIBRO\_A\_CAL\_COMP\_REG\ \ \ \ 0x18}}
+\DoxyCodeLine{00083\ \textcolor{keyword}{enum}\{}
+\DoxyCodeLine{00084\ \ \ \ \ A\_CAL\_COMP\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00001101,}
+\DoxyCodeLine{00085\ \};}
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\#define\ VIBRO\_A\_CAL\_BEMF\_REG\ \ \ \ 0x19\ }}
+\DoxyCodeLine{00087\ \textcolor{keyword}{enum}\{}
+\DoxyCodeLine{00088\ \ \ \ \ A\_CAL\_BEMF\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b01101101,}
+\DoxyCodeLine{00089\ \};}
+\DoxyCodeLine{00090\ \textcolor{preprocessor}{\#define\ VIBRO\_FEEDBACK\_REG\ \ \ \ \ \ 0x1A\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00091\ \textcolor{keyword}{enum}\{}
+\DoxyCodeLine{00092\ \ \ \ \ ERM\_MODE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00000000,}
+\DoxyCodeLine{00093\ \ \ \ \ LRA\_MODE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b10000000,}
+\DoxyCodeLine{00094\ \ \ \ \ }
+\DoxyCodeLine{00095\ \ \ \ \ FB\_BRAKE\_FACTOR\_1x\ \ \ \ \ \ \ \ \ \ =\ 0b00000000,}
+\DoxyCodeLine{00096\ \ \ \ \ FB\_BRAKE\_FACTOR\_2x\ \ \ \ \ \ \ \ \ \ =\ 0b00010000,}
+\DoxyCodeLine{00097\ \ \ \ \ FB\_BRAKE\_FACTOR\_3x\ \ \ \ \ \ \ \ \ \ =\ 0b00100000,}
+\DoxyCodeLine{00098\ \ \ \ \ FB\_BRAKE\_FACTOR\_4x\ \ \ \ \ \ \ \ \ \ =\ 0b00110000,\ \textcolor{comment}{//default}}
+\DoxyCodeLine{00099\ \ \ \ \ FB\_BRAKE\_FACTOR\_6x\ \ \ \ \ \ \ \ \ \ =\ 0b01000000,}
+\DoxyCodeLine{00100\ \ \ \ \ FB\_BRAKE\_FACTOR\_8x\ \ \ \ \ \ \ \ \ \ =\ 0b01010000,}
+\DoxyCodeLine{00101\ \ \ \ \ FB\_BRAKE\_FACTOR\_16x\ \ \ \ \ \ \ \ \ =\ 0b01100000,}
+\DoxyCodeLine{00102\ \ \ \ \ FB\_BRAKE\_DIS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b01110000,}
+\DoxyCodeLine{00103\ \ \ \ \ }
+\DoxyCodeLine{00104\ \ \ \ \ LOOP\_GAIN\_LOW\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00000000,}
+\DoxyCodeLine{00105\ \ \ \ \ LOOP\_GAIN\_MED\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00000100,\ \textcolor{comment}{//default}}
+\DoxyCodeLine{00106\ \ \ \ \ LOOP\_GAIN\_HIGH\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00001000,}
+\DoxyCodeLine{00107\ \ \ \ \ LOOP\_GAIN\_VERY\_HIGH\ \ \ \ \ \ \ \ \ =\ 0b00001100,}
+\DoxyCodeLine{00108\ \ \ \ \ }
+\DoxyCodeLine{00109\ \ \ \ \ BEMF\_GAIN\_LRA\_5x\ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00000000,}
+\DoxyCodeLine{00110\ \ \ \ \ BEMF\_GAIN\_LRA\_10x\ \ \ \ \ \ \ \ \ \ \ =\ 0b00000001,}
+\DoxyCodeLine{00111\ \ \ \ \ BEMF\_GAIN\_LRA\_20x\ \ \ \ \ \ \ \ \ \ \ =\ 0b00000010,\ \textcolor{comment}{//default}}
+\DoxyCodeLine{00112\ \ \ \ \ BEMF\_GAIN\_LRA\_30x\ \ \ \ \ \ \ \ \ \ \ =\ 0b00000011,}
+\DoxyCodeLine{00113\ \};}
+\DoxyCodeLine{00114\ \textcolor{preprocessor}{\#define\ VIBRO\_CONTROL1\_REG\ \ \ \ \ \ 0x1B\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00115\ \textcolor{keyword}{enum}\{}
+\DoxyCodeLine{00116\ \ \ \ \ STARTUP\_BOOST\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b10000000,}
+\DoxyCodeLine{00117\ \ \ \ \ AC\_COUPLE\_DIS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00000000,\ \textcolor{comment}{//\ for\ dc\ coupling\ or\ digital\ input\ modes}}
+\DoxyCodeLine{00118\ \ \ \ \ AC\_COUPLE\_ENBL\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00100000,\ \textcolor{comment}{//for\ ac\ coupling\ enabled}}
+\DoxyCodeLine{00119\ \ \ \ \ DRIVE\_TIME\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00010011}
+\DoxyCodeLine{00120\ \};}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \textcolor{preprocessor}{\#define\ VIBRO\_CONTROL2\_REG\ \ \ \ \ \ 0x1C}}
+\DoxyCodeLine{00123\ \textcolor{keyword}{enum}\{}
+\DoxyCodeLine{00124\ \ \ \ \ INPUT\_MODE\_UNIDIR\ \ \ \ \ \ \ \ \ \ \ =\ 0b00000000,}
+\DoxyCodeLine{00125\ \ \ \ \ INPUT\_MODE\_BIDIR\ \ \ \ \ \ \ \ \ \ \ \ =\ 0b10000000,}
+\DoxyCodeLine{00126\ \ \ \ \ BRAKE\_STABILISER\ \ \ \ \ \ \ \ \ \ \ \ =\ 0b01000000,}
+\DoxyCodeLine{00127\ \ \ \ \ }
+\DoxyCodeLine{00128\ \ \ \ \ SAMPLE\_TIME\_150um\ \ \ \ \ \ \ \ \ \ \ =\ 0b00000000,}
+\DoxyCodeLine{00129\ \ \ \ \ SAMPLE\_TIME\_200um\ \ \ \ \ \ \ \ \ \ \ =\ 0b00010000,}
+\DoxyCodeLine{00130\ \ \ \ \ SAMPLE\_TIME\_250um\ \ \ \ \ \ \ \ \ \ \ =\ 0b00100000,}
+\DoxyCodeLine{00131\ \ \ \ \ SAMPLE\_TIME\_300um\ \ \ \ \ \ \ \ \ \ \ =\ 0b00110000,\ \textcolor{comment}{//DEFAULT}}
+\DoxyCodeLine{00132\ \ \ \ \ }
+\DoxyCodeLine{00133\ \ \ \ \ BLANKING\_TIME\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00000100,}
+\DoxyCodeLine{00134\ \ \ \ \ }
+\DoxyCodeLine{00135\ \ \ \ \ IDISS\_TIME\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00000001}
+\DoxyCodeLine{00136\ \};}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \textcolor{preprocessor}{\#define\ VIBRO\_CONTROL3\_REG\ \ \ \ \ \ 0x1D}}
+\DoxyCodeLine{00139\ \textcolor{keyword}{enum}\{}
+\DoxyCodeLine{00140\ \ \ \ \ NG\_THRESH\_DIS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00000000,}
+\DoxyCodeLine{00141\ \ \ \ \ NG\_THRESH\_2pcnt\ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b01000000,}
+\DoxyCodeLine{00142\ \ \ \ \ NG\_THRESH\_4pcnt\ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b10000000,\ \textcolor{comment}{//DEFAULT}}
+\DoxyCodeLine{00143\ \ \ \ \ NG\_THRESH\_8pcnt\ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b11000000,}
+\DoxyCodeLine{00144\ \ \ \ \ }
+\DoxyCodeLine{00145\ \ \ \ \ ERM\_OPEN\_LOOP\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00100000,\ \textcolor{comment}{//DEFAULT\ N/A}}
+\DoxyCodeLine{00146\ \ \ \ \ }
+\DoxyCodeLine{00147\ \ \ \ \ SUPPLY\_COMP\_ENB\ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00000000,}
+\DoxyCodeLine{00148\ \ \ \ \ SUPPLY\_COMP\_DIS\ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00010000,}
+\DoxyCodeLine{00149\ \ \ \ \ }
+\DoxyCodeLine{00150\ \ \ \ \ DATA\_FORMAT\_RTP\_SNG\ \ \ \ \ \ \ \ \ =\ 0b00000000,\ }
+\DoxyCodeLine{00151\ \ \ \ \ DATA\_FORMAT\_RTP\_USGN\ \ \ \ \ \ \ \ =\ 0b00001000,}
+\DoxyCodeLine{00152\ \ \ \ \ }
+\DoxyCodeLine{00153\ \ \ \ \ LRA\_DRIVE\_MODE\_1\ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00000000,}
+\DoxyCodeLine{00154\ \ \ \ \ LRA\_DRIVE\_MODE\_2\ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00000100,}
+\DoxyCodeLine{00155\ \ \ \ \ }
+\DoxyCodeLine{00156\ \ \ \ \ INPUT\_MODE\_PWM\ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00000000,}
+\DoxyCodeLine{00157\ \ \ \ \ INPUT\_MODE\_ANALOG\ \ \ \ \ \ \ \ \ \ \ =\ 0b00000010,}
+\DoxyCodeLine{00158\ \ \ \ \ }
+\DoxyCodeLine{00159\ \ \ \ \ LRA\_OPEN\_LOOP\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00000000,}
+\DoxyCodeLine{00160\ \ \ \ \ LRA\_CLOSED\_LOOP\ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00000001\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00161\ \};}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00163\ \textcolor{preprocessor}{\#define\ VIBRO\_CONTROL4\_REG\ \ \ \ \ \ 0x1E}}
+\DoxyCodeLine{00164\ \textcolor{keyword}{enum}\{}
+\DoxyCodeLine{00165\ \ \ \ \ AUTO\_CAL\_TIME\_150um\ \ \ \ \ \ \ \ \ =\ 0b00000000,}
+\DoxyCodeLine{00166\ \ \ \ \ AUTO\_CAL\_TIME\_250um\ \ \ \ \ \ \ \ \ =\ 0b00010000,}
+\DoxyCodeLine{00167\ \ \ \ \ AUTO\_CAL\_TIME\_500um\ \ \ \ \ \ \ \ \ =\ 0b00100000,\ \textcolor{comment}{//default}}
+\DoxyCodeLine{00168\ \ \ \ \ AUTO\_CAL\_TIME\_1000um\ \ \ \ \ \ \ \ =\ 0b00110000,}
+\DoxyCodeLine{00169\ \ \ \ \ OTP\_STATUS\_PROG\ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00000100,}
+\DoxyCodeLine{00170\ \ \ \ \ OTP\_STATUS\_NOTPROG\ \ \ \ \ \ \ \ \ \ =\ 0b00000000,}
+\DoxyCodeLine{00171\ \ \ \ \ OTP\_PROGRAM\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00000000}
+\DoxyCodeLine{00172\ \};}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ \textcolor{preprocessor}{\#define\ VIBRO\_VBAT\_REG\ \ \ \ \ \ \ \ \ \ 0x21}}
+\DoxyCodeLine{00175\ \textcolor{keyword}{enum}\{}
+\DoxyCodeLine{00176\ \ \ \ \ VIBAT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0b00000000,}
+\DoxyCodeLine{00177\ \};}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00179\ \textcolor{preprocessor}{\#define\ VIBRO\_LRA\_PERIOD\_REG\ \ \ \ 0x22}}
+\DoxyCodeLine{00180\ \textcolor{keyword}{enum}\{}
+\DoxyCodeLine{00181\ \ \ \ \ LRA\_PERIOD\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ 0x38,}
+\DoxyCodeLine{00182\ \};}
+
+\end{DoxyCode}
