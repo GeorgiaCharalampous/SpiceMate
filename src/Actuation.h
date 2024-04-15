@@ -18,7 +18,7 @@ class Actuation{
      * \param  vMotor a pointer to a vibrational motor
      * \param sMotor a pointer to a servo motor
     **/
-   Actuation(VIBRO4_rpi* VibroMotor,Servo_Driver* ServoMotor,int* FD);
+   Actuation(VIBRO4_rpi* VibroMotor,Servo_Driver* ServoMotor);
 
    /**
     * Destructor

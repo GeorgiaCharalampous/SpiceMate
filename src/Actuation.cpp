@@ -1,9 +1,8 @@
 #include<Actuation.h>
 
-Actuation::Actuation(VIBRO4_rpi* VibroMotor,Servo_Driver* ServoMotor,int* FD){
+Actuation::Actuation(VIBRO4_rpi* VibroMotor,Servo_Driver* ServoMotor){
     pvMotor = VibroMotor;
     psMotor = ServoMotor;
-    pfds_read = FD;
 
     pvMotor->setAmplitude(100);
     psMotor->setFrequency(50);
