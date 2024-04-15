@@ -47,13 +47,13 @@ int main(int argc, char *argv[]){
     processor.start();
     getchar();
 
-    sensor.stop();
-    close(*pfds_read);
-    close(*pfds_write);
-    processor.stop();
     close(*pfds_readM);
     close(*pfds_writeM);
     actuator.~Actuation();
+    close(*pfds_read);
+    close(*pfds_write);
+    processor.stop();
+    sensor.stop();
 
     sensor.unRegisterCallback();
     processor.unRegisterCallback();
