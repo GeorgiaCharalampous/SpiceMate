@@ -134,7 +134,8 @@ class DataProcess {
 
     /**
      * Pointer to the file descriptor to read from.
-     * Initially set to nullptr. Must be set using
+     * Used for blocking the thread.
+     * Initially a nullptr. Must be set using
      * setFileDescriptor()
     **/
     int* pfds_read = nullptr;

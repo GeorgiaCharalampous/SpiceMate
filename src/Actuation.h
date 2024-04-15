@@ -75,8 +75,10 @@ class Actuation{
 
    /**
     * Pointer to a file descriptor to read from.
-    * For blocking the thread until data is received 
-   **/
+    * For blocking the thread until data is received .
+    * Initially a nullptr. Must be set using
+    * setFileDescriptor()
+    **/
    int* pfds_read = nullptr;
 
    
