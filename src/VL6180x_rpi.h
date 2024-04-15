@@ -99,7 +99,6 @@ class VL6180x_rpi {
     **/
     void unRegisterCallback();
 
-    //void getStatus();
     private:
     VL6180x_settings sensorSettings;
     VL6180xcallback* sensorCallback = nullptr;
