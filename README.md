@@ -20,13 +20,13 @@ During operation dispensing is triggered when an object is introduced to the reg
 # Project Aims <a name="aims" />
 <img src="https://github.com/GeorgiaCharalampous/SpiceMate/blob/main/Branding/Promotional%20Material/Posts/Device%20Introduction/6.png" align = "left" alt="drawing" width="250"/> 
   
-- Increase efficiency & hygiene through contactless control
+- ### Increase efficiency & hygiene through contactless control
 
-- Greater accessibility & independance in the kitchen for people with limited dexterity
+- ### Greater accessibility & independance in the kitchen for people with limited dexterity
 
-- Spice wastage minimisation through real-time response to events
+- ### Spice wastage minimisation through real-time response to events
 
-- Actuate response to stimulus with a maximum **end-to-end latency** of under **500um**
+- ### Actuate response to stimulus with a maximum **end-to-end latency** of under **500um**
 
 <br clear="left"/>
 
