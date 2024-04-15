@@ -16,13 +16,18 @@ class DPcallbackChild : public DPcallback{
     public:
     /**
 	 * Registers the pointer to the output device (motor)
+     * \param Actuator a pointer to an instance of
+     * the class Actuation
 	**/
     void registerActuation(Actuation* Actuator){
         pactuator = Actuator;
     }
 
     /**
-     * Setter to the writing file descriptor 
+     * Sets a file descriptor to write to
+     * To signal to other threads that data has
+     * been processed
+     * \param a a pointer to an existing file descriptor
     **/
     void setFileDescriptor (int* a)
 	{
@@ -34,12 +39,16 @@ class DPcallbackChild : public DPcallback{
     /**
 	 * Pointer to actuation class.
 	 * For setting states and initiating action.
+     * Initially a nullptr. Must be set using
+     * registerActuation()
 	**/
     Actuation* pactuator = nullptr;
 
     /**
-     * pointer to writing file descriptor of a pipe 
+     * Pointer to the file descriptor to write to.
+     * Used to signal to other threads.
+     * Initially a nullptr. Must be set using
+     * setFileDescriptor()
     **/
-
     int* pfds_write = nullptr;
 };
