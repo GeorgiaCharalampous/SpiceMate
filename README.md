@@ -14,7 +14,9 @@ During operation dispensing is triggered when an object is introduced to the reg
 5. [Install](#inst)
 6. [Example Code](#example)
 7. [Documentation](#doc)
-8. [Media Engagement](#media)
+8. [Sponsorship & Funding](#spon)
+9. [Media Engagement](#media)
+10. [Authors & Contribution](#authors)
 
 
 # Project Aims <a name="aims" />
@@ -72,7 +74,10 @@ cd demo
 ./DemoDriver
 ```
 # Documentation <a name="doc" />
-For fully annotated and easier to read documentation you can find our online document here -> https://georgiacharalampous.github.io/SpiceMate/annotated.html
+For a fully annotated and easy to read documentation you can find our online document here -> https://georgiacharalampous.github.io/SpiceMate/annotated.html
+
+# Sponsorship & Funding <a name="spon" />
+We are extremely greateful to RS Components and the GU68 Engineering Trust for providing us with the funds that enabled us to bring our idea into reality.
 
 # Media Engagement <a name="media" />
 ## Social Media Channels: <a name="channels" />
@@ -88,7 +93,7 @@ Published an [Article](https://www.rs-online.com/designspark/spicemate-an-automa
 * Total number of followers across all platforms: **57**
 * Combined views on videos across all platforms: **~10K views**
 
-# Authors & Contribution
+# Authors & Contribution <a name="authors" />
 - **Viktoriya Kaleva**     : Wrote Data Processing and Actuation Class, Callbacks and Thread Blocking, Branch Merging and Encapsulation, co-authored VL6180x_rpi class  
 - **Hasitha Senevirathne** : Component selection and BOM, 3D printing, wrote PWM Servo_Driver Class, UML Diagrams, Project Planning, PCB Design and Electronics Assembly, co-authored VL6180x_rpi class  
 - **Georgia Charalampous** : Social media management, CAD file designs, 3D printing, wrote VIBRO4_rpi class  
