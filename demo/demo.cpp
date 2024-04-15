@@ -57,8 +57,8 @@ int main(int argc, char *argv[]){
     close(*pfds_writeM);
     actuator.~Actuation();
     
-    // sensor.unRegisterCallback();
-    // processor.unRegisterCallback();
+    sensor.unRegisterCallback();
+    processor.unRegisterCallback();
 
 	return 0;
     
