@@ -9,12 +9,24 @@ During operation dispensing is triggered when an object is introduced to the reg
 1. [Project Aims](#aims)
 2. [Live Demo](#demo)
 3. [Prerequisites](#pre)
-4. [Media Engagement](#media)
+4. [Build](#build)
+5. [Install](#inst)
+6. [Example Code](#example)
+7. [Media Engagement](#media)
+
 
 # Project Aims <a name="aims" />
+<img src="https://github.com/GeorgiaCharalampous/SpiceMate/blob/main/Branding/Promotional%20Material/Posts/Device%20Introduction/6.png" align = "left" alt="drawing" width="250"/> 
+  
 - Increase efficiency & hygiene through contactless control
+
 - Greater accessibility & independance in the kitchen for people with limited dexterity
+
 - Spice wastage minimisation through real-time response to events
+
+- Actuate response to stimulus with a maximum **end-to-end latency** of under **500um**
+
+<br clear="left"/>
 
 # Live Demo <a name="demo" />
 
@@ -32,20 +44,20 @@ apt-get install libgpiod-dev
 * Servo Six board or equivalent for servo control
 * 9g SG90 Micro Servo
 
-# Build
+# Build <a name="build" />
 To build project use following commands in command line:
 ```
 cmake ..
 make
 ```
-# Install
+# Install<a name="inst" />
 ```
 sudo make install
 ```
-# Run example
-Run this example code in command line to 
+# Example Code<a name="example" />
+Run this example code in command line to build the project's executable.
 ```
-// In appropriate
+// In appropriate file path
 mkdir Build
 cd Build
 // Build CMake as explained earlier
@@ -55,7 +67,11 @@ make
 ./TestDriver
 ```
 # Documentation
-For easy to read documentation of the classes used for this device you can access our online document -> 
+For full documentation of the classes used for this device you can access our online document -> 
+
+
+
+
 # Media Engagement <a name="media" />
 ## Social Media Channels: <a name="channels" />
 * [Instagram](https://www.instagram.com/spicemate.pi/)
@@ -65,8 +81,9 @@ For easy to read documentation of the classes used for this device you can acces
 ## Articles: <a name="publications" />
 Published an [Article](https://www.rs-online.com/designspark/spicemate-an-automated-contact-less-spice-dispenser) detailing our project on RS components' public forum **DesignSparks**. DesignSparks is an online forum and community where both professionals, students and tinkerers can read, listen and learn about the latest technologies and products relating to CAD, 3D printing, electronics. 
 
-# Analytics: <a name="analytics" />
+## Analytics: <a name="analytics" />
 * Combined accounts reached across all platforms: **~2K organic interactions**
 * Total number of followers across all platforms: **57**
 * Combined views on videos across all platforms: **~10K views**
 
+# Authors
