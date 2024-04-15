@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['dataprocess_0',['DataProcess',['../class_data_process.html',1,'']]],
-  ['dataprocessed_1',['dataProcessed',['../class_d_pcallback.html#aab93bd8fdd7e45966c27858d253a7d49',1,'DPcallback']]],
-  ['datareceived_2',['dataReceived',['../class_actuation.html#a220306846bb891871042355b487521bc',1,'Actuation::dataReceived'],['../class_data_process.html#a048bba526d1d022f97204186228e9ebf',1,'DataProcess::dataReceived']]],
-  ['dpcallback_3',['DPcallback',['../class_d_pcallback.html',1,'']]],
-  ['dpcallbackchild_4',['DPcallbackChild',['../class_d_pcallback_child.html',1,'']]]
+  ['chipen_0',['chipEN',['../classVIBRO4__rpi.html#af4c05c74fbed5e77d9130072a7da5d20',1,'VIBRO4_rpi::chipEN()'],['../classVL6180x__rpi.html#afe083317b5e39b4741a47c0ea85854f0',1,'VL6180x_rpi::chipEN()']]],
+  ['chipint_1',['chipINT',['../classVL6180x__rpi.html#a210bf3c0b05e6e6d4f7e1314bd12d2d1',1,'VL6180x_rpi']]],
+  ['counterabove_2',['counterAbove',['../classDataProcess.html#a65e117c6ea1044e21d02d2ab77914e09',1,'DataProcess']]],
+  ['counterbelow_3',['counterBelow',['../classDataProcess.html#ae4460828f5ede9ba950b0971b9a32ccb',1,'DataProcess']]],
+  ['currentvalueinrange_4',['currentValueInRange',['../classDataProcess.html#a9484fd189951093967725b14abc02c69',1,'DataProcess']]]
 ];
