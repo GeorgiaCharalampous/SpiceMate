@@ -2,8 +2,10 @@
 
 # 🌶Introducing the SpiceMate
 
-A contactless spice dispenser device utilising a Flight of Time proximity sensor VL6180X, an ERM vibrational motor driven by a DRV2605/L driver and a SG90 Micro Servo als operated through a Raspberry Pi 3B.
+A contactless spice dispenser device utilising a Time of Flight proximity sensor VL6180X, an ERM vibrational motor driven by a DRV2605L driver and a SG90 Micro Servo all operated using a Raspberry Pi 3B.
 During operation dispensing is triggered when an object is introduced to the region monitored by the sensor. Motor activation/deactivation occurs in response to retained presence of the object within the sensor field.
+
+<img src="https://github.com/GeorgiaCharalampous/SpiceMate/blob/main/docs/UML_Diagrams/Use%20Case%20Diagram.svg" align = "center" alt="diagram" width = "1000"/>
 
 # Table of Contents
 1. [Project Aims](#aims)
@@ -55,7 +57,7 @@ make
 sudo make install
 ```
 # Example Code<a name="example" />
-Run this example code in command line to build the project's executable.
+Run this example code in command line to build the demo project's executable.
 ```
 // In appropriate file path
 mkdir Build
@@ -64,7 +66,7 @@ cd Build
 cmake ..
 make
 //Run executable
-./TestDriver
+./DemoDriver
 ```
 # Documentation
 For full documentation of the classes used for this device you can access our online document -> 
@@ -86,4 +88,8 @@ Published an [Article](https://www.rs-online.com/designspark/spicemate-an-automa
 * Total number of followers across all platforms: **57**
 * Combined views on videos across all platforms: **~10K views**
 
-# Authors
+# Authors & Contribution
+**Viktoriya Kaleva**     :
+**Hasitha Senevirathne** : Vib
+**Georgia Charalampous** : Social media management, CAD file designs, responsible for writing of the VIBRO4_rpi class. Also contributed to general repo management.
+**Sophie Barcan**        :
