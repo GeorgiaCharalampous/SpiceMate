@@ -109,19 +109,6 @@ void VL6180x_rpi::worker(){
     }
 }
 
-/* DEBUG ONLY; REMOVE FROM FINAL VERSION
-void VL6180x_rpi::getStatus(){
-    int a = i2c_readByte(SENSOR_RESULT_INTERRUPT_STATUS_GPIO);
-    int error = i2c_readByte(SENSOR_RESULT_RANGE_STATUS);
-    error = error >> 4;
-    printf("Error code is %u. \n",error);
-    printf("Current Interupt status is %u. \n",a);
-    printf("Sensor Start status is %u. \n",i2c_readByte(SENSOR_SYSRANGE_START));
-    //printf("Interleave status is %u. \n",i2c_readByte(0x2A3));
-    sleep(1);
-}
-*/
-
 void VL6180x_rpi::dataReady(){
     unsigned scale = i2c_readTwoBytes(0x96);
     int p2p = i2c_readByte(SENSOR_SYSRANGE_PART_TO_PART_RANGE_OFFSET);
