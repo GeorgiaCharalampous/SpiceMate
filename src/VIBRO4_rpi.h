@@ -97,14 +97,49 @@ class VIBRO4_rpi{
 
 
     private:
+    /**
+     * Struct with settings for the vibro motor
+    **/
     VIBRO4_settings motorSettings;
+
+    /**
+     * Current state of the mother
+     * 1 when initated, 0 otherwise 
+    **/
     int running = 0;
+
+    /**
+     * One byte writing method
+     * \param reg the address of the register to write to
+     * \param data the data to be written 
+    **/
     void i2c_writeByte(uint8_t reg, unsigned data);
+
+    /**
+     * One byte reading method
+     * \param reg the address of the register to read from
+     * \param data the data to be written 
+    **/
     unsigned i2c_readByte(uint8_t reg);
 
+    /**
+     * Pointer to the enable chip
+    **/
+
     struct gpiod_chip *chipEN = nullptr;
+    /**
+     * Pointer to the enable pin
+     **/
     struct gpiod_line *pinEN = nullptr;
- 
+
+    /**
+     * Vibration amplitude. Default is 0
+     * Needs to be assigned via setAmplitude()
+    **/
     uint8_t vAmplitude = 0;
+
+    /**
+     * I2C file descriptor 
+    **/
     int fd_i2c = -1;
 };
