@@ -41,7 +41,10 @@ void DataProcess::thresholding(){
 		if(5 == counterBelow){
 			printf("Stop Dispensing! \n");
 			bool status = false;
-			processCallback->dataProcessed(status);
+			if(processCallback != nullptr){
+				processCallback->dataProcessed(status);
+			}
+			else {printf("Null pointer to callback! \n");};
 			counterBelow= 0;
 			isDispensing = false;
 		};
@@ -58,7 +61,10 @@ void DataProcess::thresholding(){
 		if(30 == counterAbove){
 			printf("Start Dispensing! \n");
 			bool status = true;
-			processCallback->dataProcessed(status);
+			if(processCallback != nullptr){
+				processCallback->dataProcessed(status);
+			}
+			else {printf("Null pointer to callback! \n");};
 			counterAbove = 0;
 			isDispensing = true;
 		};
