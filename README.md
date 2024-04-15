@@ -9,12 +9,12 @@ During operation dispensing is triggered when an object is introduced to the reg
 
 # Table of Contents
 1. [Project Aims](#aims)
-2. [Live Demo](#demo)
 3. [Prerequisites](#pre)
 4. [Build](#build)
 5. [Install](#inst)
 6. [Example Code](#example)
-7. [Media Engagement](#media)
+7. [Documentation](#doc)
+8. [Media Engagement](#media)
 
 
 # Project Aims <a name="aims" />
@@ -29,8 +29,6 @@ During operation dispensing is triggered when an object is introduced to the reg
 - ### Actuate response to stimulus with a maximum **end-to-end latency** of under **500um**
 
 <br clear="left"/>
-
-# Live Demo <a name="demo" />
 
 # Prerequisites <a name="pre" />
 ## Libraries
@@ -66,13 +64,11 @@ cd Build
 cmake ..
 make
 //Run executable
+cd demo
 ./DemoDriver
 ```
-# Documentation
-For full documentation of the classes used for this device you can access our online document -> 
-
-
-
+# Documentation <a name="doc" />
+For fully annotated and easier to read documentation you can find our online document here -> https://georgiacharalampous.github.io/SpiceMate/annotated.html
 
 # Media Engagement <a name="media" />
 ## Social Media Channels: <a name="channels" />
@@ -89,7 +85,7 @@ Published an [Article](https://www.rs-online.com/designspark/spicemate-an-automa
 * Combined views on videos across all platforms: **~10K views**
 
 # Authors & Contribution
-**Viktoriya Kaleva**     :
-**Hasitha Senevirathne** : Vib
-**Georgia Charalampous** : Social media management, CAD file designs, responsible for writing of the VIBRO4_rpi class. Also contributed to general repo management.
-**Sophie Barcan**        :
+- **Viktoriya Kaleva**     :
+- **Hasitha Senevirathne** : 
+- **Georgia Charalampous** : Social media management, CAD file designs, wrote VIBRO4_rpi class.
+- **Sophie Barcan**        : Linux setup, unit testing, contributed to documentation
