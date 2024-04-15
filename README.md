@@ -44,6 +44,10 @@ apt-get install libgpiod-dev
 * Servo Six board or equivalent for servo control
 * 9g SG90 Micro Servo
 
+See [PCB folder](https://github.com/GeorgiaCharalampous/SpiceMate/tree/15dd7bdb6a2fef1f48594f7ef7c0b502bc400dbf/PCB) for circuit diagram and schematic.
+
+Datasheets and registers spreadsheet for the LightRanger Click expansion board using the VL6180X can be found on this [Wiki](https://github.com/GeorgiaCharalampous/SpiceMate/wiki/LightRanger-Click) page.
+
 # Build <a name="build" />
 To build project use following commands in command line:
 ```
@@ -85,7 +89,7 @@ Published an [Article](https://www.rs-online.com/designspark/spicemate-an-automa
 * Combined views on videos across all platforms: **~10K views**
 
 # Authors & Contribution
-- **Viktoriya Kaleva**     :
-- **Hasitha Senevirathne** : 
-- **Georgia Charalampous** : Social media management, CAD file designs, wrote VIBRO4_rpi class.
-- **Sophie Barcan**        : Linux setup, unit testing, contributed to documentation
+- **Viktoriya Kaleva**     : Wrote Data Processing and Actuation Class, Callbacks and Thread Blocking, Branch Merging and Encapsulation, co-authored VL6180x_rpi class  
+- **Hasitha Senevirathne** : Component selection and BOM, 3D printing, wrote PWM Servo_Driver Class, UML Diagrams, Project Planning, PCB Design and Electronics Assembly, co-authored VL6180x_rpi class  
+- **Georgia Charalampous** : Social media management, CAD file designs, 3D printing, wrote VIBRO4_rpi class  
+- **Sophie Barcan**        : Linux setup, unit testing, contributed to documentation  
