@@ -25,26 +25,6 @@
 var NAVTREE =
 [
   [ "SpiceMate", "index.html", [
-    [ "README", "md_README.html", [
-      [ "🌶Introducing the SpiceMate", "md_README.html#autotoc_md0", null ],
-      [ "Table of Contents", "md_README.html#autotoc_md1", null ],
-      [ "Project Aims <a name=\"aims\" />", "md_README.html#autotoc_md2", null ],
-      [ "Live Demo <a name=\"demo\" />", "md_README.html#autotoc_md3", null ],
-      [ "Prerequisites <a name=\"pre\" />", "md_README.html#autotoc_md4", [
-        [ "Libraries", "md_README.html#autotoc_md5", null ],
-        [ "Components", "md_README.html#autotoc_md6", null ]
-      ] ],
-      [ "Build <a name=\"build\" />", "md_README.html#autotoc_md7", null ],
-      [ "Install<a name=\"inst\" />", "md_README.html#autotoc_md8", null ],
-      [ "Example Code<a name=\"example\" />", "md_README.html#autotoc_md9", null ],
-      [ "Documentation", "md_README.html#autotoc_md10", null ],
-      [ "Media Engagement <a name=\"media\" />", "md_README.html#autotoc_md11", [
-        [ "Social Media Channels: <a name=\"channels\" />", "md_README.html#autotoc_md12", null ],
-        [ "Articles: <a name=\"publications\" />", "md_README.html#autotoc_md13", null ],
-        [ "Analytics: <a name=\"analytics\" />", "md_README.html#autotoc_md14", null ]
-      ] ],
-      [ "Authors & Contribution", "md_README.html#autotoc_md15", null ]
-    ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
@@ -63,7 +43,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"Actuation_8h_source.html"
+"_actuation_8h_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

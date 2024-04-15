@@ -1,9 +1,6 @@
 var searchData=
 [
-  ['i2c_5freadbyte_0',['i2c_readByte',['../classVIBRO4__rpi.html#ac17517fea710c289c0ba5e2a399375e6',1,'VIBRO4_rpi::i2c_readByte()'],['../classVL6180x__rpi.html#a5eca273e2898e6c5ce868e905e75aae1',1,'VL6180x_rpi::i2c_readByte(uint8_t reg)']]],
-  ['i2c_5freadtwobytes_1',['i2c_readTwoBytes',['../classVL6180x__rpi.html#a46099cd4112c24c5dcc40ac9f34a6901',1,'VL6180x_rpi']]],
-  ['i2c_5fwritebyte_2',['i2c_writeByte',['../classVIBRO4__rpi.html#a88e5cc613e498e96e7c559c0a44297d5',1,'VIBRO4_rpi::i2c_writeByte()'],['../classVL6180x__rpi.html#a9a92a5a0cbc60094c71f990da0e4d4c8',1,'VL6180x_rpi::i2c_writeByte(uint8_t reg, unsigned data)']]],
-  ['i2c_5fwritetwobytes_3',['i2c_writeTwoBytes',['../classVL6180x__rpi.html#a76d8cfa2721e84e205be362aec6a6442',1,'VL6180x_rpi']]],
-  ['initvibro_4',['initVibro',['../classVIBRO4__rpi.html#ae44eeeccf63c0c0e199b079249408ce4',1,'VIBRO4_rpi']]],
-  ['isdispensing_5',['isDispensing',['../classDataProcess.html#a75119e30fce9bf1b1099df95fd0d6947',1,'DataProcess']]]
+  ['registeractuation_0',['registerActuation',['../class_d_pcallback_child.html#ada71ca215f1618aabf597c2628953979',1,'DPcallbackChild']]],
+  ['registercallback_1',['registerCallback',['../class_data_process.html#a50cce891b4224eda9a3fd02d534c8b57',1,'DataProcess::registerCallback()'],['../class_v_l6180x__rpi.html#ac0ddd9484407dfc20f58e5dc562efeec',1,'VL6180x_rpi::registerCallback()']]],
+  ['registerdp_2',['registerDP',['../class_v_l6180xcallback_child.html#a1ec7398da02a2f10fd32e4c16f88f93a',1,'VL6180xcallbackChild']]]
 ];

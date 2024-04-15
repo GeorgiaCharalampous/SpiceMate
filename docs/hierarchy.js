@@ -1,17 +1,16 @@
 var hierarchy =
 [
-    [ "Actuation", "classActuation.html", null ],
-    [ "DataProcess", "classDataProcess.html", null ],
-    [ "DPcallback", "classDPcallback.html", [
-      [ "DPcallbackChild", "classDPcallbackChild.html", null ]
+    [ "Actuation", "class_actuation.html", null ],
+    [ "DataProcess", "class_data_process.html", null ],
+    [ "DPcallback", "class_d_pcallback.html", [
+      [ "DPcallbackChild", "class_d_pcallback_child.html", null ]
     ] ],
-    [ "Servo_Driver", "classServo__Driver.html", null ],
-    [ "TestCallback", "classTestCallback.html", null ],
-    [ "VIBRO4_rpi", "classVIBRO4__rpi.html", null ],
-    [ "VIBRO4_settings", "structVIBRO4__settings.html", null ],
-    [ "VL6180x_rpi", "classVL6180x__rpi.html", null ],
-    [ "VL6180x_settings", "structVL6180x__settings.html", null ],
-    [ "VL6180xcallback", "classVL6180xcallback.html", [
-      [ "VL6180xcallbackChild", "classVL6180xcallbackChild.html", null ]
+    [ "Servo_Driver", "class_servo___driver.html", null ],
+    [ "VIBRO4_rpi", "class_v_i_b_r_o4__rpi.html", null ],
+    [ "VIBRO4_settings", "struct_v_i_b_r_o4__settings.html", null ],
+    [ "VL6180x_rpi", "class_v_l6180x__rpi.html", null ],
+    [ "VL6180x_settings", "struct_v_l6180x__settings.html", null ],
+    [ "VL6180xcallback", "class_v_l6180xcallback.html", [
+      [ "VL6180xcallbackChild", "class_v_l6180xcallback_child.html", null ]
     ] ]
 ];

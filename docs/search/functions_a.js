@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['worker_0',['worker',['../classActuation.html#a8e05ea83e4a7c9889274a6ca82e122af',1,'Actuation::worker()'],['../classDataProcess.html#a9bee1aa4a9ad6d9babf83921c2d82890',1,'DataProcess::worker()'],['../classVL6180x__rpi.html#ad09df87085f977e66c3d11e9dbc0ebe9',1,'VL6180x_rpi::worker()']]]
+  ['_7eactuation_0',['~Actuation',['../class_actuation.html#a8446b3b773fa0cd24198cc67c2d373bd',1,'Actuation']]],
+  ['_7eservo_5fdriver_1',['~Servo_Driver',['../class_servo___driver.html#a21dadfee5479577957353c2e4ccc0a13',1,'Servo_Driver']]],
+  ['_7evibro4_5frpi_2',['~VIBRO4_rpi',['../class_v_i_b_r_o4__rpi.html#ad0fb8ea1d975ae6e5d29b60e8d642830',1,'VIBRO4_rpi']]],
+  ['_7evl6180x_5frpi_3',['~VL6180x_rpi',['../class_v_l6180x__rpi.html#a4fe8075410a794f010c21798a2594a9b',1,'VL6180x_rpi']]]
 ];
