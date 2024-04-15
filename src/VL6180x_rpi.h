@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+//#include <pigpio.h>
 #include <linux/i2c-dev.h>
 #include <gpiod.h>
 
@@ -10,12 +11,8 @@
 #ifndef  VL6180xcallbackChild
 #include <VL6180xcallbackChild.h>
 #endif
-#ifndef VL6180x_regAddress
 #include <VL6180x_regAddress.h>
-#endif
-#ifndef VL6180X_regBitDefinitions
 #include <VL6180X_regBitDefinitions.h>
-#endif
 
 #ifndef NDEBUG
 #define DEBUG

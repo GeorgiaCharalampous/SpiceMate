@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <thread>
-
 #ifndef DPcallbackChild
 #include <DPcallbackChild.h>
 #endif

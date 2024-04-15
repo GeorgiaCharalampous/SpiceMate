@@ -1,10 +1,10 @@
+#ifndef VL6180x_rpi
+#include "VL6180x_rpi.h"
+#endif
 #include <bitset>
 #include<unistd.h>
 #include<fcntl.h>
 #include<sys/ioctl.h>
-#ifndef VL6180x_rpi
-#include "VL6180x_rpi.h"
-#endif
 
 
 void VL6180x_rpi::startRangeContinuous(VL6180x_settings settings){
