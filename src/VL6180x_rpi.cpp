@@ -50,7 +50,6 @@ void VL6180x_rpi::startRangeContinuous(VL6180x_settings settings){
     i2c_writeByte(SENSOR_SYSRANGE_THRESH_HIGH,settings.sysrange_thresh_high);
     i2c_writeByte(SENSOR_SYSRANGE_INTERMEASUREMENT_PERIOD,settings.sysrange_intermeasurement_period);
     i2c_writeByte(SENSOR_SYSRANGE_MAX_CONVERGENCE_TIME,settings.sysrange_max_convergence_time);
-    //i2c_writeByte(SENSOR_SYSRANGE_RANGE_CHECK_ENABLES,settings.sysrange_range_check_enables);
     i2c_writeByte(SENSOR_SYSRANGE_START,settings.sysrange_start);
 
     int mct = i2c_readByte(SENSOR_SYSRANGE_MAX_CONVERGENCE_TIME);
@@ -68,12 +67,11 @@ void VL6180x_rpi::startRangeContinuous(VL6180x_settings settings){
             throw "Could not request event for IRQ.";
         }
 
-
-    #ifdef DEBUG
-	fprintf(stderr,"Starting proximity thread.\n");
-    #endif
     running = 1;
     proxThread = std::thread(&VL6180x_rpi::worker,this);
+    #ifdef DEBUG
+	fprintf(stderr,"Proximity thread started.\n");
+    #endif
 
 };
 
@@ -110,25 +108,19 @@ void VL6180x_rpi::worker(){
 }
 
 void VL6180x_rpi::dataReady(){
-    unsigned scale = i2c_readTwoBytes(0x96);
-    int p2p = i2c_readByte(SENSOR_SYSRANGE_PART_TO_PART_RANGE_OFFSET);
-    int cvh = i2c_readByte(SENSOR_SYSRANGE_CROSSTALK_VALID_HEIGHT);
-    //need to assign an actual value
-    uint8_t value = i2c_readByte(SENSOR_RESULT_RANGE_VAL);
+    uint8_t value = (uint8_t)(i2c_readByte(SENSOR_RESULT_RANGE_VAL));
     int error = i2c_readByte(SENSOR_RESULT_RANGE_STATUS);
     error = error >> 4;
     #ifdef DEBUG
-	//fprintf(stderr,"Error code %u.\n",error);
+	fprintf(stderr,"Error code %u.\n",error);
     #endif	
     sensorCallback->hasSample(value);
-    //clear All interupts
     i2c_writeByte(SENSOR_SYSTEM_INTERRUPT_CLEAR,(CLEAR_RANGE_INT|CLEAR_ALS_INT|CLEAR_ERROR_INT));
     #ifdef DEBUG
-	//fprintf(stderr,"Processed callback.\n");
+	fprintf(stderr,"Processed callback.\n");
     #endif
     i2c_writeByte(SENSOR_SYSRANGE_START,3);
     i2c_writeByte(SENSOR_SYSRANGE_START,3);
-
 }
 
 unsigned VL6180x_rpi::i2c_readTwoBytes(uint8_t reg)
@@ -151,8 +143,6 @@ unsigned VL6180x_rpi::i2c_readTwoBytes(uint8_t reg)
     #endif
 	    throw i2cslave;
 	}
-
-
 
     //transmit a single read request to sensor for reg_address
     uint8_t reg_address[2];
@@ -177,23 +167,22 @@ unsigned VL6180x_rpi::i2c_readTwoBytes(uint8_t reg)
 unsigned VL6180x_rpi::i2c_readByte(uint8_t reg)
 {
     char gpioFilename[20];
-	snprintf(gpioFilename, 19, "/dev/i2c-%d", sensorSettings.default_i2c_bus);
-	fd_i2c = open(gpioFilename, O_RDWR);
-	if (fd_i2c < 0) {
-	    char i2copen[] = "Could not open I2C.\n";
-    #ifdef DEBUG
-	    fprintf(stderr,i2copen);
-    #endif
-	    throw i2copen;
-	}
-	
-	if (ioctl(fd_i2c, I2C_SLAVE, sensorSettings.sensor_address) < 0) {
-	    char i2cslave[] = "Could not access I2C adress.\n";
-    #ifdef DEBUG
-	    fprintf(stderr,i2cslave);
-    #endif
-	    throw i2cslave;
-	}
+    snprintf(gpioFilename, 19, "/dev/i2c-%d", sensorSettings.default_i2c_bus);
+    fd_i2c = open(gpioFilename, O_RDWR);
+    if (fd_i2c < 0) {
+        char i2copen[] = "Could not open I2C.\n";
+        #ifdef DEBUG
+        fprintf(stderr,i2copen);
+        #endif
+        throw i2copen;
+    }
+    if (ioctl(fd_i2c, I2C_SLAVE, sensorSettings.sensor_address) < 0) {
+        char i2cslave[] = "Could not access I2C adress.\n";
+        #ifdef DEBUG
+        fprintf(stderr,i2cslave);
+        #endif
+        throw i2cslave;
+    }
     //transmit a single read request to sensor for reg_address
     uint8_t reg_address[2];
     reg_address[0] = (reg >> 8) & 0xFF; // MSB of register address
@@ -211,7 +200,6 @@ unsigned VL6180x_rpi::i2c_readByte(uint8_t reg)
     }
     close(fd_i2c);
     return ((uint8_t)(data[0]));
-
 };
 
 void VL6180x_rpi::i2c_writeTwoBytes(uint8_t reg, unsigned data)
