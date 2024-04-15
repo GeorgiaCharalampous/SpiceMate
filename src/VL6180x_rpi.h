@@ -30,12 +30,6 @@ static const char could_not_open_i2c[] = "Could not open I2C.\n";
 // default interrupt timeout
 #define ISR_TIMEOUT 1000
 
-// pointers to end-user configured settings
-//extern uint8_t* ptr_range_thresh_low;
-//uint8_t* ptr_range_thresh_high = nullptr;
-//uint8_t* ptr_intermeasurement_period = nullptr;
-//uint8_t* ptr_max_convergence_time = nullptr;
-
 struct VL6180x_settings{
     int default_i2c_bus = 1;
     uint8_t sensor_address = DEFAULT_VL6180X_ADDRESS;
@@ -99,29 +93,91 @@ class VL6180x_rpi {
     **/
     void unRegisterCallback();
 
-    //void getStatus();
     private:
+    /**
+     * Struct with relevant sensor settings 
+     * as described in the VL6180x register
+     * data sheet
+    **/
     VL6180x_settings sensorSettings;
+
+    /**
+     * Pointer to a callback.
+     * Initially nullptr.
+     * Needs to be assigned with registerCallback()
+    **/
     VL6180xcallback* sensorCallback = nullptr;
-    std::thread proxThread;//Proximity sensor thread
+
+    /**
+     * Thread for proximity sensor measurements 
+    **/
+    std::thread proxThread;
+
+    /**
+     * Current state of the sensor thread
+     * 1 when running and 0 otherwise 
+    **/
     int running = 0;
+
+    /**
+     * Two byte writing method
+     * \param reg the address of the register to write in
+     * \param data data to be written 
+    **/
     void i2c_writeTwoBytes(uint8_t reg, unsigned data);
+
+    /**
+     * One byte writing method
+     * \param reg the address of the register to write in
+     * \param data data to be written 
+    **/
     void i2c_writeByte(uint8_t reg, unsigned data);
+
+    /**
+     * Two bytes reading function
+     * \param reg the address of the register to read from 
+    **/
     unsigned i2c_readTwoBytes(uint8_t reg);
+
+    /**
+     * One bytes reading function
+     * \param reg the address of the register to read from 
+    **/
     unsigned i2c_readByte(uint8_t reg);
-    int i2c_readConversion();
 
-
-    const uint8_t reg_congig = 1;
-    const uint8_t reg_lo_thres = 2;
-    const uint8_t reg_hi_thres = 3;
-
+    /**
+     * Executes when interrupt happens 
+    **/
     void dataReady();
+
+    /**
+     * The worker of the thread. 
+     * Remains blocked until an interrupt happens 
+    **/
     void worker();
+
+    /**
+     * Pointer to the interrupt chip
+    **/
     struct gpiod_chip *chipINT = nullptr;
+
+    /**
+     * Pointer to the interrupt pin
+    **/
     struct gpiod_line *pinINT = nullptr;
+
+    /**
+     * Pointer to the enable chip
+    **/
     struct gpiod_chip *chipEN = nullptr;
+
+    /**
+     * Pointer to the enable pin
+     **/
     struct gpiod_line *pinEN = nullptr;
 
+    /**
+     * I2C file descriptor 
+    **/
     int fd_i2c = -1;
 };

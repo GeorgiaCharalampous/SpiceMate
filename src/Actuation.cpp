@@ -1,13 +1,14 @@
 #include<Actuation.h>
 
-Actuation::Actuation(VIBRO4_rpi* VibroMotor,Servo_Driver* ServoMotor,int* FD){
+Actuation::Actuation(VIBRO4_rpi* VibroMotor,Servo_Driver* ServoMotor){
     pvMotor = VibroMotor;
     psMotor = ServoMotor;
-    pfds_read = FD;
 
     pvMotor->setAmplitude(100);
     psMotor->setFrequency(50);
+};
 
+void Actuation::start(){
     running = 1;
 	actuationThread = std::thread(&Actuation::worker,this);
     #ifdef DEBUG
@@ -25,10 +26,12 @@ void Actuation::worker(){
                 psMotor->setAngle(180);
                 psMotor->startPWM();
                 pvMotor->playHaptic_realTime();
+                status = true;
             }
             else{
                 pvMotor->stopHaptic();
                 psMotor->setAngle(0);
+                status = false;
             }
         };
     }
@@ -38,8 +41,11 @@ Actuation::~Actuation(){
     if(!running) return;
     running = 0;
     actuationThread.join();
-    psMotor->setAngle(0);
-    psMotor->stopPWM();
+    if(status){
+        pvMotor->stopHaptic();
+        psMotor->setAngle(0);
+        psMotor->stopPWM();
+    };
     #ifdef DEBUG
 	fprintf(stderr,"Motor thread stopped.\n");
     #endif	

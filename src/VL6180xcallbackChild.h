@@ -24,6 +24,9 @@ class VL6180xcallbackChild : public VL6180xcallback {
 		dp = object;
 	};
 
+	/**
+	 * Assigns a reference to the fail descriptor pointer 
+	**/
 	void setFileDescriptor (int* a)
 	{
 		pfds_write = a;
@@ -37,6 +40,13 @@ class VL6180xcallbackChild : public VL6180xcallback {
 	**/
 	DataProcess* dp = nullptr;
 
-	int* pfds_write;
+	/**
+	 * Pointer to a file descriptor to write to
+	 * For blocking the processing thread 
+	 * Initially a nullptr
+	 * Needs to be set via setFileDescriptor
+	**/
+
+	int* pfds_write = nullptr;
 
 };

@@ -18,12 +18,18 @@ class Actuation{
      * \param  vMotor a pointer to a vibrational motor
      * \param sMotor a pointer to a servo motor
     **/
-   Actuation(VIBRO4_rpi* VibroMotor,Servo_Driver* ServoMotor,int* FD);
+   Actuation(VIBRO4_rpi* VibroMotor,Servo_Driver* ServoMotor);
 
    /**
     * Destructor
     **/ 
    ~Actuation();
+
+   /**
+    * Open a thread for actuation 
+   **/
+
+   void start();
 
     /**
     * Sets a pointer to a file descriptor to be used
@@ -50,12 +56,12 @@ class Actuation{
    /**
     * Pointer to the vibrational motor 
    **/
-   VIBRO4_rpi* pvMotor;
+   VIBRO4_rpi* pvMotor = nullptr;
 
    /**
     * Pointer to the servo motor 
    **/
-   Servo_Driver* psMotor;
+   Servo_Driver* psMotor = nullptr;
 
    /**
     * Current state of the class
@@ -80,4 +86,13 @@ class Actuation{
     * setFileDescriptor()
     **/
    int* pfds_read = nullptr;
+
+   /**
+    * Current status of the actuator
+    * True if the motors are on
+    * False otherwise 
+   **/
+
+   bool status = false;
+
 };

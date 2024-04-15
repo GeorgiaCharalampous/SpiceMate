@@ -5,7 +5,9 @@
 void DataProcess::start(){
 	running = true;
 	prosThread = std::thread(&DataProcess::worker,this);
-	printf("Data processing thread opened \n"); 
+	#ifdef DEBUG
+	printf("Data processing thread opened \n"); 	
+	#endif
 };
 
 void DataProcess::worker(){
@@ -20,7 +22,6 @@ void DataProcess::thresholding(){
     if (!dataReceived) return;
 	dataReceived = false;
 	
-	//printf("Incomming reading: %u \n",value); 
 	if ((value > lowerLimit)&&(value < upperLimit))
 	{
 		currentValueInRange = true;
@@ -39,9 +40,16 @@ void DataProcess::thresholding(){
 			counterBelow = 0;
 		};
 		if(5 == counterBelow){
+			#ifdef DEBUG
 			printf("Stop Dispensing! \n");
+			#endif
 			bool status = false;
-			processCallback->dataProcessed(status);
+			if(processCallback != nullptr){
+				processCallback->dataProcessed(status);
+			}
+			else {
+				printf("Null pointer to callback! \n");
+			};
 			counterBelow= 0;
 			isDispensing = false;
 		};
@@ -56,9 +64,16 @@ void DataProcess::thresholding(){
 		else {counterAbove = 0;};
 
 		if(30 == counterAbove){
+			#ifdef DEBUG
 			printf("Start Dispensing! \n");
+			#endif
 			bool status = true;
-			processCallback->dataProcessed(status);
+			if(processCallback != nullptr){
+				processCallback->dataProcessed(status);
+			}
+			else {
+				printf("Null pointer to callback! \n");
+			};
 			counterAbove = 0;
 			isDispensing = true;
 		};

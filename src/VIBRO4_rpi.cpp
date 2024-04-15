@@ -19,9 +19,7 @@ void VIBRO4_rpi::initVibro(VIBRO4_settings settings){
         gpiod_line_request_output(pinEN,"Motor",0);  // open the pin to drive as output
         gpiod_line_set_value(pinEN,1); // sets EN pin to high 
         
-        //CLASHES HERE WHEN RAN TWO TIMES IN A ROW
-        // Initialise and autocallibrate
-        i2c_writeByte(VIBRO_MODE_REG,DEVICE_RDY); // decide on whether we need both
+        i2c_writeByte(VIBRO_MODE_REG,DEVICE_RDY);
         autoCal();
   
         i2c_writeByte(VIBRO_CONTROL1_REG,93);
@@ -29,8 +27,8 @@ void VIBRO4_rpi::initVibro(VIBRO4_settings settings){
         i2c_writeByte(VIBRO_CONTROL3_REG,80);
 
         i2c_writeByte(VIBRO_REGFIELD_REG,2);
-        // put on standby for low pwer mode
-        i2c_writeByte(VIBRO_MODE_REG,settings.standby); // also sets this to internal trigger
+        
+        i2c_writeByte(VIBRO_MODE_REG,settings.standby);
         running = 1;
 }
 

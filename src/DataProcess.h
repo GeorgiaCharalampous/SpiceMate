@@ -60,12 +60,14 @@ class DataProcess {
     };
 
     
-    private:
+    public:
     /**
      * Performs data thresholding and determines 
      * the action to be performed
     **/
     void thresholding();
+
+    private:
 
     /**
      * Worker for the thread. Calls thresholding() 
