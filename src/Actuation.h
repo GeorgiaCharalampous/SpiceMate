@@ -24,25 +24,59 @@ class Actuation{
     * Destructor
     **/ 
    ~Actuation();
-    /**
-    * Current status of the motor. 
-    **/
 
+    /**
+    * Sets a pointer to a file descriptor to be used
+    * for read() blocking
+    * \param a pointer to an existing descriptor
+    **/
    void setFileDescriptor(int* a){
         pfds_read = a;
     };
 
+    /**
+     * Boolean to describe if the motors should be activated
+     * Motors are powered off by default
+    **/
    bool activate = false;
 
+   /**
+    * Boolean to indicate if data has been received
+    * and the states of the motors required changing
+   **/
    bool dataReceived = false;
 
    private:
+   /**
+    * Pointer to the vibrational motor 
+   **/
    VIBRO4_rpi* pvMotor;
+
+   /**
+    * Pointer to the servo motor 
+   **/
    Servo_Driver* psMotor;
 
+   /**
+    * Current state of the class
+   **/
    int running = 0;
+
+   /**
+    * Actuation thread 
+   **/
    std::thread actuationThread;
+
+   /**
+    * Worker function of the actuation thread.
+    * Blocked until data is read from the file descriptor 
+   **/
    void worker();
+
+   /**
+    * Pointer to a file descriptor to read from.
+    * For blocking the thread until data is received 
+   **/
    int* pfds_read = nullptr;
 
    
