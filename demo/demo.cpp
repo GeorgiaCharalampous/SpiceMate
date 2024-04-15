@@ -30,11 +30,12 @@ int main(int argc, char *argv[]){
     VL6180xcallbackChild passCallback;
     DPcallbackChild processingCallback;
     DataProcess processor;
-    Actuation actuator(&vibro,&servo);
-
+   
     passCallback.setFileDescriptor(pfds_write);
     processor.setFileDescriptor(pfds_read);
     processingCallback.setFileDescriptor(pfds_writeM);
+
+    Actuation actuator(&vibro,&servo);
     actuator.setFileDescriptor(pfds_readM);
 
     VL6180x_settings sensor_Settings;
@@ -47,14 +48,14 @@ int main(int argc, char *argv[]){
     processor.start();
     getchar();
 
-    close(*pfds_readM);
-    close(*pfds_writeM);
-    actuator.~Actuation();
+    sensor.stop();
     close(*pfds_read);
     close(*pfds_write);
     processor.stop();
-    sensor.stop();
-
+    close(*pfds_readM);
+    close(*pfds_writeM);
+    actuator.~Actuation();
+    
     sensor.unRegisterCallback();
     processor.unRegisterCallback();
 

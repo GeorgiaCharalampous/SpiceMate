@@ -80,4 +80,12 @@ class Actuation{
     * setFileDescriptor()
     **/
    int* pfds_read = nullptr;
+
+   /**
+    * Current status of the actuator
+    * True if the motors are on
+    * False otherwise 
+   **/
+
+   bool status = false;
 };
