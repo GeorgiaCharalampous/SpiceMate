@@ -33,6 +33,7 @@ class DataProcess {
      * Starts data processing on a separate thread 
     **/
     void start();
+
     /**
      * Stops data processing and joins the thread
     **/
@@ -50,7 +51,9 @@ class DataProcess {
     void unRegisterCallback();
 
     /**
-     *  ????
+     *  Sets a file descriptor to read from
+     *  For blocking the thread until data is received
+     *  \param a a pointer to an existing file descriptor
     **/
     void setFileDescriptor(int* a)
     {
@@ -123,7 +126,16 @@ class DataProcess {
     **/
     bool currentValueInRange = false;
 
+    /**
+     * Pointer to a callback for communication
+     * with the actuation class 
+    **/
     DPcallback* processCallback = nullptr;
 
-    int* pfds_read;
+    /**
+     * Pointer to the file descriptor to read from.
+     * Initially set to nullptr. Must be set using
+     * setFileDescriptor()
+    **/
+    int* pfds_read = nullptr;
 };
