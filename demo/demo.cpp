@@ -21,42 +21,42 @@ int main(int argc, char *argv[]){
     int* pfds_writeM = &fdsM[1];
 
     VIBRO4_settings vmotor_Settings;
-    VL6180x_rpi sensor_Instance;
-    VIBRO4_rpi vibro_Instance;
-    Servo_Driver servo_Instance(18);
+    VL6180x_rpi sensor;
+    VIBRO4_rpi vibro;
+    Servo_Driver servo(18);
 
-    vibro_Instance.initVibro(vmotor_Settings);
+    vibro.initVibro(vmotor_Settings);
 
     VL6180xcallbackChild passCallback;
     DPcallbackChild processingCallback;
-    DataProcess printThreshold;
-    Actuation actuator(&vibro_Instance,&servo_Instance);
+    DataProcess processor;
+    Actuation actuator(&vibro,&servo);
 
     passCallback.setFileDescriptor(pfds_write);
-    printThreshold.setFileDescriptor(pfds_read);
+    processor.setFileDescriptor(pfds_read);
     processingCallback.setFileDescriptor(pfds_writeM);
     actuator.setFileDescriptor(pfds_readM);
 
     VL6180x_settings sensor_Settings;
-    sensor_Instance.registerCallback(&passCallback);
-    passCallback.registerDP(&printThreshold);
-    printThreshold.registerCallback(&processingCallback);
+    sensor.registerCallback(&passCallback);
+    passCallback.registerDP(&processor);
+    processor.registerCallback(&processingCallback);
     processingCallback.registerActuation(&actuator);
 
-    sensor_Instance.startRangeContinuous(sensor_Settings);
-    printThreshold.start();
+    sensor.startRangeContinuous(sensor_Settings);
+    processor.start();
     getchar();
 
-    sensor_Instance.stop();
+    sensor.stop();
     close(*pfds_read);
     close(*pfds_write);
-    printThreshold.stop();
+    processor.stop();
     close(*pfds_readM);
     close(*pfds_writeM);
     actuator.~Actuation();
 
-    sensor_Instance.unRegisterCallback();
-    printThreshold.unRegisterCallback();
+    sensor.unRegisterCallback();
+    processor.unRegisterCallback();
 
 	return 0;
     
